@@ -878,7 +878,7 @@
   .drawer-overlay.open { opacity: 1; visibility: visible; }
 
   .drawer {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -2033,16 +2033,13 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .acct-settings-tab .detail-chip-tag svg { flex-shrink: 0; }
 .acct-settings-tab .acct-cert-view-title { display: flex; align-items: center; gap: 6px; }
 .acct-settings-tab .acct-cert-view-title svg { flex-shrink: 0; color: var(--accent-blue); }
-.acct-settings-tab .aev-edit-only { display: none; }
-.acct-settings-tab.editing .aev-view-only { display: none !important; }
-.acct-settings-tab.editing .aev-edit-only { display: block; }
-.acct-settings-tab .acct-edit-toolbar { display: flex; justify-content: flex-end; margin: -4px 0 8px; }
-.acct-settings-tab.editing .acct-edit-toolbar { display: none; }
-.acct-settings-tab .acct-save-row { display: none; }
-.acct-settings-tab.editing .acct-save-row { display: flex; }
-.acct-settings-tab:not(.editing) .acct-view-card { background: var(--surface-white); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); padding: 20px 22px; margin-bottom: 16px; }
+.acct-settings-tab .aev-edit-only { display: block; }
+.acct-settings-tab .aev-view-only { display: none !important; }
+.acct-settings-tab .acct-edit-toolbar { display: none; }
+.acct-settings-tab .acct-save-row { display: flex; }
+.acct-settings-tab .acct-view-card { background: var(--surface-white); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); padding: 20px 22px; margin-bottom: 16px; }
 #screenProfile .acct-view-card, #screenProfile .detail-card, #screenProfile .acct-cert-view-card { border-radius: 14px; }
-.acct-settings-tab:not(.editing) .acct-view-card:last-child { margin-bottom: 0; }
+.acct-settings-tab .acct-view-card:last-child { margin-bottom: 0; }
 .acct-settings-tab .acct-view-card .detail-mini-grid { margin-bottom: 0; }
 .acct-settings-tab .acct-view-card .detail-mini-grid-3col, .acct-settings-tab .acct-view-card .detail-mini-grid-4col { margin-bottom: 12px; }
 .acct-settings-tab .dmf-label { display: flex; align-items: center; gap: 5px; }
@@ -2648,6 +2645,181 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   }
 .sup-soon-title { font-size: 19px; font-weight: 800; color: var(--text-heading); margin-bottom: 8px; }
 .sup-soon-desc { font-size: 13.5px; color: var(--text-body-muted); line-height: 1.6; max-width: 420px; margin: 0 auto; }
+
+/* ===== Payouts screen ===== */
+.pay-summary-card {
+  display: flex; border-radius: 16px; overflow: hidden; margin-top: 4px;
+  border: 1px solid var(--border-subtle);
+}
+.pay-summary-half { flex: 1; min-width: 0; padding: 16px 14px; }
+.pay-summary-half.earned { background: linear-gradient(135deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%); }
+.pay-summary-half.pending { background: #fff; border-left: 1px solid var(--pending-amber-text); position: relative; }
+.pay-summary-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+.pay-summary-half.earned .pay-summary-label { color: var(--text-on-dark-muted); }
+.pay-summary-half.pending .pay-summary-label { color: var(--text-body-muted); }
+.pay-summary-amount { font-size: 21px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; }
+.pay-summary-half.earned .pay-summary-amount { color: #fff; }
+.pay-summary-half.pending .pay-summary-amount { color: var(--pending-amber-text); }
+.pay-summary-sub { font-size: 11px; color: var(--text-body-muted); margin-top: 5px; }
+
+.pay-filter-row { display: flex; gap: 10px; margin-top: 16px; }
+.pay-filter-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 9px 12px; border-radius: 999px; border: 1px solid var(--border-subtle);
+  background: #fff; font-size: 12.5px; font-weight: 700; color: var(--text-heading);
+  font-family: inherit; cursor: pointer; min-width: 0;
+}
+.pay-filter-btn .pf-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; background: var(--accent-blue); }
+.pay-filter-btn svg { flex-shrink: 0; color: var(--text-body-muted); }
+.pay-filter-btn .pf-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pay-filter-btn .pf-chevron { flex-shrink: 0; color: var(--text-body-muted); margin-left: auto; }
+
+.pay-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.pay-item {
+  display: block; width: 100%; text-align: left; background: #fff; border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 14px; font-family: inherit; cursor: pointer;
+  transition: transform 120ms ease-out, opacity 120ms ease-out, border-color 150ms ease-out;
+}
+.pay-item:active { transform: scale(0.98); opacity: 0.85; }
+.pay-item:hover { border-color: #c9d8ee; }
+.pay-item-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+.pay-item-ref { font-size: 11.5px; font-weight: 700; color: var(--accent-blue); }
+.pay-item-title { font-size: 14px; font-weight: 700; color: var(--text-heading); line-height: 1.35; margin-bottom: 10px; }
+.pay-item-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+.pay-item-meta { font-size: 12px; color: var(--text-body-muted); }
+.pay-item-amount { font-size: 16px; font-weight: 800; color: var(--text-heading); flex-shrink: 0; }
+
+.pay-empty { text-align: center; padding: 60px 20px; color: var(--text-body-muted); font-size: 13px; }
+
+/* Status pills reuse the same colour language as elsewhere, plus two new ones (upfront/overdue)
+   specific to payouts. */
+.status-pill.purple { background: var(--tint-purple-bg); color: var(--icon-purple); }
+.status-pill.orange { background: #fce3d3; color: #b3480a; }
+.status-pill.red { background: var(--tint-pink-bg); color: var(--icon-red); }
+
+/* Payout filter sheets (status / month) and the payout detail sheet share the same bottom-sheet
+   shell as the calendar's Day Detail modal: rounded top corners, grab handle, internal scroll. */
+#payFilterStatusOverlay, #payFilterMonthOverlay, #payDetailOverlay { align-items: flex-end; justify-content: center; padding: 0; }
+#payFilterStatusOverlay .modal-card, #payFilterMonthOverlay .modal-card, #payDetailOverlay .modal-card {
+  width: 100%; max-width: 100%; max-height: 82vh; max-height: 82dvh;
+  border-radius: 20px 20px 0 0; margin: 0; box-sizing: border-box;
+  display: flex; flex-direction: column; overflow: hidden; position: relative;
+  padding: 18px 0 0; text-align: left; background: #fff;
+  transform: translateY(100%); opacity: 1;
+  transition: transform 320ms cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 -8px 40px rgba(16,24,40,0.25);
+}
+#payFilterStatusOverlay.open .modal-card, #payFilterMonthOverlay.open .modal-card, #payDetailOverlay.open .modal-card { transform: translateY(0); opacity: 1; }
+#payFilterStatusOverlay .modal-card::before, #payFilterMonthOverlay .modal-card::before, #payDetailOverlay .modal-card::before {
+  content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+  width: 36px; height: 4px; border-radius: 999px; background: #d7dce3;
+}
+.pay-filter-head { display: flex; align-items: center; justify-content: space-between; padding: 0 18px 14px; flex-shrink: 0; border-bottom: 1px solid var(--border-subtle); }
+.pay-filter-head h3 { font-size: 17px; font-weight: 800; color: var(--accent-blue); }
+.pay-filter-body { flex: 1; min-height: 0; overflow-y: auto; padding: 8px 18px 18px; scrollbar-width: none; -ms-overflow-style: none; }
+.pay-filter-body::-webkit-scrollbar { display: none; }
+.pay-filter-option {
+  display: flex; align-items: center; gap: 11px; width: 100%; padding: 14px 12px; border-radius: 12px;
+  background: none; border: none; font-family: inherit; font-size: 14.5px; font-weight: 700;
+  color: var(--text-heading); cursor: pointer; text-align: left;
+}
+.pay-filter-option.selected { background: var(--icon-tint-bg); color: var(--accent-blue); }
+.pay-filter-option .pfo-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.pay-filter-option .pfo-count { margin-left: 6px; font-size: 11.5px; font-weight: 700; color: var(--text-body-muted); background: var(--surface-soft); border-radius: 999px; padding: 2px 9px; }
+.pay-filter-option.selected .pfo-count { color: var(--accent-blue); background: #fff; }
+.pay-filter-option .pfo-check { margin-left: auto; color: var(--accent-blue); flex-shrink: 0; }
+
+/* Payout detail sheet content */
+#payDetailOverlay .modal-card { padding-top: 20px; }
+.pd-head { padding: 0 18px 16px; flex-shrink: 0; border-bottom: 1px solid var(--border-subtle); }
+.pd-head-top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.pd-head-ref { font-size: 14px; font-weight: 800; color: var(--accent-blue); flex-shrink: 0; }
+.pd-head-close { margin-left: auto; }
+.pd-net-label { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-body-muted); margin-bottom: 4px; }
+.pd-net-amount { font-size: 28px; font-weight: 800; color: var(--text-heading); letter-spacing: -0.01em; }
+.pd-body { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 18px calc(24px + env(safe-area-inset-bottom, 0px)); scrollbar-width: none; -ms-overflow-style: none; }
+.pd-body::-webkit-scrollbar { display: none; }
+.pd-sect-title { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-body-muted); margin: 18px 0 8px; }
+.pd-sect-title:first-child { margin-top: 0; }
+.pd-card { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2px 14px; }
+.pd-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border-subtle); }
+.pd-row:last-child { border-bottom: none; }
+.pd-row-label { font-size: 13.5px; color: var(--text-body-muted); flex-shrink: 0; }
+.pd-row-value { font-size: 13.5px; font-weight: 700; color: var(--text-heading); text-align: right; }
+.pd-job-card { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px; }
+.pd-job-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.pd-job-title { font-size: 13.5px; font-weight: 700; color: var(--text-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pd-job-amount { font-size: 13.5px; font-weight: 800; color: var(--text-heading); flex-shrink: 0; }
+.pd-job-sub { font-size: 12px; color: var(--text-body-muted); margin-top: 6px; line-height: 1.6; }
+.pd-fin-card { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 2px 14px; }
+.pd-fin-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--border-subtle); font-size: 13.5px; }
+.pd-fin-row:last-child { border-bottom: none; }
+.pd-fin-row .pd-fin-label { color: var(--text-body-muted); }
+.pd-fin-row .pd-fin-value { font-weight: 700; color: var(--text-heading); }
+.pd-fin-row.total .pd-fin-label { font-weight: 800; color: var(--text-heading); }
+.pd-fin-row.total .pd-fin-value { font-weight: 800; color: var(--icon-green); font-size: 15px; }
+
+/* ===== Disputes screen ===== */
+.disp-count { font-size: 13px; color: var(--text-body-muted); margin: 4px 0 14px; }
+.disp-filter-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; -ms-overflow-style: none; margin-top: 14px; }
+.disp-filter-row::-webkit-scrollbar { display: none; }
+.disp-filter-row .supcal-filter-pill { flex-shrink: 0; white-space: nowrap; }
+.disp-empty {
+  text-align: center; padding: 46px 20px; margin-top: 18px; color: var(--text-body-muted);
+  font-size: 13.5px; border: 1.5px dashed var(--border-subtle); border-radius: 14px;
+}
+
+/* ===== Questionnaire wizard ===== */
+.ob-wiz-dots-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.ob-wiz-dots { display: flex; gap: 6px; margin-bottom: 0; }
+.ob-wiz-dot { width: 8px; height: 8px; border-radius: 999px; background: #d7dce3; transition: width 200ms ease-out, background-color 200ms ease-out; }
+.ob-wiz-dot.active { width: 28px; background: var(--accent-blue); }
+.ob-wiz-head { display: block; margin-bottom: 22px; }
+.ob-wiz-stepof { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-body-muted); margin-bottom: 6px; }
+.ob-wiz-title { font-size: 19px; font-weight: 800; color: var(--text-heading); line-height: 1.3; margin-bottom: 6px; }
+.ob-wiz-desc { font-size: 13.5px; color: var(--text-body-muted); line-height: 1.6; max-width: 480px; }
+.ob-wiz-nav { display: flex; gap: 10px; flex-shrink: 0; }
+.ob-wiz-step { display: none; }
+.ob-wiz-step.active { display: block; }
+.ob-wiz-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.ob-wiz-trade-chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px;
+  border: 1.5px solid var(--accent-blue); background: #fff; color: var(--accent-blue);
+  font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.ob-wiz-trade-chip.focused { background: var(--accent-blue); color: #fff; }
+.ob-wiz-trade-chip .owtc-x { display: flex; align-items: center; justify-content: center; opacity: 0.75; }
+.ob-wiz-trade-chip .owtc-x:hover { opacity: 1; }
+.ob-wiz-cat-picker { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; margin-top: 12px; background: var(--surface-soft); border-radius: 12px; }
+.ob-wiz-cat-add { padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--accent-blue); background: #fff; color: var(--accent-blue); font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.ob-wiz-roles-title { font-size: 14.5px; font-weight: 800; color: var(--text-heading); margin-bottom: 12px; }
+.ob-wiz-role-row {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--border-subtle); margin-bottom: 10px; cursor: pointer;
+}
+.ob-wiz-role-row.selected { border-color: var(--accent-blue); background: var(--icon-tint-bg); }
+.ob-wiz-role-row .owrr-box { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid #cbd5e1; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.ob-wiz-role-row.selected .owrr-box { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }
+.ob-wiz-role-row .owrr-title { font-size: 14px; font-weight: 700; color: var(--text-heading); }
+.ob-wiz-role-row .owrr-req { font-size: 12px; color: var(--text-body-muted); margin-top: 2px; }
+.ob-wiz-radio-col .choice-tile { display: block; margin-bottom: 10px; }
+.ob-wiz-radio-col .choice-tile:last-child { margin-bottom: 0; }
+
+/* Some Profile-module sections read as fields directly on the page (no enclosing white card) —
+   the .cardless modifier strips the card chrome while leaving inner components (toggle-cards,
+   file rows) with their own borders intact, since those still render as individual cards. */
+.acct-view-card.cardless { background: transparent; border: none; padding: 0; box-shadow: none; }
+#obPricingTiles.tile-row-2 { grid-template-columns: 1fr 1fr; gap: 12px; }
+#obPricingTiles .choice-tile { padding: 18px 14px; }
+#supDashSectorTiles.tile-row-2 { grid-template-columns: 1fr 1fr; gap: 14px; }
+/* .aev-edit-only's own display:block (needed so hidden fields reveal correctly) has higher
+   specificity than these containers' own display:grid/flex and was silently winning, collapsing
+   every grid/flex tile row on this tab to a single stacked column. Restated here at matching
+   specificity so each row keeps its intended layout. */
+.radio-tile-row.cols-1.aev-edit-only { display: grid; grid-template-columns: 1fr; }
+.radio-tile-row.cols-2.aev-edit-only { display: flex; gap: 12px; }
+.radio-tile-row.cols-2.aev-edit-only .radio-tile { flex: 1; }
+
 .sup-soon-meanwhile {
     font-size: 13px; color: var(--text-body-muted); line-height: 1.6;
     margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border-subtle);
@@ -3576,6 +3748,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .subpage-topbar .back-btn:hover { background: var(--surface-soft); }
 .subpage-topbar .back-btn:active { transform: scale(0.94); }
 .subpage-topbar .subpage-title { font-size: 17px; font-weight: 800; color: #0f172a; flex: 1; min-width: 0; line-height: 1.25; }
+#screenProfile .subpage-title, #screenChangePassword .subpage-title, #screenSettings .subpage-title { text-align: center; }
 .subpage-topbar > div.subpage-title-wrap { flex: 1; min-width: 0; }
 .subpage-topbar .bell-btn { flex-shrink: 0; }
 .subpage-topbar .subpage-subtitle { font-size: 12px; font-weight: 500; color: var(--text-body-muted); margin-top: 2px; line-height: 1.3; }
@@ -4025,12 +4198,9 @@ rule already being here. */
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; -ms-overflow-style: none; }
 #supSettingsTabs::-webkit-scrollbar { display: none; }
-/* Account Settings header: the ring is replaced by a plain progress bar sitting on its own row
-       below the heading/subheading/"Active" chip (with Edit alongside it), instead of squeezing a
-       circular ring in beside them — the "Active" chip stays right where it is, parallel to the
-       heading. With the ring gone there's nothing left that needs to wrap, so keep heading + chip
-       strictly on one row. */
-    #supAcctRingCol { display: none; }
+/* Account Settings header: ring + heading/subheading, matching the reference exactly — no
+       longer swapped for a plain bar on mobile. */
+    #supAcctRingCol { display: flex; }
 /* Account Settings > Portfolio tab: same two-column-field-row-collapses-to-one-column
        treatment already applied inside the onboarding wizard itself. */
     #supSettingsPanelQuestionnaire .ob-row-2 { display: block; }
@@ -4071,6 +4241,11 @@ rule already being here. */
 .sup-comp-doc-row .scdr-icon { color: #94a3b8; flex-shrink: 0; }
 .sup-comp-doc-row .scdr-name { font-size: 13px; color: var(--text-heading); font-weight: 600; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sup-comp-doc-row .scdr-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; color: #1a7a3e; background: #eafaf0; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 999px; flex-shrink: 0; }
+.doc-pdf-icon { width: 34px; height: 34px; border-radius: 8px; background: #e0244d; color: #fff; font-size: 9.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: 0.02em; }
+.sup-comp-doc-row .scdr-name { font-size: 13px; font-weight: 700; color: var(--text-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sup-comp-doc-row .scdr-actions { font-size: 12px; margin-top: 2px; }
+.sup-comp-doc-row .scdr-actions a, .sup-comp-doc-row .scdr-actions span.scdr-act { color: var(--accent-blue); font-weight: 600; cursor: pointer; }
+.sup-comp-doc-row .scdr-x { cursor: pointer; color: var(--text-body-muted); flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--surface-soft); }
 .sup-comp-doc-row .scdr-view-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; background: linear-gradient(135deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%); color: #fff; font-size: 12.5px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
 .sup-comp-doc-row .scdr-upload-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-body-muted); cursor: pointer; flex-shrink: 0; }
 #supqSuggestChips.supq-suggest-row .simple-chip { padding: 6px 12px; font-size: 11.5px; }
@@ -4101,7 +4276,7 @@ rule already being here. */
 .detail-mini-field .dmf-value[data-tooltip] { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .detail-chip-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--text-heading); background: var(--surface-soft); padding: 5px 12px; border-radius: 999px; margin: 3px 6px 3px 0; }
 /* ---------- Supplier Account Settings: view/edit toggle ---------- */
-  .acct-settings-tab .aev-edit-only { display: none; }
+  .acct-settings-tab .aev-edit-only { display: block; }
 .acct-view-empty { font-size: 13px; color: var(--text-body-muted); font-style: italic; }
 .acct-view-value.muted { color: #94a3b8; font-weight: 500; font-style: italic; }
 .acct-view-para { font-size: 13.5px; color: var(--text-heading); line-height: 1.6; padding: 6px 0 0; }
@@ -5342,13 +5517,8 @@ rule already being here. */
     <div class="subpage-topbar">
       <button type="button" class="back-btn" id="profileBackBtn" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
       <div class="subpage-title-wrap">
-        <div class="subpage-title" style="display:flex;align-items:center;gap:8px;">Profile<span class="status-pill green" id="supAcctStatusPill" style="font-size:10.5px;">Active</span></div>
-        <div class="subpage-subtitle">Your account and business</div>
+        <div class="subpage-title">Profile</div>
       </div>
-      <button class="bell-btn subpage-bell" type="button" aria-label="Notifications, 73 unread">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        <span class="bell-badge">73</span>
-      </button>
     </div>
     <div class="subpage-content">
           <div id="supProfileSettingsView">
@@ -5368,7 +5538,11 @@ rule already being here. */
               </div>
             </div>
             <div class="dash-section">
-              <div class="dash-header" style="justify-content:flex-end;">
+              <div class="dash-header" style="justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <h1 style="font-size:26px;font-weight:800;color:var(--text-heading);letter-spacing:-0.01em;margin-bottom:6px;">Account Settings</h1>
+                  <div style="font-size:14px;color:var(--text-body-muted);line-height:1.5;max-width:320px;">Manage your profile, business &amp; subscription.</div>
+                </div>
                 <div style="display:flex;align-items:start;gap:14px;">
                   <div class="sup-acct-ring-col" id="supAcctRingCol">
                     <div style="position:relative;width:64px;height:64px;">
@@ -5385,7 +5559,7 @@ rule already being here. */
                   </div>
                 </div>
               </div>
-              <div class="sup-acct-mobile-progress-row" id="supAcctMobileProgressRow">
+              <div class="sup-acct-mobile-progress-row" id="supAcctMobileProgressRow" style="display:none;">
                 <div class="sup-acct-mobile-progress" id="supAcctMobileProgress">
                   <div class="sacct-progress-track"><div class="sacct-progress-fill" id="supAcctMobileProgressFill" style="width:0%;"></div></div>
                   <div class="sacct-progress-label" id="supAcctMobileProgressLabel">Profile complete — 0%</div>
@@ -5397,19 +5571,18 @@ rule already being here. */
                 <div class="pm-settings-tabs-row" id="supSettingsTabs" style="margin-top:0;flex:1;">
                   <div class="pm-settings-tab-item active" data-supsettingstab="profile">Profile</div>
                   <div class="pm-settings-tab-item" data-supsettingstab="sectors">Sectors</div>
-                  <div class="pm-settings-tab-item" data-supsettingstab="insurance">Compliance</div>
-                  <div class="pm-settings-tab-item" data-supsettingstab="questionnaire">Portfolio</div>
-                  <div class="pm-settings-tab-item" data-supsettingstab="payment">Payment Setup</div>
-                  <div class="pm-settings-tab-item" data-supsettingstab="settings">Settings</div>
-                  <div class="pm-settings-tab-item" data-supsettingstab="inbox">Chat<span class="dash-nav-badge" id="supSettingsBadgeInbox" hidden style="position:static;margin-left:6px;"></span></div>
+                  <div class="pm-settings-tab-item" data-supsettingstab="identity">Identity</div>
+                  <div class="pm-settings-tab-item" data-supsettingstab="insurance">Insurance</div>
+                  <div class="pm-settings-tab-item" data-supsettingstab="background">Background</div>
+                  <div class="pm-settings-tab-item" data-supsettingstab="questionnaire">Questionnaire</div>
                 </div>
-                <button type="button" class="btn btn-primary" id="supAcctEditBtn" style="flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:-2px;"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4z"/></svg>Edit</button>
+                <button type="button" class="btn btn-primary" id="supAcctEditBtn" style="display:none;flex-shrink:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:-2px;"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4z"/></svg>Edit</button>
               </div>
 
               <!-- Profile tab -->
               <div id="supSettingsPanelProfile" class="acct-settings-tab">
                 <div style="margin-top:20px;">
-                  <div class="acct-view-card">
+                  <div class="acct-view-card cardless">
                   <div style="display:flex;align-items:center;gap:16px;">
                     <div style="position:relative;width:64px;height:64px;flex-shrink:0;" data-title="Upload Profile Photo">
                       <div id="supProfileAvatarInitials" style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg, #22447f 0%, #0d1b3d 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;">FE</div>
@@ -5435,7 +5608,7 @@ rule already being here. */
                       <input class="field-input" type="email" value="greenwood86@gmail.com" id="supProfileEmailInput">
                     </div>
                   </div>
-                  <div class="ob-field aev-edit-only" style="margin-bottom:0;max-width:50%;">
+                  <div class="ob-field aev-edit-only" style="margin-bottom:0;">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
                       <label style="margin-bottom:0;">Mobile number</label>
                       <span style="font-size:12.5px;font-weight:700;color:var(--accent-blue);cursor:pointer;" id="supChangeNumberBtn">Change number</span>
@@ -5460,7 +5633,54 @@ rule already being here. */
                   </div>
                   </div>
 
-                  <div class="acct-view-card" id="supPersonalDetailsCardSole">
+
+                  <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
+                    <button type="button" class="btn btn-primary" data-supsettings-save="Profile">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sectors tab -->
+              <div id="supSettingsPanelSectors" class="acct-settings-tab" style="display:none;">
+                <div style="margin-top:20px;">
+                  <div class="tile-row-2" id="supDashSectorTiles">
+                    <div class="choice-tile selected" data-value="residential" tabindex="0" role="checkbox" aria-checked="true">
+                      <div class="tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
+                      <div class="tile-body"><div class="tile-title">Residential</div></div>
+                      <div class="tile-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    </div>
+                    <div class="choice-tile selected" data-value="commercial" tabindex="0" role="checkbox" aria-checked="true">
+                      <div class="tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
+                      <div class="tile-body"><div class="tile-title">Commercial</div></div>
+                      <div class="tile-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                    </div>
+                  </div>
+
+                  <div class="ob-section" id="supResidentialSubTypes" style="margin-top:22px;">
+                    <div class="ob-section-title" style="font-size:13.5px;">Residential sub-types <span class="meta-badge optional">(optional)</span></div>
+                    <div class="simple-chip-row" id="supResSubChips">
+                      <div class="simple-chip" data-value="str">STR – Short Term Rentals</div>
+                      <div class="simple-chip selected" data-value="estate-agent">Estate Agents</div>
+                    </div>
+                  </div>
+
+                  <div class="ob-section" id="supCommercialSubTypes">
+                    <div class="ob-section-title" style="font-size:13.5px;">Commercial sub-types <span class="meta-badge optional">(optional)</span></div>
+                    <div class="simple-chip-row" id="supComSubChips">
+                      <div class="simple-chip simple-chip-disabled" data-value="hotels" aria-disabled="true" data-tooltip="Commercial sub-types are coming soon">Hotels &amp; Hostels</div>
+                    </div>
+                  </div>
+
+                  <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
+                    <button type="button" class="btn btn-primary" data-supsettings-save="Sectors">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Identity tab -->
+              <div id="supSettingsPanelIdentity" class="acct-settings-tab" style="display:none;">
+                <div style="margin-top:20px;">
+                  <div class="acct-view-card cardless" id="supPersonalDetailsCardSole">
                   <div class="detail-card-head aev-view-only"><div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Personal Details</h3></div></div>
                   <div class="ob-section-heading aev-edit-only" style="margin-top:0;">Personal Details</div>
 
@@ -5561,7 +5781,7 @@ rule already being here. */
                   <div class="ob-row-2 aev-edit-only">
                     <div class="ob-field">
                       <label>NI number</label>
-                      <input class="field-input" type="text" value="enc:131ac863d6307f0599e9f98e" disabled style="background:var(--surface-soft);color:var(--text-body-muted);">
+                      <input class="field-input" type="text" value="QQ 123456 C" disabled style="background:var(--surface-soft);color:var(--text-body-muted);">
                       <div class="helper">View only. Contact support to change.</div>
                     </div>
                     <div class="ob-field">
@@ -5591,7 +5811,7 @@ rule already being here. */
                   </div>
                   </div>
 
-                  <div class="acct-view-card" id="supCompanyDetailsCard" style="display:none;">
+                  <div class="acct-view-card cardless" id="supCompanyDetailsCard" style="display:none;">
                   <div class="detail-card-head aev-view-only"><div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div><h3>Company Details</h3></div></div>
                   <div class="ob-section-heading aev-edit-only" style="margin-top:0;">Company Details</div>
 
@@ -5651,129 +5871,23 @@ rule already being here. */
                   </div>
                   </div>
 
-                  <div class="acct-view-card">
+                  <div class="acct-view-card cardless">
                   <div class="detail-card-head aev-view-only"><div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><h3 id="supProofAddressHeading">Proof of Address</h3></div></div>
                   <div class="ob-section-heading aev-edit-only" style="margin-top:0;" id="supProofAddressHeadingEdit">Proof of Address</div>
                   <div class="scf-label aev-edit-only" style="font-size:12.5px;font-weight:600;color:var(--text-body-muted);margin-bottom:8px;">Proof of address</div>
                   <div class="sup-comp-doc-row" style="margin-bottom:0;">
-                    <svg class="scdr-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                    <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--text-heading);" id="supProofAddressDocName">Uploaded</div><span class="sup-view-all-link" style="font-size:12px;" id="supProofAddressViewBtn" data-doc-view="Proof of Address">View file</span></div>
+                    <div class="doc-pdf-icon">PDF</div>
+                    <div style="flex:1;min-width:0;">
+                      <div class="scdr-name" id="supProofAddressDocName">9b93e539978243eaa47af304af4&hellip;</div>
+                      <div class="scdr-actions"><a href="javascript:void(0)" id="supProofAddressViewBtn" data-doc-view="Proof of Address">View file</a> &middot; <span class="scdr-act aev-edit-only" id="supProofAddressReplaceBtn" data-doc-replace="proofAddress">Replace</span></div>
+                    </div>
                     <span class="scdr-badge">UPLOADED</span>
-                    <span style="font-size:12.5px;font-weight:600;color:var(--accent-blue);cursor:pointer;" id="supProofAddressReplaceBtn" data-doc-replace="proofAddress" class="aev-edit-only">Replace</span>
                     <input type="file" data-doc-input="proofAddress" style="display:none;">
-                    <span style="cursor:pointer;color:var(--text-body-muted);" class="aev-edit-only">&times;</span>
+                    <span class="scdr-x aev-edit-only"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
                   </div>
                   </div>
-
                   <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
-                    <button type="button" class="btn btn-secondary-light" data-acct-discard="Profile">Discard</button>
-                    <button type="button" class="btn btn-primary" data-supsettings-save="Profile">Save Changes</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Sectors tab -->
-              <div id="supSettingsPanelSectors" class="acct-settings-tab" style="display:none;">
-                <div style="margin-top:20px;">
-                  <div class="acct-view-card">
-                  <div class="detail-card-head aev-view-only"><div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div><h3>Property Sectors</h3></div></div>
-                  <div class="aev-view-only" id="supSectorsTagsView">
-                    <div class="dfr-label" style="margin-bottom:8px;">Property sectors</div>
-                    <div style="margin-bottom:18px;"><span class="detail-chip-tag">Residential</span><span class="detail-chip-tag">Commercial</span></div>
-                    <div class="dfr-label" style="margin-bottom:8px;">Residential sub-types</div>
-                    <div style="margin-bottom:18px;"><span class="detail-chip-tag">Estate Agents</span></div>
-                    <div class="dfr-label" style="margin-bottom:8px;">Commercial sub-types</div>
-                    <div style="margin-bottom:4px;"><span class="detail-chip-tag">Hotels &amp; Hostels</span></div>
-                  </div>
-
-                  <div class="aev-edit-only">
-                  <div class="tile-row-2" id="supDashSectorTiles">
-                    <div class="choice-tile selected" data-value="residential" tabindex="0" role="checkbox" aria-checked="true">
-                      <div class="tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
-                      <div class="tile-body"><div class="tile-title">Residential</div></div>
-                      <div class="tile-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-                    </div>
-                    <div class="choice-tile selected" data-value="commercial" tabindex="0" role="checkbox" aria-checked="true">
-                      <div class="tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
-                      <div class="tile-body"><div class="tile-title">Commercial</div></div>
-                      <div class="tile-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-                    </div>
-                  </div>
-
-                  <div class="ob-section" id="supResidentialSubTypes" style="margin-top:22px;">
-                    <div class="ob-section-title" style="font-size:13.5px;">Residential sub-types <span class="meta-badge optional">(optional)</span></div>
-                    <div class="simple-chip-row" id="supResSubChips">
-                      <div class="simple-chip" data-value="str">STR – Short Term Rentals</div>
-                      <div class="simple-chip selected" data-value="estate-agent">Estate Agents</div>
-                    </div>
-                  </div>
-
-                  <div class="ob-section" id="supCommercialSubTypes">
-                    <div class="ob-section-title" style="font-size:13.5px;">Commercial sub-types <span class="meta-badge optional">(optional)</span></div>
-                    <div class="simple-chip-row" id="supComSubChips">
-                      <div class="simple-chip simple-chip-disabled" data-value="hotels" aria-disabled="true" data-tooltip="Commercial sub-types are coming soon">Hotels &amp; Hostels</div>
-                    </div>
-                  </div>
-                  </div>
-                  </div>
-
-                  <div class="acct-view-card">
-                  <div class="detail-card-head aev-view-only"><div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><h3>Categories &amp; Roles</h3></div></div>
-                  <div class="ob-section-heading aev-edit-only" style="margin-top:0;">Categories &amp; Roles</div>
-                  <p class="ob-section-subtext aev-edit-only" style="margin-top:-10px;">Pick the categories you work in and the specific roles within each. We route matching jobs to you and decide which certificates to verify based on your role choices.</p>
-
-                  <div class="aev-view-only" id="supSectorsCatRolesView"></div>
-
-                  <div class="selected-cat-chips-row aev-edit-only" id="stgSelectedCatChipsRow"></div>
-
-                  <div class="cat-role-picker aev-edit-only">
-                    <div class="crp-cats">
-                      <div class="crp-cats-label">CATEGORIES <span class="crp-cats-total">16</span></div>
-                      <div class="crp-search"><input class="field-input" type="text" id="stgCategorySearchInput" placeholder="Search categories..."></div>
-                      <div id="stgCategoryList">
-                        <div class="crp-cat-row active" data-cat="Gas & Heating"><span class="crp-checkbox"></span><span class="crp-cat-name">Gas &amp; Heating</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="HVAC & Air Conditioning"><span class="crp-checkbox"></span><span class="crp-cat-name">HVAC &amp; Air Conditioning</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Electrical"><span class="crp-checkbox"></span><span class="crp-cat-name">Electrical</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Plumber"><span class="crp-checkbox"></span><span class="crp-cat-name">Plumber</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Compliance & Legal"><span class="crp-checkbox"></span><span class="crp-cat-name">Compliance &amp; Legal</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Property Marketing & Agency"><span class="crp-checkbox"></span><span class="crp-cat-name">Property Marketing &amp; Agency</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Damp, Mould & Structural"><span class="crp-checkbox"></span><span class="crp-cat-name">Damp, Mould &amp; Structural</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Security & Access"><span class="crp-checkbox"></span><span class="crp-cat-name">Security &amp; Access</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Cleaning"><span class="crp-checkbox"></span><span class="crp-cat-name">Cleaning</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="General Maintenance"><span class="crp-checkbox"></span><span class="crp-cat-name">General Maintenance</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Grounds & Outdoor"><span class="crp-checkbox"></span><span class="crp-cat-name">Grounds &amp; Outdoor</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Pest Control"><span class="crp-checkbox"></span><span class="crp-cat-name">Pest Control</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Appliances"><span class="crp-checkbox"></span><span class="crp-cat-name">Appliances</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Lifts & Accessibility"><span class="crp-checkbox"></span><span class="crp-cat-name">Lifts &amp; Accessibility</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Inventory & Inspections"><span class="crp-checkbox"></span><span class="crp-cat-name">Inventory &amp; Inspections</span><span class="crp-count" data-role-count="0">0</span></div>
-                        <div class="crp-cat-row" data-cat="Locksmith"><span class="crp-checkbox"></span><span class="crp-cat-name">Locksmith</span><span class="crp-count" data-role-count="0">0</span></div>
-                      </div>
-                    </div>
-                    <div class="crp-roles">
-                      <div class="crp-roles-head">
-                        <div class="crp-roles-title" id="stgCrpRolesTitle">Gas & Heating</div>
-                        <div class="crp-select-all" id="stgCrpSelectAll">Select All</div>
-                      </div>
-                      <div class="crp-roles-grid" id="stgCrpRolesGrid"></div>
-                    </div>
-                  </div>
-                  </div>
-
-                  <div class="acct-view-card">
-                  <div class="detail-card-head aev-view-only"><div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Certifications</h3></div></div>
-                  <div class="ob-section-heading aev-edit-only" style="margin-top:0;">Certifications for Your Selected Roles</div>
-                  <p class="ob-section-subtext aev-edit-only" style="margin-top:-2px;">Verified certifications appear as trust badges on your profile. Add the registration number, expiry and a copy for each.</p>
-                  <div class="aev-view-only" id="supSectorsCertsView"></div>
-                  <div id="stgRoleCertifications" class="aev-edit-only">
-                    <div class="dash-empty" style="padding:20px 10px;">
-                      <div class="empty-sub">Select a role that requires certification (e.g. Gas Safe Engineer, Scaffolder) to add its details here.</div>
-                    </div>
-                  </div>
-                  </div>
-
-                  <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
-                    <button type="button" class="btn btn-secondary-light" data-acct-discard="Sectors">Discard</button>
-                    <button type="button" class="btn btn-primary" data-supsettings-save="Sectors">Save Changes</button>
+                    <button type="button" class="btn btn-primary" data-supsettings-save="Identity">Save Changes</button>
                   </div>
                 </div>
               </div>
@@ -5788,10 +5902,10 @@ rule already being here. */
                       <div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Public Liability Insurance</h3></div>
                     </div>
                     <div class="detail-mini-grid" style="margin-bottom:14px;">
-                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>Insurance provider</div><div class="dmf-value" id="supPliProviderView">Markel</div></div>
-                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>Policy number</div><div class="dmf-value" id="supPliPolicyView">PL-722800</div></div>
+                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>Insurance provider</div><div class="dmf-value" id="supPliProviderView">Hiscox</div></div>
+                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>Policy number</div><div class="dmf-value" id="supPliPolicyView">PL-330202</div></div>
                       <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c0-1.5-1.5-2.5-3-2.5s-3 1-3 2.5 1.5 2 3 2.5 3 1 3 2.5-1.5 2.5-3 2.5-3-1-3-2.5M12 6v12"/></svg>Coverage amount</div><div class="dmf-value" id="supPliCoverageView">£2,000,000</div></div>
-                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Policy expiry date</div><div class="dmf-value"><span id="supPliExpiryView">26/11/2026</span></div></div>
+                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Policy expiry date</div><div class="dmf-value"><span id="supPliExpiryView">26/10/2026</span></div></div>
                     </div>
                     <div class="scf-label" style="font-size:12.5px;font-weight:600;color:var(--text-body-muted);margin-bottom:8px;">Public liability certificate</div>
                     <div class="sup-comp-doc-row" style="margin-bottom:0;">
@@ -5810,21 +5924,21 @@ rule already being here. */
                     <div class="field-collapsible open" id="supPliFields" style="max-height:1200px;opacity:1;">
                       <div class="otc-body">
                         <div class="ob-row-2">
-                          <div class="ob-field"><label>Insurance provider</label><input class="field-input" type="text" value="Markel" id="supPliProviderInput"></div>
-                          <div class="ob-field"><label>Policy number</label><input class="field-input" type="text" value="PL-722800" id="supPliPolicyInput"></div>
+                          <div class="ob-field" style="margin-bottom:0;"><label>Insurance provider</label><input class="field-input" type="text" value="Hiscox" id="supPliProviderInput"></div>
+                          <div class="ob-field"><label>Policy number</label><input class="field-input" type="text" value="PL-330202" id="supPliPolicyInput"></div>
                         </div>
-                        <div class="ob-row-2">
+                        <div class="ob-row-2" style="margin-bottom:16px;">
                           <div class="ob-field" style="margin-bottom:0;"><label>Coverage amount (£)</label><input class="field-input" type="text" value="£2,000,000" id="supPliCoverageInput"></div>
                           <div class="ob-field" style="margin-bottom:0;">
                             <label>Policy expiry date</label>
                             <div class="pm-filter-field" style="width:100%;">
                               <button type="button" class="pm-custom-dd-btn keylr-date-trigger" data-cal="supPliExpiry" style="width:100%;height:48px;">
-                                <span class="cdd-value cal-value" data-cal-text="supPliExpiry">26/11/2026</span>
+                                <span class="cdd-value cal-value" data-cal-text="supPliExpiry">26/10/2026</span>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                               </button>
                               <div class="pm-cal-popup" data-cal-popup="supPliExpiry">
                                 <div class="pm-cal-head">
-                                  <button type="button" class="pm-cal-month-label" data-cal-monthlabel="supPliExpiry"><span data-cal-monthtext="supPliExpiry">November 2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+                                  <button type="button" class="pm-cal-month-label" data-cal-monthlabel="supPliExpiry"><span data-cal-monthtext="supPliExpiry">October 2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
                                   <div class="pm-cal-nav">
                                     <button type="button" class="pm-cal-nav-btn" data-cal-prev="supPliExpiry" aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
                                     <button type="button" class="pm-cal-nav-btn" data-cal-next="supPliExpiry" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></button>
@@ -5837,19 +5951,24 @@ rule already being here. */
                                   <button type="button" class="pm-cal-link" data-cal-today="supPliExpiry">Today</button>
                                 </div>
                               </div>
-                              <input type="hidden" id="supPliExpiryInput" value="2026-11-26">
+                              <input type="hidden" id="supPliExpiryInput" value="2026-10-26">
                             </div>
-                            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1a7a3e;background:#eafaf0;padding:3px 10px;border-radius:999px;margin-top:8px;"><span style="width:5px;height:5px;border-radius:50%;background:#1a7a3e;"></span>Valid</span>
+                            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1a7a3e;background:#eafaf0;padding:3px 10px;border-radius:999px;margin-top:8px;margin-bottom:16px;"><span style="width:5px;height:5px;border-radius:50%;background:#1a7a3e;"></span>Valid</span>
                           </div>
                         </div>
-                        <div class="scf-label" style="font-size:12.5px;font-weight:600;color:var(--text-body-muted);margin-bottom:8px;">Public liability certificate</div>
+                        <div class="scf-label" style="font-size:11px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-body-muted);margin-bottom:10px;">Insurance Certificate</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                          <span style="font-size:13.5px;font-weight:700;color:var(--text-heading);">Public Liability Certificate</span>
+                          <span class="scdr-badge">UPLOADED</span>
+                        </div>
                         <div class="sup-comp-doc-row" style="margin-bottom:0;">
-                          <svg class="scdr-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                          <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--text-heading);" id="supPliDocName">Uploaded certificate</div><span class="sup-view-all-link" style="font-size:12px;" data-doc-view="Public Liability Certificate">View File</span></div>
-                          <span class="scdr-badge">Uploaded</span>
-                          <span style="font-size:12.5px;font-weight:600;color:var(--accent-blue);cursor:pointer;" data-doc-replace="pli">Replace</span>
+                          <div class="doc-pdf-icon">PDF</div>
+                          <div style="flex:1;min-width:0;">
+                            <div class="scdr-name" id="supPliDocName">9b93e539978243eaa47af304af4&hellip;</div>
+                            <div class="scdr-actions"><a href="javascript:void(0)" data-doc-view="Public Liability Certificate">View file</a> &middot; <span class="scdr-act aev-edit-only" data-doc-replace="pli">Replace</span></div>
+                          </div>
                           <input type="file" data-doc-input="pli" style="display:none;">
-                          <span style="cursor:pointer;color:var(--text-body-muted);">&times;</span>
+                          <span class="scdr-x aev-edit-only"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
                         </div>
                       </div>
                     </div>
@@ -5862,10 +5981,10 @@ rule already being here. */
                       <div class="dch-left"><div class="dch-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg></div><h3>Professional Indemnity Insurance</h3></div>
                     </div>
                     <div class="detail-mini-grid" style="margin-bottom:14px;">
-                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>Indemnity provider</div><div class="dmf-value" id="supPiProviderView">Direct Line for Business</div></div>
-                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>Policy number</div><div class="dmf-value" id="supPiPolicyView">PI-124012</div></div>
+                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>Indemnity provider</div><div class="dmf-value" id="supPiProviderView">Markel</div></div>
+                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"/></svg>Policy number</div><div class="dmf-value" id="supPiPolicyView">PI-576019</div></div>
                       <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5c0-1.5-1.5-2.5-3-2.5s-3 1-3 2.5 1.5 2 3 2.5 3 1 3 2.5-1.5 2.5-3 2.5-3-1-3-2.5M12 6v12"/></svg>Coverage amount</div><div class="dmf-value" id="supPiCoverageView">£1,000,000</div></div>
-                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Expiry date</div><div class="dmf-value"><span id="supPiExpiryView">26/09/2026</span></div></div>
+                      <div class="detail-mini-field"><div class="dmf-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Expiry date</div><div class="dmf-value"><span id="supPiExpiryView">05/12/2026</span></div></div>
                     </div>
                     <div class="scf-label" style="font-size:12.5px;font-weight:600;color:var(--text-body-muted);margin-bottom:8px;">PI certificate</div>
                     <div class="sup-comp-doc-row" style="margin-bottom:0;">
@@ -5884,8 +6003,8 @@ rule already being here. */
                     <div class="field-collapsible open" id="supPiFields" style="max-height:1200px;opacity:1;">
                       <div class="otc-body">
                         <div class="ob-row-2">
-                          <div class="ob-field"><label>Indemnity provider</label><input class="field-input" type="text" value="Direct Line for Business" id="supPiProviderInput"></div>
-                          <div class="ob-field"><label>Policy number</label><input class="field-input" type="text" value="PI-124012" id="supPiPolicyInput"></div>
+                          <div class="ob-field"><label>Indemnity provider</label><input class="field-input" type="text" value="Markel" id="supPiProviderInput"></div>
+                          <div class="ob-field"><label>Policy number</label><input class="field-input" type="text" value="PI-576019" id="supPiPolicyInput"></div>
                         </div>
                         <div class="ob-row-2">
                           <div class="ob-field" style="margin-bottom:0;"><label>Coverage amount (£)</label><input class="field-input" type="text" value="£1,000,000" id="supPiCoverageInput"></div>
@@ -5893,12 +6012,12 @@ rule already being here. */
                             <label>Expiry date</label>
                             <div class="pm-filter-field" style="width:100%;">
                               <button type="button" class="pm-custom-dd-btn keylr-date-trigger" data-cal="supPiExpiry" style="width:100%;height:48px;">
-                                <span class="cdd-value cal-value" data-cal-text="supPiExpiry">26/09/2026</span>
+                                <span class="cdd-value cal-value" data-cal-text="supPiExpiry">05/12/2026</span>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                               </button>
                               <div class="pm-cal-popup" data-cal-popup="supPiExpiry">
                                 <div class="pm-cal-head">
-                                  <button type="button" class="pm-cal-month-label" data-cal-monthlabel="supPiExpiry"><span data-cal-monthtext="supPiExpiry">September 2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+                                  <button type="button" class="pm-cal-month-label" data-cal-monthlabel="supPiExpiry"><span data-cal-monthtext="supPiExpiry">December 2026</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
                                   <div class="pm-cal-nav">
                                     <button type="button" class="pm-cal-nav-btn" data-cal-prev="supPiExpiry" aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
                                     <button type="button" class="pm-cal-nav-btn" data-cal-next="supPiExpiry" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></button>
@@ -5911,18 +6030,23 @@ rule already being here. */
                                   <button type="button" class="pm-cal-link" data-cal-today="supPiExpiry">Today</button>
                                 </div>
                               </div>
-                              <input type="hidden" id="supPiExpiryInput" value="2026-09-26">
+                              <input type="hidden" id="supPiExpiryInput" value="2026-12-05">
                             </div>
+                            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1a7a3e;background:#eafaf0;padding:3px 10px;border-radius:999px;margin-top:8px;margin-bottom:16px;"><span style="width:5px;height:5px;border-radius:50%;background:#1a7a3e;"></span>Valid</span>
                           </div>
                         </div>
-                        <div class="scf-label" style="font-size:12.5px;font-weight:600;color:var(--text-body-muted);margin-bottom:8px;">PI certificate</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                          <span style="font-size:13.5px;font-weight:700;color:var(--text-heading);">PI Certificate</span>
+                          <span class="scdr-badge">UPLOADED</span>
+                        </div>
                         <div class="sup-comp-doc-row" style="margin-bottom:0;">
-                          <svg class="scdr-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                          <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--text-heading);" id="supPiDocName">Uploaded certificate</div><span class="sup-view-all-link" style="font-size:12px;" data-doc-view="Professional Indemnity Certificate">View File</span></div>
-                          <span class="scdr-badge">Uploaded</span>
-                          <span style="font-size:12.5px;font-weight:600;color:var(--accent-blue);cursor:pointer;" data-doc-replace="pi">Replace</span>
+                          <div class="doc-pdf-icon">PDF</div>
+                          <div style="flex:1;min-width:0;">
+                            <div class="scdr-name" id="supPiDocName">9b93e539978243eaa47af30&hellip;</div>
+                            <div class="scdr-actions"><a href="javascript:void(0)" data-doc-view="Professional Indemnity Certificate">View file</a> &middot; <span class="scdr-act aev-edit-only" data-doc-replace="pi">Replace</span></div>
+                          </div>
                           <input type="file" data-doc-input="pi" style="display:none;">
-                          <span style="cursor:pointer;color:var(--text-body-muted);">&times;</span>
+                          <span class="scdr-x aev-edit-only"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
                         </div>
                       </div>
                     </div>
@@ -5949,6 +6073,16 @@ rule already being here. */
                   </div>
                   <div class="acct-view-empty" id="supElInsuranceCardViewEmpty" style="display:none;">No Employers' Liability Insurance on file.</div>
 
+
+                  <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
+                    <button type="button" class="btn btn-primary" data-supsettings-save="Insurance">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Background tab -->
+              <div id="supSettingsPanelBackground" class="acct-settings-tab" style="display:none;">
+                <div style="margin-top:20px;">
                 <div id="supBgCheckSoleView">
                 <div class="ob-card-section">
                     <div class="ocs-head">
@@ -5981,16 +6115,18 @@ rule already being here. */
                         <div class="otc-body">
                           <div class="scf-label" style="font-size:12.5px;font-weight:600;color:var(--text-body-muted);margin-bottom:8px;">Basic DBS certificate</div>
                           <div class="sup-comp-doc-row">
-                            <svg class="scdr-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                            <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:700;color:var(--text-heading);" id="supDbsDocName">Uploaded</div><span class="sup-view-all-link" style="font-size:12px;" data-doc-view="DBS Certificate">View file</span></div>
+                            <div class="doc-pdf-icon">PDF</div>
+                            <div style="flex:1;min-width:0;">
+                              <div class="scdr-name" id="supDbsDocName">47a8ca0b49834c54bf6&hellip;</div>
+                              <div class="scdr-actions"><a href="javascript:void(0)" data-doc-view="DBS Certificate">View file</a> &middot; <span class="scdr-act aev-edit-only" data-doc-replace="dbs">Replace</span></div>
+                            </div>
                             <span class="scdr-badge">UPLOADED</span>
-                            <span style="font-size:12.5px;font-weight:600;color:var(--accent-blue);cursor:pointer;" data-doc-replace="dbs">Replace</span>
                             <input type="file" data-doc-input="dbs" style="display:none;">
-                            <span style="cursor:pointer;color:var(--text-body-muted);">&times;</span>
+                            <span class="scdr-x aev-edit-only"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>
                           </div>
 
                           <div class="ob-row-2" style="margin-top:14px;">
-                            <div class="ob-field"><label>Certificate number</label><input class="field-input" type="text" placeholder="12-digit number" value="001234567890" id="supDbsCertNumberInput"></div>
+                            <div class="ob-field" style="margin-bottom:0;"><label>Certificate number</label><input class="field-input" type="text" placeholder="12-digit number" value="001234567890" id="supDbsCertNumberInput"></div>
                             <div class="ob-field">
                               <label>DBS level</label>
                               <div style="position:relative;">
@@ -6028,11 +6164,15 @@ rule already being here. */
                             </div>
                           </div>
 
-                          <div class="callout callout-neutral" style="margin-top:14px;margin-bottom:0;">
+                          <div class="callout callout-neutral" style="margin-top:14px;margin-bottom:0;display:none;">
                             <div><div class="callout-title">Don't have a DBS certificate?</div><div class="callout-body">You can apply for a Basic DBS check online through the official DBS website. It costs £18 and typically arrives within 14 days.<br><a href="#" onclick="return false;" style="color:var(--accent-blue);font-weight:600;">Apply for a Basic DBS check on GOV.UK ↗</a></div></div>
                           </div>
                         </div>
                       </div>
+                    </div>
+
+                    <div class="callout callout-neutral" id="supDbsNoCertCallout" style="margin-top:14px;margin-bottom:16px;">
+                      <div><div class="callout-title">Don't have a DBS certificate?</div><div class="callout-body">You can apply for a Basic DBS check online through the official DBS website. It costs £18 and typically arrives within 14 days.<br><a href="#" onclick="return false;" style="color:var(--accent-blue);font-weight:600;">Apply for a Basic DBS check on GOV.UK ↗</a></div></div>
                     </div>
 
                     <div class="scf-label" style="font-size:13px;font-weight:700;color:var(--text-heading);margin:18px 0 10px;">Criminal record declaration</div>
@@ -6149,9 +6289,28 @@ rule already being here. */
                     <span class="status-pill green" id="supCompanyRtwView">Yes — all staff have right to work</span>
                   </div>
                 </div>
-
+                  <div class="ob-card-section" style="margin-top:16px;">
+                    <div class="ocs-head">
+                      <div class="ocs-icon" style="background:#fef3c7;color:#92620a;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 9l6-1z"/></svg></div>
+                      <div class="ocs-title">Job references &amp; portfolio</div>
+                      <span class="meta-badge optional" style="text-transform:none;">Recommended</span>
+                    </div>
+                    <div class="ocs-desc">References and portfolio photos are displayed on your marketplace profile. They help build trust and improve your search ranking significantly.</div>
+                    <div class="ob-field">
+                      <textarea class="ob-textarea" style="min-height:70px;" id="stgpJobRefsTextarea">References available on request from managing agents.</textarea>
+                    </div>
+                    <div class="ob-field" style="margin-bottom:0;">
+                      <label>Portfolio Photos</label>
+                      <div class="portfolio-grid" id="stgpPortfolioGrid">
+                        <div class="portfolio-add-tile" id="stgpPortfolioAddTile">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                          Add Photo
+                        </div>
+                      </div>
+                      <div class="helper">Upload photos of completed work — kitchens, bathrooms, electrical panels, before/after shots. High-quality images increase booking rates by up to 40%. <span id="stgpPortfolioCount">0</span> / 10 photos.</div>
+                    </div>
+                  </div>
                   <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
-                    <button type="button" class="btn btn-secondary-light" data-acct-discard="Insurance">Discard</button>
                     <button type="button" class="btn btn-primary" data-supsettings-save="Background">Save Changes</button>
                   </div>
                 </div>
@@ -6175,158 +6334,115 @@ rule already being here. */
               <!-- Questionnaire tab -->
               <div id="supSettingsPanelQuestionnaire" style="display:none;padding-bottom:76px;">
                 <div style="margin-top:20px;">
-                  <div class="ob-card-section" id="stgpCompanyLogoCard" style="display:none;">
-                    <div class="ocs-head">
-                      <div class="ocs-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
-                      <div class="ocs-title">Company logo</div>
-                      <span class="meta-badge optional">Optional</span>
+                <div class="ob-wiz-shell">
+                  <div class="ob-wiz-dots-row">
+                    <div class="ob-wiz-dots" id="obWizDots">
+                      <span class="ob-wiz-dot active" data-dot="0"></span>
+                      <span class="ob-wiz-dot" data-dot="1"></span>
+                      <span class="ob-wiz-dot" data-dot="2"></span>
+                      <span class="ob-wiz-dot" data-dot="3"></span>
+                      <span class="ob-wiz-dot" data-dot="4"></span>
                     </div>
-                    <div class="ocs-desc">Your company logo shown on your public profile and job notifications.</div>
-                    <div class="ob-field" style="margin-bottom:0;">
-                      <label>Upload Company Logo</label>
-                      <div class="file-dropzone" id="stgpCompanyLogoDropzone" style="max-width:280px;" data-title="Upload Company Logo">
-                        <input type="file" style="display:none;">
-                        <div class="fd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></svg></div>
-                        <div class="fd-label">Click to Upload</div>
-                      </div>
+                    <div class="ob-wiz-nav">
+                      <button type="button" class="btn btn-secondary-light" id="obWizBackBtn" style="display:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:-2px;"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back</button>
+                      <button type="button" class="btn btn-primary" id="obWizNextBtn">Next</button>
+                    </div>
+                  </div>
+                  <div class="ob-wiz-head">
+                    <div class="ob-wiz-headtext">
+                      <div class="ob-wiz-stepof" id="obWizStepOf">1 OF 5</div>
+                      <h2 class="ob-wiz-title" id="obWizTitle">Which trades do you do?</h2>
+                      <div class="ob-wiz-desc" id="obWizDesc">Pick the categories you work in, then tick the specific roles within each. We route matching jobs to you and verify only the certificates your roles need.</div>
                     </div>
                   </div>
 
-                  <div class="ob-card-section">
-                    <div class="ocs-head">
-                      <div class="ocs-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg></div>
-                      <div class="ocs-title">Experience &amp; track record</div>
-                    </div>
-                    <div class="ocs-desc">Clients often filter by experience and completed jobs — these appear on your marketplace profile.</div>
+                  <!-- Step 0: Which trades do you do? -->
+                  <div class="ob-wiz-step active" data-wizstep="0">
+                    <div class="ob-wiz-chip-row" id="obTradeChipRow"></div>
+                    <button type="button" class="btn btn-secondary-light" id="obAddTradeCatBtn" style="margin-top:4px;">+ Add trade category</button>
+                    <div class="ob-wiz-cat-picker" id="obTradeCatPicker" style="display:none;"></div>
+                    <div id="obTradeRolesWrap" style="margin-top:22px;"></div>
+                  </div>
 
-                    <div id="stgpExpTrackSoleTrader">
-                      <div class="ob-row-2">
-                        <div class="ob-field">
-                          <label>How many years of experience do you have?</label>
-                          <div style="position:relative;">
-                            <button type="button" class="pm-custom-dd-btn ob-select-dd" data-dd="stgpExpYearsSole"><span class="cdd-value cdd-placeholder">Select...</span><svg class="cdd-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-                            <div class="pm-custom-dd-menu" data-dd-menu="stgpExpYearsSole">
-                              <div class="cdd-item" data-value="Less than 1 year">Less than 1 year</div>
-                              <div class="cdd-item" data-value="1–3 years">1–3 years</div>
-                              <div class="cdd-item" data-value="4–7 years">4–7 years</div>
-                              <div class="cdd-item" data-value="8–15 years">8–15 years</div>
-                              <div class="cdd-item" data-value="15+ years">15+ years</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="ob-field">
-                          <label>How many jobs have you completed?</label>
-                          <div style="position:relative;">
-                            <button type="button" class="pm-custom-dd-btn ob-select-dd" data-dd="stgpJobsSole"><span class="cdd-value cdd-placeholder">Select...</span><svg class="cdd-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-                            <div class="pm-custom-dd-menu" data-dd-menu="stgpJobsSole">
-                              <div class="cdd-item" data-value="1–10">1–10</div>
-                              <div class="cdd-item" data-value="11–50">11–50</div>
-                              <div class="cdd-item" data-value="51–200">51–200</div>
-                              <div class="cdd-item" data-value="200+">200+</div>
-                            </div>
-                          </div>
-                        </div>
+                  <!-- Step 1: Company logo -->
+                  <div class="ob-wiz-step" data-wizstep="1">
+                    <div class="ob-card-section" style="margin-bottom:0;">
+                      <div class="ocs-head">
+                        <div class="ocs-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+                        <div class="ocs-title">Business logo</div>
+                        <span class="meta-badge optional">Optional</span>
                       </div>
-                    </div>
-
-                    <div id="stgpExpTrackCompany" style="display:none;">
-                      <div class="ob-row-2">
-                        <div class="ob-field">
-                          <label>How many years of experience do you have?</label>
-                          <div style="position:relative;">
-                            <button type="button" class="pm-custom-dd-btn ob-select-dd" data-dd="stgpExpYearsCompany"><span class="cdd-value cdd-placeholder">Select...</span><svg class="cdd-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-                            <div class="pm-custom-dd-menu" data-dd-menu="stgpExpYearsCompany">
-                              <div class="cdd-item" data-value="Less than 1 year">Less than 1 year</div>
-                              <div class="cdd-item" data-value="1–3 years">1–3 years</div>
-                              <div class="cdd-item" data-value="3–5 years">3–5 years</div>
-                              <div class="cdd-item" data-value="5–10 years">5–10 years</div>
-                              <div class="cdd-item" data-value="10+ years">10+ years</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="ob-field">
-                          <label>How many jobs have you completed?</label>
-                          <div style="position:relative;">
-                            <button type="button" class="pm-custom-dd-btn ob-select-dd" data-dd="stgpJobsCompany"><span class="cdd-value cdd-placeholder">Select...</span><svg class="cdd-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-                            <div class="pm-custom-dd-menu" data-dd-menu="stgpJobsCompany">
-                              <div class="cdd-item" data-value="Under 50 jobs">Under 50 jobs</div>
-                              <div class="cdd-item" data-value="50–200 jobs">50–200 jobs</div>
-                              <div class="cdd-item" data-value="200–500 jobs">200–500 jobs</div>
-                              <div class="cdd-item" data-value="500–1,000 jobs">500–1,000 jobs</div>
-                              <div class="cdd-item" data-value="1,000+ jobs">1,000+ jobs</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ob-row-2">
-                        <div class="ob-field">
-                          <label>Year established <span class="meta-badge optional">Optional</span></label>
-                          <input class="field-input" type="text" id="stgpCompanyYearEstablished" placeholder="e.g. 2014">
-                        </div>
-                        <div class="ob-field">
-                          <label>Number of operatives</label>
-                          <div style="position:relative;">
-                            <button type="button" class="pm-custom-dd-btn ob-select-dd" data-dd="stgpNumOperatives"><span class="cdd-value cdd-placeholder">Select...</span><svg class="cdd-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-                            <div class="pm-custom-dd-menu" data-dd-menu="stgpNumOperatives">
-                              <div class="cdd-item" data-value="1–5">1–5</div>
-                              <div class="cdd-item" data-value="6–15">6–15</div>
-                              <div class="cdd-item" data-value="16–50">16–50</div>
-                              <div class="cdd-item" data-value="50+">50+</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <div class="ocs-desc">Shown on your public profile and job notifications. You can skip this and add it later.</div>
                       <div class="ob-field" style="margin-bottom:0;">
-                        <label>Website <span class="meta-badge optional">Optional</span></label>
-                        <input class="field-input" type="url" id="stgpCompanyWebsite" placeholder="https://yourcompany.co.uk">
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="ob-card-section">
-                    <div class="ocs-head">
-                      <div class="ocs-icon" style="background:#fef3c7;color:#92620a;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5 1 6.5-5.5-3-5.5 3 1-6.5L3 9l6-1z"/></svg></div>
-                      <div class="ocs-title">Job references &amp; portfolio</div>
-                      <span class="meta-badge optional" style="text-transform:none;">Recommended</span>
-                    </div>
-                    <div class="ocs-desc">References and portfolio photos are displayed on your marketplace profile. They help build trust and improve your search ranking significantly.</div>
-                    <div class="ob-field">
-                      <textarea class="ob-textarea" style="min-height:70px;" id="stgpJobRefsTextarea">References available on request from managing agents.</textarea>
-                    </div>
-                    <div class="ob-field" style="margin-bottom:0;">
-                      <label>Portfolio Photos</label>
-                      <div class="portfolio-grid" id="stgpPortfolioGrid">
-                        <div class="portfolio-add-tile" id="stgpPortfolioAddTile">
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-                          Add Photo
+                        <label>Upload logo</label>
+                        <div class="file-dropzone" id="obWizLogoDropzone" style="max-width:280px;" data-title="Upload Logo">
+                          <input type="file" style="display:none;">
+                          <div class="fd-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M17 8l-5-5-5 5M12 3v12"/></svg></div>
+                          <div class="fd-label">Click to Upload</div>
                         </div>
                       </div>
-                      <div class="helper">Upload photos of completed work — kitchens, bathrooms, electrical panels, before/after shots. High-quality images increase booking rates by up to 40%. <span id="stgpPortfolioCount">0</span> / 10 photos.</div>
                     </div>
                   </div>
 
-                  <div class="ob-card-section">
-                    <div class="ocs-head">
-                      <div class="ocs-icon" style="background:#eef0f8;color:#5b4fc4;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0112 0v1"/></svg></div>
-                      <div class="ocs-title">Describe yourself to clients</div>
+                  <!-- Step 2: Pricing models -->
+                  <div class="ob-wiz-step" data-wizstep="2">
+                    <div class="tile-row-2" id="obPricingTiles">
+                      <div class="choice-tile selected" data-value="fixed"><div class="tile-body"><div class="tile-title">Fixed Price</div></div></div>
+                      <div class="choice-tile selected" data-value="hourly"><div class="tile-body"><div class="tile-title">Hourly / Day Rate</div></div></div>
+                      <div class="choice-tile" data-value="tiered"><div class="tile-body"><div class="tile-title">Tiered / Banded</div></div></div>
+                      <div class="choice-tile" data-value="estimated"><div class="tile-body"><div class="tile-title">Estimated</div></div></div>
+                      <div class="choice-tile" data-value="quote"><div class="tile-body"><div class="tile-title">Quote Based</div></div></div>
+                      <div class="choice-tile" data-value="subscription"><div class="tile-body"><div class="tile-title">Subscription / Bundle</div></div></div>
                     </div>
-                    <div class="ocs-desc">Write a short bio for your marketplace profile — your chance to make a great first impression, or let AI help.</div>
+                  </div>
+
+                  <!-- Step 3: Years of experience -->
+                  <div class="ob-wiz-step" data-wizstep="3">
+                    <div class="ob-wiz-radio-col" id="obExpTiles">
+                      <div class="choice-tile" data-value="0-2"><div class="tile-body"><div class="tile-title">0&ndash;2 years</div><div class="tile-desc">Just starting out or recently qualified</div></div></div>
+                      <div class="choice-tile selected" data-value="3-5"><div class="tile-body"><div class="tile-title">3&ndash;5 years</div><div class="tile-desc">Established and building a client base</div></div></div>
+                      <div class="choice-tile" data-value="6-10"><div class="tile-body"><div class="tile-title">6&ndash;10 years</div><div class="tile-desc">Experienced professional</div></div></div>
+                      <div class="choice-tile" data-value="11-20"><div class="tile-body"><div class="tile-title">11&ndash;20 years</div><div class="tile-desc">Seasoned expert in your field</div></div></div>
+                      <div class="choice-tile" data-value="20+"><div class="tile-body"><div class="tile-title">20+ years</div><div class="tile-desc">Decades of trusted experience</div></div></div>
+                    </div>
+                    <div class="ob-field" style="margin-top:20px;margin-bottom:0;">
+                      <label>Tell clients more about your experience <span class="meta-badge optional">Optional</span></label>
+                      <textarea class="ob-textarea" id="obExpMoreTextarea" placeholder="Describe job details, responsibilities, or any additional notes."></textarea>
+                    </div>
+                  </div>
+
+                  <!-- Step 4: Jobs completed -->
+                  <div class="ob-wiz-step" data-wizstep="4">
+                    <div class="ob-wiz-radio-col" id="obJobsTiles">
+                      <div class="choice-tile" data-value="under50"><div class="tile-body"><div class="tile-title">Under 50 jobs</div></div></div>
+                      <div class="choice-tile selected" data-value="50-200"><div class="tile-body"><div class="tile-title">50&ndash;200 jobs</div></div></div>
+                      <div class="choice-tile" data-value="200-500"><div class="tile-body"><div class="tile-title">200&ndash;500 jobs</div></div></div>
+                      <div class="choice-tile" data-value="500-1000"><div class="tile-body"><div class="tile-title">500&ndash;1,000 jobs</div></div></div>
+                      <div class="choice-tile" data-value="1000+"><div class="tile-body"><div class="tile-title">1,000+ jobs</div></div></div>
+                    </div>
+                  </div>
+
+                  <!-- Step 5 (labelled 6 OF 5, matching the reference): Bio -->
+                  <div class="ob-wiz-step" data-wizstep="5">
                     <div class="ob-field" style="margin-bottom:14px;">
-                      <textarea class="ob-textarea" id="stgpBioTextarea" placeholder="Reliable, fully-insured appliances team based in Manchester. Sole trader with 15 years experience.">Reliable, fully-insured appliances team based in Manchester. Sole trader with 15 years experience.</textarea>
+                      <textarea class="ob-textarea" id="stgpBioTextarea" placeholder="Reliable, fully-insured appliances team based in Manchester. Sole trader with 15 years experience.">Reliable, fully-insured grounds &amp; outdoor team based in Warminster. Sole trader with 5 years experience.</textarea>
                     </div>
                     <div class="callout callout-info" style="margin-bottom:0;">
                       <div class="callout-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5z"/></svg></div>
                       <div>
-                        <div class="callout-title">Tips for a Great Bio:</div>
+                        <div class="callout-title">Tips for a great bio</div>
                         <ul class="callout-bullet-list">
                           <li>Mention your primary trade and years of experience</li>
                           <li>Highlight what makes you different (response time, speciality, reliability)</li>
-                          <li>Keep it professional but personable — 2-4 sentences is ideal</li>
+                          <li>Keep it professional but personable &mdash; 2&ndash;4 sentences is ideal</li>
                         </ul>
                       </div>
                     </div>
                   </div>
+                </div>
 
+                <!-- Hidden, not part of the reference flow but kept for data continuity -->
+                <div style="display:none;" id="stgpLegacyExtras">
                   <div class="ob-card-section">
                     <div class="ocs-head">
                       <div class="ocs-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
@@ -6454,6 +6570,7 @@ rule already being here. */
                     <div style="height:4px;"></div>
                   </div>
                 </div>
+                </div>
               </div>
 
               <!-- Payment Setup tab -->
@@ -6560,7 +6677,7 @@ rule already being here. */
               </div>
 
               <!-- Settings tab -->
-              <div id="supSettingsPanelSettings" style="display:none;">
+              <div id="supSettingsPanelSettings" style="display:none !important;">
                 <div style="margin-top:20px;">
                   <div class="sup-settings-section-label">Notifications</div>
                   <div class="sup-settings-row">
@@ -6578,6 +6695,16 @@ rule already being here. */
                       <div class="sup-settings-row-desc">Weekly digest of your jobs and earnings</div>
                     </div>
                     <button type="button" class="toggle-switch on" id="supNotifyEmailToggle" role="switch" aria-checked="true"><span class="thumb"></span></button>
+                  </div>
+
+                  <div class="sup-settings-section-label">Security</div>
+                  <div class="sup-settings-row clickable" id="supChangePasswordRow">
+                    <div class="sup-settings-row-icon blue"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                    <div class="sup-settings-row-body">
+                      <div class="sup-settings-row-title">Change password</div>
+                      <div class="sup-settings-row-desc">Update the password you use to sign in</div>
+                    </div>
+                    <svg class="sup-settings-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                   </div>
 
                   <div class="sup-settings-section-label">Support</div>
@@ -7713,43 +7840,92 @@ rule already being here. */
       <button type="button" class="back-btn" id="payoutsBackBtn" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
       <div class="subpage-title-wrap">
         <div class="subpage-title">Payouts</div>
-        <div class="subpage-subtitle">Your earnings and payouts</div>
       </div>
-      <button class="bell-btn subpage-bell" type="button" aria-label="Notifications, 73 unread">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        <span class="bell-badge">73</span>
-      </button>
     </div>
     <div class="subpage-content">
-      <div class="card revenue-card" style="margin-top:4px;">
-        <div class="rev-label">Earnings this month</div>
-        <div class="rev-head">
-          <div class="rev-amount">&pound;0</div>
+      <div class="pay-summary-card">
+        <div class="pay-summary-half earned">
+          <div class="pay-summary-label">Total Earned</div>
+          <div class="pay-summary-amount" id="paySummaryEarned">&pound;9,323.06</div>
         </div>
-        <div class="rev-tiles">
-          <div class="rev-tile pending">
-            <div class="rt-label">Pending payout</div>
-            <div class="rt-value">&pound;0</div>
-          </div>
-          <div class="rev-tile next">
-            <div class="rt-label">Next payout</div>
-            <div class="rt-value">&pound;346</div>
-          </div>
+        <div class="pay-summary-half pending">
+          <div class="pay-summary-label">Pending Payout</div>
+          <div class="pay-summary-amount" id="paySummaryPending">&pound;1,049.98</div>
+          <div class="pay-summary-sub">Awaiting schedule</div>
         </div>
       </div>
 
-      <h2 class="sect-title" style="margin-top:20px;">Recent payouts</h2>
-      <div class="card activity-card">
-        <button class="activity-row" type="button">
-          <span class="act-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
-          <span class="act-body"><span class="act-title" style="display:block">Payout of &pound;849.98 scheduled</span><span class="act-sub" style="display:block">A deposit of &pound;849.98 from your customer has been scheduled</span></span>
-          <span class="act-time">7d</span>
+      <div class="pay-filter-row">
+        <button type="button" class="pay-filter-btn" id="payStatusFilterBtn">
+          <span class="pf-dot" id="payStatusFilterDot"></span>
+          <span class="pf-label" id="payStatusFilterLabel">All</span>
+          <svg class="pf-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <button class="activity-row" type="button">
-          <span class="act-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
-          <span class="act-body"><span class="act-title" style="display:block">&pound;200.00 has been deposited</span><span class="act-sub" style="display:block">Your deposit payout of &pound;200.00 for JB-2709 has been paid</span></span>
-          <span class="act-time">8d</span>
+        <button type="button" class="pay-filter-btn" id="payMonthFilterBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          <span class="pf-label" id="payMonthFilterLabel">All months</span>
+          <svg class="pf-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
+      </div>
+
+      <div class="pay-list" id="payList"></div>
+      <div class="pay-empty" id="payEmpty" style="display:none;">No payouts match these filters.</div>
+    </div>
+  </div>
+
+  <!-- Payouts: Filter by status -->
+  <div class="modal-overlay" id="payFilterStatusOverlay">
+    <div class="modal-card">
+      <div class="pay-filter-head"><h3>Filter by status</h3><button type="button" class="modal-close-btn" id="payFilterStatusCloseBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+      <div class="pay-filter-body" id="payFilterStatusBody"></div>
+    </div>
+  </div>
+
+  <!-- Payouts: Filter by month -->
+  <div class="modal-overlay" id="payFilterMonthOverlay">
+    <div class="modal-card">
+      <div class="pay-filter-head"><h3>Filter by month</h3><button type="button" class="modal-close-btn" id="payFilterMonthCloseBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+      <div class="pay-filter-body" id="payFilterMonthBody"></div>
+    </div>
+  </div>
+
+  <!-- Payouts: payout detail -->
+  <div class="modal-overlay" id="payDetailOverlay">
+    <div class="modal-card">
+      <div class="pd-head">
+        <div class="pd-head-top">
+          <span class="pd-head-ref" id="pdRef">KLR-PAY-000</span>
+          <span class="status-pill" id="pdStatusPill">Paid</span>
+          <span class="status-pill gray" id="pdTermsPill">On completion</span>
+          <button type="button" class="modal-close-btn pd-head-close" id="payDetailCloseBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        </div>
+        <div class="pd-net-label">Net Payout</div>
+        <div class="pd-net-amount" id="pdNetAmount">&pound;0</div>
+      </div>
+      <div class="pd-body">
+        <div class="pd-sect-title">Payment Details</div>
+        <div class="pd-card">
+          <div class="pd-row"><span class="pd-row-label">Expected Payment Date</span><span class="pd-row-value" id="pdExpectedDate">&mdash;</span></div>
+          <div class="pd-row"><span class="pd-row-label">Receiving Account</span><span class="pd-row-value" id="pdAccount">Lloyds Bank &bull;&bull;2896</span></div>
+          <div class="pd-row"><span class="pd-row-label">Reference</span><span class="pd-row-value" id="pdReference">KLR-PAY-000</span></div>
+          <div class="pd-row"><span class="pd-row-label">Payment Terms</span><span class="pd-row-value" id="pdPaymentTerms">On completion</span></div>
+          <div class="pd-row"><span class="pd-row-label">Status</span><span class="status-pill" id="pdStatusPill2">Paid</span></div>
+        </div>
+
+        <div id="pdJobSection">
+          <div class="pd-sect-title">Job</div>
+          <div class="pd-job-card">
+            <div class="pd-job-top"><span class="pd-job-title" id="pdJobTitle">&nbsp;</span><span class="pd-job-amount" id="pdJobAmount">&pound;0</span></div>
+            <div class="pd-job-sub">Property &middot; <span id="pdJobProperty">&nbsp;</span><br>Property Manager &middot; <span id="pdJobPM">&nbsp;</span></div>
+          </div>
+        </div>
+
+        <div class="pd-sect-title">Financial Breakdown</div>
+        <div class="pd-fin-card">
+          <div class="pd-fin-row"><span class="pd-fin-label">Supplier Earning</span><span class="pd-fin-value" id="pdEarning">&pound;0</span></div>
+          <div class="pd-fin-row"><span class="pd-fin-label">VAT (20%)</span><span class="pd-fin-value" id="pdVat">&pound;0</span></div>
+          <div class="pd-fin-row total"><span class="pd-fin-label">Net Payout</span><span class="pd-fin-value" id="pdFinNet">&pound;0</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -7761,24 +7937,114 @@ rule already being here. */
       <div class="subpage-title-wrap">
         <div class="subpage-title">Disputes</div>
       </div>
-      <button class="bell-btn subpage-bell" type="button" aria-label="Notifications, 73 unread">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        <span class="bell-badge">73</span>
-      </button>
     </div>
     <div class="subpage-content">
-      <div class="dash-section">
-        <div class="sup-soon-card" style="margin-top:12px;">
-          <div class="sup-soon-icon">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <span class="sup-soon-chip">Coming soon</span>
-          <div class="sup-soon-title">Disputes is on the way</div>
-          <div class="sup-soon-desc">
-            You&rsquo;ll be able to raise and track disputes on a job here &mdash; what&rsquo;s open, what&rsquo;s awaiting a response, and what&rsquo;s been resolved.
-          </div>
+      <div class="disp-count" id="dispCount">0 disputes</div>
+      <div class="dash-search-bar" style="max-width:none;width:100%;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="dispSearchInput" placeholder="Search dispute, job..." autocomplete="off">
+      </div>
+      <div class="disp-filter-row" id="dispFilterRow">
+        <button type="button" class="supcal-filter-pill active" data-disp-filter="all">All</button>
+        <button type="button" class="supcal-filter-pill" data-disp-filter="open">Open</button>
+        <button type="button" class="supcal-filter-pill" data-disp-filter="acknowledged">Acknowledged</button>
+        <button type="button" class="supcal-filter-pill" data-disp-filter="awaiting-supplier">Awaiting Supplier</button>
+        <button type="button" class="supcal-filter-pill" data-disp-filter="resolved">Resolved</button>
+      </div>
+      <div class="disp-empty" id="dispEmpty">No disputes &mdash; quiet is good.</div>
+      <div class="pay-list" id="dispList" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- =========== SCREEN · CHANGE PASSWORD =========== -->
+  <!-- =========== SCREEN · SETTINGS (standalone) =========== -->
+  <div class="screen" id="screenSettings">
+    <div class="subpage-topbar">
+      <button type="button" class="back-btn" id="settingsBackBtn" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="subpage-title-wrap">
+        <div class="subpage-title">Settings</div>
+      </div>
+    </div>
+    <div class="subpage-content">
+      <div class="sup-settings-section-label">Notifications</div>
+      <div class="sup-settings-row">
+        <div class="sup-settings-row-icon blue"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+        <div class="sup-settings-row-body">
+          <div class="sup-settings-row-title">Push notifications</div>
+          <div class="sup-settings-row-desc">New offers, job updates and reminders</div>
+        </div>
+        <button type="button" class="toggle-switch on" id="stgPushToggle" role="switch" aria-checked="true"><span class="thumb"></span></button>
+      </div>
+      <div class="sup-settings-row">
+        <div class="sup-settings-row-icon green"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg></div>
+        <div class="sup-settings-row-body">
+          <div class="sup-settings-row-title">Email summaries</div>
+          <div class="sup-settings-row-desc">Weekly digest of your jobs and earnings</div>
+        </div>
+        <button type="button" class="toggle-switch on" id="stgEmailToggle" role="switch" aria-checked="true"><span class="thumb"></span></button>
+      </div>
+
+      <div class="sup-settings-section-label">Security</div>
+      <div class="sup-settings-row clickable" id="stgChangePasswordRow">
+        <div class="sup-settings-row-icon blue"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="sup-settings-row-body">
+          <div class="sup-settings-row-title">Change password</div>
+          <div class="sup-settings-row-desc">Update the password you use to sign in</div>
+        </div>
+        <svg class="sup-settings-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+
+      <div class="sup-settings-section-label">Preferences</div>
+      <div class="sup-settings-row clickable" id="stgAboutKeylrRow">
+        <div class="sup-settings-row-icon gray"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
+        <div class="sup-settings-row-body">
+          <div class="sup-settings-row-title">About Keylr</div>
+        </div>
+        <svg class="sup-settings-row-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+
+      <div class="sup-settings-footer">Keylr &middot; Version 1.0.0</div>
+    </div>
+  </div>
+
+  <div class="screen" id="screenChangePassword">
+    <div class="subpage-topbar">
+      <button type="button" class="back-btn" id="changePasswordBackBtn" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="subpage-title-wrap">
+        <div class="subpage-title">Change password</div>
+      </div>
+    </div>
+    <div class="subpage-content">
+      <div class="detail-card" style="display:flex;align-items:flex-start;gap:16px;padding:20px;margin-top:4px;">
+        <div class="dch-icon" style="width:44px;height:44px;border-radius:12px;flex-shrink:0;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div>
+          <h3 style="font-size:16px;margin-bottom:6px;">Update your password</h3>
+          <div style="font-size:13.5px;color:var(--text-body-muted);line-height:1.6;">Pick something only you know &mdash; at least 8 characters. We&rsquo;ll sign you in with the new one from your next login.</div>
         </div>
       </div>
+
+      <div class="ob-field" style="margin-top:24px;">
+        <label>Current password</label>
+        <div style="position:relative;">
+          <input class="field-input" type="password" id="cpwCurrentInput" placeholder="Enter current password" style="padding-right:44px;">
+          <button type="button" class="eye-toggle" data-eye-for="cpwCurrentInput" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-body-muted);padding:6px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a21.62 21.62 0 015.06-6.06M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a21.6 21.6 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg></button>
+        </div>
+      </div>
+      <div class="ob-field" style="margin-top:18px;">
+        <label>New password</label>
+        <div style="position:relative;">
+          <input class="field-input" type="password" id="cpwNewInput" placeholder="At least 8 characters" style="padding-right:44px;">
+          <button type="button" class="eye-toggle" data-eye-for="cpwNewInput" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-body-muted);padding:6px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a21.62 21.62 0 015.06-6.06M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a21.6 21.6 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg></button>
+        </div>
+      </div>
+      <div class="ob-field" style="margin-top:18px;">
+        <label>Confirm new password</label>
+        <div style="position:relative;">
+          <input class="field-input" type="password" id="cpwConfirmInput" placeholder="Re-enter new password" style="padding-right:44px;">
+          <button type="button" class="eye-toggle" data-eye-for="cpwConfirmInput" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-body-muted);padding:6px;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0112 20c-7 0-11-8-11-8a21.62 21.62 0 015.06-6.06M9.9 4.24A10.94 10.94 0 0112 4c7 0 11 8 11 8a21.6 21.6 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/></svg></button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" id="cpwSaveBtn" style="width:100%;margin-top:26px;" disabled>Save changes</button>
     </div>
   </div>
 
@@ -8088,10 +8354,12 @@ rule already being here. */
   var screenInbox = document.getElementById('screenInbox');
   var screenPayouts = document.getElementById('screenPayouts');
   var screenDisputes = document.getElementById('screenDisputes');
+  var screenChangePassword = document.getElementById('screenChangePassword');
+  var screenSettings = document.getElementById('screenSettings');
   var screenNotifications = document.getElementById('screenNotifications');
   var screenProfile = document.getElementById('screenProfile');
   var screenEditWizard = document.getElementById('screenEditWizard');
-  var allScreens = [screenSplash, screenAuth, screenHome, screenJobRequests, screenMyJobs, screenServiceArea, screenCalendar, screenInbox, screenPayouts, screenDisputes, screenNotifications, screenProfile, screenEditWizard];
+  var allScreens = [screenSplash, screenAuth, screenHome, screenJobRequests, screenMyJobs, screenServiceArea, screenCalendar, screenInbox, screenPayouts, screenDisputes, screenNotifications, screenProfile, screenEditWizard, screenChangePassword, screenSettings];
   var bottomNav = document.getElementById('bottomNav');
   var splashSignInBtn = document.getElementById('splashSignInBtn');
   var ccWrap = document.getElementById('ccWrap');
@@ -8519,10 +8787,11 @@ rule already being here. */
           notifPreviousScreen = screenHome;
           showScreen(screenNotifications);
         } else if (nav === 'settings') {
-          if (typeof supNotifOpenSettingsTab === 'function') supNotifOpenSettingsTab('settings');
+          showScreen(screenSettings);
         } else if (nav === 'profile') {
           if (typeof initSupProfileOnce === 'function') initSupProfileOnce();
           showScreen(screenProfile);
+          if (typeof updateProfileCompletionUI === 'function') updateProfileCompletionUI();
         }
       }, 160);
     });
@@ -8541,23 +8810,534 @@ rule already being here. */
   if (homePayoutsLink) homePayoutsLink.addEventListener('click', function () { showScreen(screenPayouts); });
   if (profileBackBtn) profileBackBtn.addEventListener('click', function () { showScreen(screenHome); });
 
-  /* ---- Profile / Account Settings (ported view-mode from supplier.html) ----
-     supplier.html's "Edit" button opens the full onboarding wizard in edit mode — that wizard
-     is explicitly out of scope for this mobile app, so Edit here gives honest feedback instead
-     of either silently doing nothing or faking a parallel edit flow. Every tab's view-mode
-     content (the part a supplier actually reads day to day) is ported and fully working. */
+  /* ================= Payouts ================= */
+  (function () {
+    // amount in GBP; date as 'D Mon YYYY'; kind drives what the detail sheet shows.
+    var PROPS = [
+      { addr: 'London, SW18 9WR', pm: 'KEY RIDERS LTD' },
+      { addr: 'Manchester, M4 5JD', pm: 'Northgate Lettings' },
+      { addr: 'Bristol, BS1 6QH', pm: 'Harbourview PM' },
+      { addr: 'Leeds, LS2 7HY', pm: 'Aire Valley Properties' }
+    ];
+    var payouts = [
+      { ref: 'KLR-PAY-110', status: 'pending', title: 'Appliance Installation (all white goods)', date: '8 Jul 2026', jobs: 1, amount: 849.98, jobAmount: 600.00, prop: 0 },
+      { ref: 'KLR-PAY-101', status: 'pending', title: 'Airbnb Turnover Clean', date: '3 Jul 2026', jobs: 1, amount: 200, jobAmount: 165.00, prop: 1 },
+      { ref: 'KLR-PAY-96', status: 'paid', title: 'Carpet / Stair Carpet Steam Clean', date: '7 Jul 2026', jobs: 1, amount: 200, jobAmount: 165.00, prop: 2 },
+      { ref: 'KLR-PAY-93', status: 'paid', title: 'Gas Tightness Test', date: '7 Jul 2026', jobs: 1, amount: 150, jobAmount: 120.00, prop: 3 },
+      { ref: 'KLR-PAY-75', status: 'paid', title: 'Door Entry / Intercom / Smart Doorbell', date: '7 Jul 2026', jobs: 1, amount: 80.02, jobAmount: 62.00, prop: 0 },
+      { ref: 'KLR-PAY-73', status: 'paid', title: 'Airbnb Turnover Clean', date: '6 Jul 2026', jobs: 1, amount: 4, jobAmount: 4.00, prop: 1 },
+      { ref: 'KLR-PAY-72', status: 'paid', title: 'End of Tenancy / Deep / Regular / Communal', date: '6 Jul 2026', jobs: 1, amount: 200, jobAmount: 165.00, prop: 2 },
+      { ref: 'KLR-PAY-71', status: 'paid', title: 'Carpet / Stair Carpet Steam Clean', date: '6 Jul 2026', jobs: 1, amount: 275.02, jobAmount: 230.00, prop: 3 },
+      { ref: 'KLR-PAY-70', status: 'paid', title: 'End of Tenancy / Deep / Regular / Communal', date: '6 Jul 2026', jobs: 1, amount: 150, jobAmount: 120.00, prop: 0 },
+      { ref: 'KLR-PAY-69', status: 'paid', title: 'Carpet / Stair Carpet Steam Clean', date: '6 Jul 2026', jobs: 1, amount: 240.02, jobAmount: 200.00, prop: 1 },
+      { ref: 'KLR-PAY-64', status: 'paid', title: 'Boiler Service (Annual)', date: '5 Jul 2026', jobs: 1, amount: 72, jobAmount: 58.00, prop: 2 },
+      { ref: 'KLR-PAY-62', status: 'paid', title: 'Airbnb Turnover Clean', date: '5 Jul 2026', jobs: 1, amount: 120, jobAmount: 98.00, prop: 3 },
+      { ref: 'KLR-PAY-60', status: 'paid', title: 'Oven / Cooker / Microwave / Extractor Repair', date: '5 Jul 2026', jobs: 1, amount: 72, jobAmount: 58.00, prop: 0 },
+      { ref: 'KLR-PAY-53', status: 'upfront', title: 'Early payout', date: '3 Jul 2026', jobs: 0, amount: 1608 },
+      { ref: 'KLR-PAY-50', status: 'upfront', title: 'Early payout', date: '25 Jun 2026', jobs: 0, amount: 360 },
+      { ref: 'KLR-PAY-49', status: 'upfront', title: 'Early payout', date: '23 Jun 2026', jobs: 0, amount: 160 },
+      { ref: 'KLR-PAY-48', status: 'upfront', title: 'Early payout', date: '24 Jun 2026', jobs: 0, amount: 360 },
+      { ref: 'KLR-PAY-47', status: 'upfront', title: 'Early payout', date: '25 Jun 2026', jobs: 0, amount: 300 },
+      { ref: 'KLR-PAY-46', status: 'upfront', title: 'Early payout', date: '25 Jun 2026', jobs: 0, amount: 300 },
+      { ref: 'KLR-PAY-15', status: 'upfront', title: 'Early payout', date: '23 Jun 2026', jobs: 0, amount: 50 },
+      { ref: 'KLR-PAY-28', status: 'paid', title: 'Billing period', date: '26 May 2026', jobs: 0, amount: 346, kind: 'billing' },
+      { ref: 'KLR-PAY-5', status: 'upfront', title: 'Early payout', date: '16 Jun 2026', jobs: 0, amount: 120 },
+      { ref: 'KLR-PAY-6', status: 'upfront', title: 'Early payout', date: '9 Jun 2026', jobs: 0, amount: 85 },
+      { ref: 'KLR-PAY-29', status: 'paid', title: 'Billing period', date: '28 Apr 2026', jobs: 0, amount: 289, kind: 'billing' },
+      { ref: 'KLR-PAY-7', status: 'upfront', title: 'Early payout', date: '31 May 2026', jobs: 0, amount: 220 },
+      { ref: 'KLR-PAY-30', status: 'paid', title: 'Billing period', date: '28 Mar 2026', jobs: 0, amount: 412, kind: 'billing' },
+      { ref: 'KLR-PAY-8', status: 'overdue', title: 'Early payout', date: '23 May 2026', jobs: 0, amount: 150 },
+      { ref: 'KLR-PAY-9', status: 'upfront', title: 'Early payout', date: '15 May 2026', jobs: 0, amount: 98 },
+      { ref: 'KLR-PAY-31', status: 'paid', title: 'Billing period', date: '28 Feb 2026', jobs: 0, amount: 158, kind: 'billing' },
+      { ref: 'KLR-PAY-10', status: 'upfront', title: 'Early payout', date: '7 May 2026', jobs: 0, amount: 310 },
+      { ref: 'KLR-PAY-32', status: 'paid', title: 'Billing period', date: '28 Jan 2026', jobs: 0, amount: 523, kind: 'billing' },
+      { ref: 'KLR-PAY-11', status: 'overdue', title: 'Early payout', date: '29 Apr 2026', jobs: 0, amount: 175 },
+      { ref: 'KLR-PAY-12', status: 'upfront', title: 'Early payout', date: '21 Apr 2026', jobs: 0, amount: 62 },
+      { ref: 'KLR-PAY-33', status: 'paid', title: 'Billing period', date: '28 Dec 2025', jobs: 0, amount: 227, kind: 'billing' },
+      { ref: 'KLR-PAY-13', status: 'upfront', title: 'Early payout', date: '13 Apr 2026', jobs: 0, amount: 280 },
+      { ref: 'KLR-PAY-34', status: 'paid', title: 'Billing period', date: '28 Nov 2025', jobs: 0, amount: 381, kind: 'billing' },
+      { ref: 'KLR-PAY-14', status: 'upfront', title: 'Early payout', date: '5 Apr 2026', jobs: 0, amount: 110 },
+      { ref: 'KLR-PAY-35', status: 'paid', title: 'Billing period', date: '28 Oct 2025', jobs: 0, amount: 475, kind: 'billing' },
+      { ref: 'KLR-PAY-36', status: 'paid', title: 'Billing period', date: '28 Sep 2025', jobs: 0, amount: 194, kind: 'billing' },
+      { ref: 'KLR-PAY-37', status: 'paid', title: 'Billing period', date: '28 Aug 2025', jobs: 0, amount: 332, kind: 'billing' }
+    ];
+    payouts.forEach(function (p) {
+      if (p.jobs > 0 && p.kind === undefined) p.kind = 'job';
+      else if (p.kind === undefined) p.kind = 'early';
+      p.earning = Math.round((p.amount / 1.2) * 100) / 100;
+      p.vat = Math.round((p.amount - p.earning) * 100) / 100;
+      p.terms = p.kind === 'job' ? 'On completion' : (p.kind === 'billing' ? 'Billing period' : 'Upfront');
+    });
+
+    var STATUS_META = {
+      all: { label: 'All', pillClass: '', dot: 'var(--accent-blue)' },
+      paid: { label: 'Paid', pillClass: 'green', dot: 'var(--icon-green)' },
+      upfront: { label: 'Upfront', pillClass: 'purple', dot: 'var(--icon-purple)' },
+      pending: { label: 'Pending', pillClass: 'amber', dot: '#dc9a2e' },
+      overdue: { label: 'Overdue', pillClass: 'orange', dot: '#b3480a' },
+      disputed: { label: 'Disputed', pillClass: 'red', dot: 'var(--icon-red)' }
+    };
+    var MONTHS = ['Jul 2026', 'Jun 2026', 'May 2026', 'Apr 2026', 'Mar 2026', 'Feb 2026', 'Jan 2026', 'Dec 2025', 'Nov 2025', 'Oct 2025', 'Sep 2025', 'Aug 2025'];
+
+    var payStatusFilter = 'all';
+    var payMonthFilter = 'All months';
+
+    function payMatchesMonth(p, month) {
+      if (month === 'All months') return true;
+      return p.date.slice(-(month.length)) === month;
+    }
+
+    function renderPayList() {
+      var list = document.getElementById('payList');
+      var empty = document.getElementById('payEmpty');
+      var filtered = payouts.filter(function (p) {
+        return (payStatusFilter === 'all' || p.status === payStatusFilter) && payMatchesMonth(p, payMonthFilter);
+      });
+      if (!filtered.length) { list.innerHTML = ''; empty.style.display = ''; return; }
+      empty.style.display = 'none';
+      list.innerHTML = filtered.map(function (p) {
+        var meta = STATUS_META[p.status];
+        return '<button type="button" class="pay-item" data-pay-ref="' + p.ref + '">' +
+          '<div class="pay-item-top"><span class="pay-item-ref">' + p.ref + '</span><span class="status-pill ' + meta.pillClass + '">' + meta.label + '</span></div>' +
+          '<div class="pay-item-title">' + p.title + '</div>' +
+          '<div class="pay-item-bottom"><span class="pay-item-meta">' + p.date + ' &middot; ' + p.jobs + ' job' + (p.jobs === 1 ? '' : 's') + '</span><span class="pay-item-amount">&pound;' + payFmt(p.amount) + '</span></div>' +
+        '</button>';
+      }).join('');
+      list.querySelectorAll('[data-pay-ref]').forEach(function (btn) {
+        btn.addEventListener('click', function () { openPayDetail(btn.getAttribute('data-pay-ref')); });
+      });
+    }
+    function payFmt(n) {
+      return n.toLocaleString('en-GB', { minimumFractionDigits: n % 1 === 0 ? 0 : 2, maximumFractionDigits: 2 });
+    }
+
+    function openPayDetail(ref) {
+      var p = payouts.filter(function (x) { return x.ref === ref; })[0];
+      if (!p) return;
+      var meta = STATUS_META[p.status];
+      document.getElementById('pdRef').textContent = p.ref;
+      document.getElementById('pdReference').textContent = p.ref;
+      ['pdStatusPill', 'pdStatusPill2'].forEach(function (id) {
+        var el = document.getElementById(id);
+        el.textContent = meta.label;
+        el.className = 'status-pill ' + meta.pillClass;
+      });
+      document.getElementById('pdTermsPill').textContent = p.terms;
+      document.getElementById('pdNetAmount').textContent = '\u00a3' + payFmt(p.amount);
+      document.getElementById('pdPaymentTerms').textContent = p.terms;
+      document.getElementById('pdExpectedDate').textContent = p.status === 'paid' ? p.date : '\u2014';
+      document.getElementById('pdAccount').textContent = 'Lloyds Bank \u2022\u20222896';
+      document.getElementById('pdEarning').textContent = '\u00a3' + payFmt(p.earning);
+      document.getElementById('pdVat').textContent = '\u00a3' + payFmt(p.vat);
+      document.getElementById('pdFinNet').textContent = '\u00a3' + payFmt(p.amount);
+      var jobSection = document.getElementById('pdJobSection');
+      if (p.kind === 'job') {
+        jobSection.style.display = '';
+        var prop = PROPS[p.prop || 0];
+        document.getElementById('pdJobTitle').textContent = p.title;
+        document.getElementById('pdJobAmount').textContent = '\u00a3' + payFmt(p.jobAmount);
+        document.getElementById('pdJobProperty').textContent = prop.addr;
+        document.getElementById('pdJobPM').textContent = prop.pm;
+      } else {
+        jobSection.style.display = 'none';
+      }
+      document.getElementById('payDetailOverlay').classList.add('open');
+    }
+    document.getElementById('payDetailCloseBtn').addEventListener('click', function () { document.getElementById('payDetailOverlay').classList.remove('open'); });
+    document.getElementById('payDetailOverlay').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
+
+    // Filter by status sheet
+    var statusBody = document.getElementById('payFilterStatusBody');
+    function statusCount(key) {
+      if (key === 'all') return payouts.length;
+      return payouts.filter(function (p) { return p.status === key; }).length;
+    }
+    statusBody.innerHTML = ['all', 'paid', 'upfront', 'pending', 'overdue', 'disputed'].map(function (key) {
+      var meta = STATUS_META[key];
+      return '<button type="button" class="pay-filter-option' + (key === payStatusFilter ? ' selected' : '') + '" data-status-key="' + key + '">' +
+        '<span class="pfo-dot" style="background:' + meta.dot + '"></span><span>' + meta.label + '</span>' +
+        '<span class="pfo-count">' + statusCount(key) + '</span>' +
+        (key === payStatusFilter ? '<svg class="pfo-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' : '') +
+      '</button>';
+    }).join('');
+    function wireStatusOptions() {
+      statusBody.querySelectorAll('[data-status-key]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          payStatusFilter = btn.getAttribute('data-status-key');
+          var meta = STATUS_META[payStatusFilter];
+          document.getElementById('payStatusFilterLabel').textContent = meta.label;
+          document.getElementById('payStatusFilterDot').style.background = meta.dot;
+          statusBody.querySelectorAll('.pay-filter-option').forEach(function (o) { o.classList.remove('selected'); o.querySelector('.pfo-check') && o.querySelector('.pfo-check').remove(); });
+          btn.classList.add('selected');
+          btn.insertAdjacentHTML('beforeend', '<svg class="pfo-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>');
+          document.getElementById('payFilterStatusOverlay').classList.remove('open');
+          renderPayList();
+        });
+      });
+    }
+    wireStatusOptions();
+    document.getElementById('payStatusFilterBtn').addEventListener('click', function () { document.getElementById('payFilterStatusOverlay').classList.add('open'); });
+    document.getElementById('payFilterStatusCloseBtn').addEventListener('click', function () { document.getElementById('payFilterStatusOverlay').classList.remove('open'); });
+    document.getElementById('payFilterStatusOverlay').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
+
+    // Filter by month sheet
+    var monthBody = document.getElementById('payFilterMonthBody');
+    function renderMonthOptions() {
+      var all = ['All months'].concat(MONTHS);
+      monthBody.innerHTML = all.map(function (m) {
+        var selected = m === payMonthFilter;
+        return '<button type="button" class="pay-filter-option' + (selected ? ' selected' : '') + '" data-month-key="' + m + '">' +
+          '<span>' + m + '</span>' +
+          (selected ? '<svg class="pfo-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' : '') +
+        '</button>';
+      }).join('');
+      monthBody.querySelectorAll('[data-month-key]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          payMonthFilter = btn.getAttribute('data-month-key');
+          document.getElementById('payMonthFilterLabel').textContent = payMonthFilter;
+          document.getElementById('payFilterMonthOverlay').classList.remove('open');
+          renderMonthOptions();
+          renderPayList();
+        });
+      });
+    }
+    renderMonthOptions();
+    document.getElementById('payMonthFilterBtn').addEventListener('click', function () { document.getElementById('payFilterMonthOverlay').classList.add('open'); });
+    document.getElementById('payFilterMonthCloseBtn').addEventListener('click', function () { document.getElementById('payFilterMonthOverlay').classList.remove('open'); });
+    document.getElementById('payFilterMonthOverlay').addEventListener('click', function (e) { if (e.target === this) this.classList.remove('open'); });
+
+    renderPayList();
+  })();
+
+  /* ================= Insurance toggle collapse (PLI / PI) ================= */
+  (function () {
+    function wireInsuranceToggle(toggleId, fieldsId) {
+      var toggle = document.getElementById(toggleId);
+      var fields = document.getElementById(fieldsId);
+      if (!toggle || !fields) return;
+      toggle.addEventListener('click', function () {
+        var isOn = toggle.classList.toggle('on');
+        toggle.setAttribute('aria-checked', isOn ? 'true' : 'false');
+        fields.classList.toggle('open', isOn);
+        fields.style.maxHeight = isOn ? '1200px' : '0';
+        fields.style.opacity = isOn ? '1' : '0';
+      });
+    }
+    wireInsuranceToggle('supPliToggle', 'supPliFields');
+    wireInsuranceToggle('supPiToggle', 'supPiFields');
+    wireInsuranceToggle('supDbsToggle', 'supDbsFields');
+  })();
+
+  /* ================= Change number / email reveal forms ================= */
+  (function () {
+    function wireReveal(linkId, formId, cancelId, verifyId, displayId, inputId, successMsg) {
+      var link = document.getElementById(linkId);
+      var form = document.getElementById(formId);
+      if (!link || !form) return;
+      link.addEventListener('click', function () { form.style.display = form.style.display === 'none' ? '' : 'none'; });
+      var cancelBtn = cancelId && document.getElementById(cancelId);
+      if (cancelBtn) cancelBtn.addEventListener('click', function () { form.style.display = 'none'; });
+      var verifyBtn = verifyId && document.getElementById(verifyId);
+      if (verifyBtn) verifyBtn.addEventListener('click', function () {
+        var input = inputId && document.getElementById(inputId);
+        if (input && !input.value) { input.focus(); return; }
+        var display = displayId && document.getElementById(displayId);
+        if (display && input) display.textContent = input.value;
+        form.style.display = 'none';
+        if (input) input.value = '';
+        showToast(successMsg);
+      });
+    }
+    wireReveal('supChangeNumberBtn', 'supChangeNumberForm', 'supCancelChangeNumberBtn', 'supVerifyNewNumberBtn', null, 'supNewNumberInput', 'Verification code sent to your new number.');
+    wireReveal('supIdChangeNumberLink', 'supIdChangeNumberForm', 'supIdCancelChangeNumberBtn', 'supIdVerifyNewNumberBtn', 'supIdPhoneView', 'supIdNewNumberInput', 'Verification code sent to your new number.');
+    wireReveal('supAcctChangeEmailLink', 'supAcctChangeEmailForm', 'supAcctCancelChangeEmailBtn', 'supAcctSendEmailVerifyBtn', 'supIdEmailView', 'supAcctNewEmailInput', 'Confirmation email sent to your new address.');
+  })();
+
+  /* ================= Profile photo upload ================= */
+  (function () {
+    var input = document.getElementById('supProfileAvatarInput');
+    var editBtn = document.getElementById('supProfileAvatarEditBtn');
+    var img = document.getElementById('supProfileAvatarImg');
+    var initials = document.getElementById('supProfileAvatarInitials');
+    if (!input) return;
+    if (editBtn) editBtn.addEventListener('click', function () { input.click(); });
+    input.addEventListener('change', function () {
+      var file = input.files && input.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        if (img) { img.src = e.target.result; img.style.display = 'block'; }
+        if (initials) initials.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    });
+  })();
+
+
+  /* ================= Settings (standalone screen) ================= */
+  (function () {
+    var backBtn = document.getElementById('settingsBackBtn');
+    if (backBtn) backBtn.addEventListener('click', function () { showScreen(screenHome); });
+    ['stgPushToggle', 'stgEmailToggle'].forEach(function (id) {
+      var toggle = document.getElementById(id);
+      if (!toggle) return;
+      toggle.addEventListener('click', function () {
+        var isOn = toggle.classList.toggle('on');
+        toggle.setAttribute('aria-checked', isOn ? 'true' : 'false');
+      });
+    });
+  })();
+
+  (function () {
+    var row = document.getElementById('stgChangePasswordRow');
+    if (row) row.addEventListener('click', function () { showScreen(screenChangePassword); });
+    var backBtn = document.getElementById('changePasswordBackBtn');
+    if (backBtn) backBtn.addEventListener('click', function () { showScreen(screenSettings); });
+    document.querySelectorAll('#screenChangePassword [data-eye-for]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = document.getElementById(btn.getAttribute('data-eye-for'));
+        input.type = input.type === 'password' ? 'text' : 'password';
+      });
+    });
+    var curr = document.getElementById('cpwCurrentInput');
+    var next = document.getElementById('cpwNewInput');
+    var conf = document.getElementById('cpwConfirmInput');
+    var saveBtn = document.getElementById('cpwSaveBtn');
+    function updateSaveState() {
+      saveBtn.disabled = !(curr.value && next.value.length >= 8 && conf.value && conf.value === next.value);
+    }
+    [curr, next, conf].forEach(function (el) { el.addEventListener('input', updateSaveState); });
+    saveBtn.addEventListener('click', function () {
+      if (saveBtn.disabled) return;
+      showToast('Password updated.');
+      curr.value = ''; next.value = ''; conf.value = '';
+      updateSaveState();
+      showScreen(screenProfile);
+    });
+  })();
+
+
+  /* ================= Disputes ================= */
+  (function () {
+    var disputes = []; // none currently — matches the reference's empty state
+    function renderDisputes() {
+      var count = document.getElementById('dispCount');
+      var empty = document.getElementById('dispEmpty');
+      var list = document.getElementById('dispList');
+      count.textContent = disputes.length + ' dispute' + (disputes.length === 1 ? '' : 's');
+      if (!disputes.length) { empty.style.display = ''; list.style.display = 'none'; return; }
+      empty.style.display = 'none'; list.style.display = '';
+    }
+    document.querySelectorAll('#dispFilterRow [data-disp-filter]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('#dispFilterRow [data-disp-filter]').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        renderDisputes();
+      });
+    });
+    renderDisputes();
+  })();
+
+  /* ================= Questionnaire wizard ================= */
+  (function () {
+    var TRADE_CATEGORIES = {
+      'Cleaning': ['Cleaner', 'End-of-Tenancy Cleaner', 'Window Cleaner'],
+      'Damp, Mould & Structural': ['Damp Specialist', 'Ventilation Engineer', 'Electrician', 'Roofer', 'Handyman', 'Builder', 'Plasterer', 'Scaffolder', 'Kitchen Fitter'],
+      'Appliances': ['Appliance Engineer'],
+      'Compliance & Legal': ['EPC Assessor', 'Legionella Specialist', 'Asbestos Surveyor', 'Fire Risk Assessor'],
+      'Electrical': ['Electrician', 'PAT Tester', 'EV Charger Installer'],
+      'Electrical General': ['General Electrician'],
+      'Fire Safety': ['Fire Risk Assessor', 'Fire Alarm Engineer', 'Fire Door Installer'],
+      'Fire Safety General': ['Fire Safety Officer'],
+      'Gas & Heating': ['Gas Safe Engineer', 'Heating Engineer', 'Heat Pump Installer'],
+      'Gas & Heating General': ['General Gas Engineer'],
+      'HVAC & AC': ['Air Conditioning Engineer', 'Ventilation Engineer'],
+      'Pest Control': ['Pest Controller'],
+      'Plumbing': ['Plumber', 'Drainage Engineer', 'Bathroom Fitter'],
+      'Security & Access': ['Locksmith', 'CCTV Engineer'],
+      'Smart Home & Tech': ['Smart Home Installer', 'Electrician', 'IT / Network Engineer'],
+      'Void & Turnover': ['Void Cleaner', 'Turnover Contractor']
+    };
+    var ROLE_REQUIRES = {
+      'Gas Safe Engineer': 'Gas Safe registration',
+      'Smart Home Installer': 'NICEIC / NAPIT',
+      'Damp Specialist': 'PCA Membership',
+      'Scaffolder': 'CISRS Card'
+    };
+    var obSelectedTrades = [
+      { category: 'Cleaning', roles: ['Cleaner'] },
+      { category: 'Gas & Heating', roles: ['Gas Safe Engineer'] }
+    ];
+    var obFocusedCategory = 'Gas & Heating';
+    var obWizSteps = [
+      { stepOf: '1 OF 5', title: 'Which trades do you do?', desc: 'Pick the categories you work in, then tick the specific roles within each. We route matching jobs to you and verify only the certificates your roles need.' },
+      { stepOf: '2 OF 5', title: 'Add your business logo', desc: 'Shown on your public profile and job notifications. Purely optional \u2014 you can skip this and add it later.' },
+      { stepOf: '3 OF 5', title: 'What pricing models do you use?', desc: 'You can combine multiple models.' },
+      { stepOf: '4 OF 5', title: 'How many years of experience do you have?', desc: 'Displayed on your marketplace profile. Clients often filter by experience level.' },
+      { stepOf: '5 OF 5', title: 'How many jobs have you completed?', desc: 'An estimate across your career. Helps clients understand your track record.' },
+      { stepOf: '6 OF 5', title: 'Describe yourself to clients', desc: 'Write a short bio for your marketplace profile \u2014 your chance to make a great first impression.' }
+    ];
+    var obWizIndex = 0;
+
+    function renderTradeChips() {
+      var row = document.getElementById('obTradeChipRow');
+      row.innerHTML = obSelectedTrades.map(function (t) {
+        return '<span class="ob-wiz-trade-chip' + (t.category === obFocusedCategory ? ' focused' : '') + '" data-trade-chip="' + t.category + '">' +
+          t.category + ' \u00b7 ' + t.roles.length +
+          '<span class="owtc-x" data-trade-remove="' + t.category + '"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span>' +
+        '</span>';
+      }).join('');
+      row.querySelectorAll('[data-trade-chip]').forEach(function (chip) {
+        chip.addEventListener('click', function (e) {
+          if (e.target.closest('[data-trade-remove]')) return;
+          obFocusedCategory = chip.getAttribute('data-trade-chip');
+          renderTradeChips(); renderTradeRoles();
+        });
+      });
+      row.querySelectorAll('[data-trade-remove]').forEach(function (x) {
+        x.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var cat = x.getAttribute('data-trade-remove');
+          obSelectedTrades = obSelectedTrades.filter(function (t) { return t.category !== cat; });
+          if (obFocusedCategory === cat) obFocusedCategory = obSelectedTrades.length ? obSelectedTrades[obSelectedTrades.length - 1].category : null;
+          renderTradeChips(); renderTradeRoles();
+        });
+      });
+    }
+    function renderTradeRoles() {
+      var wrap = document.getElementById('obTradeRolesWrap');
+      var entry = obSelectedTrades.filter(function (t) { return t.category === obFocusedCategory; })[0];
+      if (!entry) { wrap.innerHTML = ''; return; }
+      var roles = TRADE_CATEGORIES[entry.category] || [];
+      wrap.innerHTML = '<div class="ob-wiz-roles-title">' + entry.category + ' \u2014 roles</div>' +
+        roles.map(function (r) {
+          var checked = entry.roles.indexOf(r) > -1;
+          return '<div class="ob-wiz-role-row' + (checked ? ' selected' : '') + '" data-role-name="' + r + '">' +
+            '<span class="owrr-box">' + (checked ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' : '') + '</span>' +
+            '<div><div class="owrr-title">' + r + '</div>' + (ROLE_REQUIRES[r] ? '<div class="owrr-req">Requires: ' + ROLE_REQUIRES[r] + '</div>' : '') + '</div>' +
+          '</div>';
+        }).join('');
+      wrap.querySelectorAll('[data-role-name]').forEach(function (row) {
+        row.addEventListener('click', function () {
+          var r = row.getAttribute('data-role-name');
+          var idx = entry.roles.indexOf(r);
+          if (idx > -1) entry.roles.splice(idx, 1); else entry.roles.push(r);
+          renderTradeChips(); renderTradeRoles();
+        });
+      });
+    }
+    function renderCatPicker() {
+      var picker = document.getElementById('obTradeCatPicker');
+      var chosen = obSelectedTrades.map(function (t) { return t.category; });
+      picker.innerHTML = Object.keys(TRADE_CATEGORIES).filter(function (c) { return chosen.indexOf(c) === -1; }).map(function (c) {
+        return '<button type="button" class="ob-wiz-cat-add" data-add-cat="' + c + '">+ ' + c + '</button>';
+      }).join('');
+      picker.querySelectorAll('[data-add-cat]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cat = btn.getAttribute('data-add-cat');
+          obSelectedTrades.push({ category: cat, roles: [] });
+          obFocusedCategory = cat;
+          renderTradeChips(); renderTradeRoles(); renderCatPicker();
+        });
+      });
+    }
+    document.getElementById('obAddTradeCatBtn').addEventListener('click', function () {
+      var picker = document.getElementById('obTradeCatPicker');
+      var open = picker.style.display !== 'none';
+      picker.style.display = open ? 'none' : 'flex';
+      if (!open) renderCatPicker();
+    });
+    renderTradeChips(); renderTradeRoles();
+
+    // Pricing models: multi-select
+    document.querySelectorAll('#obPricingTiles .choice-tile').forEach(function (tile) {
+      tile.addEventListener('click', function () { tile.classList.toggle('selected'); });
+    });
+    // Experience / jobs: single-select (radio behaviour)
+    [['obExpTiles'], ['obJobsTiles']].forEach(function (pair) {
+      var group = document.getElementById(pair[0]);
+      group.querySelectorAll('.choice-tile').forEach(function (tile) {
+        tile.addEventListener('click', function () {
+          group.querySelectorAll('.choice-tile').forEach(function (t) { t.classList.remove('selected'); });
+          tile.classList.add('selected');
+        });
+      });
+    });
+
+    function renderWizStep(index) {
+      obWizIndex = index;
+      var step = obWizSteps[index];
+      document.getElementById('obWizStepOf').textContent = step.stepOf;
+      document.getElementById('obWizTitle').textContent = step.title;
+      document.getElementById('obWizDesc').textContent = step.desc;
+      document.querySelectorAll('.ob-wiz-step').forEach(function (el) {
+        el.classList.toggle('active', parseInt(el.getAttribute('data-wizstep'), 10) === index);
+      });
+      var dotIndex = Math.min(index, 4);
+      document.querySelectorAll('.ob-wiz-dot').forEach(function (dot) {
+        dot.classList.toggle('active', parseInt(dot.getAttribute('data-dot'), 10) === dotIndex);
+      });
+      document.getElementById('obWizBackBtn').style.display = index === 0 ? 'none' : '';
+      document.getElementById('obWizNextBtn').textContent = index === obWizSteps.length - 1 ? 'Save' : 'Next';
+      document.querySelector('#supSettingsPanelQuestionnaire .subpage-content, #supSettingsPanelQuestionnaire').scrollTop = 0;
+      var content = document.getElementById('supProfileSettingsView');
+      if (content) content.scrollIntoView({ block: 'start', behavior: 'auto' });
+    }
+    document.getElementById('obWizNextBtn').addEventListener('click', function () {
+      if (obWizIndex < obWizSteps.length - 1) renderWizStep(obWizIndex + 1);
+      else showToast('Questionnaire saved.');
+    });
+    document.getElementById('obWizBackBtn').addEventListener('click', function () {
+      if (obWizIndex > 0) renderWizStep(obWizIndex - 1);
+    });
+  })();
+
   var supProfileInitialized = false;
+  /* Real completion check across the fields that actually gate marketplace approval — not every
+     optional field, just the ones each tab treats as required. Recomputed whenever Profile opens. */
+  function calcProfileCompletion() {
+    var checks = [
+      function () { return !!(document.getElementById('supProfileFullNameInput') || {}).value; },
+      function () { return !!(document.getElementById('supProfileEmailInput') || {}).value; },
+      function () { return document.querySelectorAll('#supDashSectorTiles .choice-tile.selected').length > 0; },
+      function () { return !!(document.getElementById('supIdFullNameInput') || {}).value; },
+      function () { return !!(document.getElementById('supDobInput') || {}).value; },
+      function () { return !!(document.getElementById('supHomeAddressInput') || {}).value; },
+      function () { var t = document.getElementById('supPliToggle'); return !t || t.classList.contains('on') ? !!(document.getElementById('supPliProviderInput') || {}).value : true; },
+      function () { var t = document.getElementById('supPiToggle'); return !t || t.classList.contains('on') ? !!(document.getElementById('supPiProviderInput') || {}).value : true; },
+      function () { var t = document.getElementById('supDbsToggle'); return true; },
+      function () { return !!document.querySelector('input[name="supRtw"]:checked, .choice-tile[data-value="yes"].selected'); },
+      function () { return document.querySelectorAll('#obTradeChipRow .ob-wiz-trade-chip').length > 0; },
+      function () { return document.querySelectorAll('#obPricingTiles .choice-tile.selected').length > 0; },
+      function () { return !!(document.getElementById('stgpBioTextarea') || {}).value; }
+    ];
+    var passed = 0;
+    checks.forEach(function (fn) { try { if (fn()) passed++; } catch (e) {} });
+    return Math.round((passed / checks.length) * 100);
+  }
+  function updateProfileCompletionUI() {
+    var pct = calcProfileCompletion();
+    var fill = document.getElementById('supAcctMobileProgressFill');
+    var label = document.getElementById('supAcctMobileProgressLabel');
+    var ringPct = document.getElementById('supProfileCompletePct');
+    var ring = document.getElementById('supProfileCompleteRing');
+    if (fill) fill.style.width = pct + '%';
+    if (label) label.textContent = 'Profile complete \u2014 ' + pct + '%';
+    if (ringPct) ringPct.textContent = pct + '%';
+    if (ring) ring.style.strokeDashoffset = String(169.6 * (1 - pct / 100));
+  }
   function switchSupSettingsTab(key) {
     document.querySelectorAll('#supSettingsTabs .pm-settings-tab-item').forEach(function (t) {
       t.classList.toggle('active', t.getAttribute('data-supsettingstab') === key);
     });
-    ['profile', 'sectors', 'insurance', 'requests', 'questionnaire', 'payment', 'settings', 'inbox'].forEach(function (k) {
+    ['profile', 'sectors', 'identity', 'insurance', 'background', 'requests', 'questionnaire', 'payment', 'settings', 'inbox'].forEach(function (k) {
       var panel = document.getElementById('supSettingsPanel' + k.charAt(0).toUpperCase() + k.slice(1));
       if (panel) panel.style.display = k === key ? '' : 'none';
     });
     var portfolioBar = document.getElementById('portfolioSaveBar');
-    if (portfolioBar) portfolioBar.style.display = key === 'questionnaire' ? '' : 'none';
+    if (portfolioBar) portfolioBar.style.display = 'none';
     if (key === 'inbox' && typeof initSupInboxOnce === 'function') initSupInboxOnce();
+    if (typeof updateProfileCompletionUI === 'function') updateProfileCompletionUI();
   }
   function initSupProfileOnce() {
     if (supProfileInitialized) return;
@@ -8863,10 +9643,11 @@ rule already being here. */
     var SECTION_LABELS = { identity: 'Identity', insurance: 'Compliance', background: 'Background Check', payment: 'Payment Setup', categories: 'Categories & Roles' };
     var EDITABLE_TAB_KEYS = ['profile', 'sectors', 'insurance', 'payment'];
     function updateEditBtnVisibility() {
-      var key = getActiveSettingsTabKey();
-      var show = EDITABLE_TAB_KEYS.indexOf(key) !== -1;
+      // Fields are always directly editable now (see the aev-edit-only fix), so the separate
+      // "Edit" trigger that used to reveal them — and the whole edit-request wizard it opened —
+      // no longer has a role here; the reference design has no such button on any tab.
       var editBtnMobile = document.getElementById('supAcctEditBtnMobile');
-      if (editBtnMobile) editBtnMobile.style.display = show ? 'flex' : 'none';
+      if (editBtnMobile) editBtnMobile.style.display = 'none';
     }
     function obStepEl(key) { return document.querySelector('#supObContainer [data-stepkey="' + key + '"]'); }
     function renderObStep(index) {
@@ -9059,8 +9840,6 @@ rule already being here. */
     if (editBtn) { editBtn.style.display = 'none'; editBtn.addEventListener('click', showEditNotice); }
     if (editBtnMobile) { editBtnMobile.addEventListener('click', showEditNotice); }
     updateEditBtnVisibility();
-    document.getElementById('supAcctRingCol').style.display = 'none';
-    document.getElementById('supAcctMobileProgressRow').style.display = 'flex';
     var onboardingBanner = document.getElementById('supOnboardingBanner');
     if (onboardingBanner) onboardingBanner.style.display = 'none';
     function savePortfolioChanges() { showToast('Changes saved.'); }
@@ -9109,6 +9888,11 @@ rule already being here. */
   });
   initMultiSelectTiles(document.getElementById('stgpLondonZones'));
   initMultiSelectTiles(document.getElementById('stgpOtherCities'));
+  initMultiSelectTiles(document.getElementById('supDashSectorTiles'));
+  initMultiSelectTiles(document.getElementById('supResSubChips'));
+  initMultiSelectTiles(document.getElementById('supComSubChips'));
+  initSingleSelectTiles(document.getElementById('supRightToWorkTiles'));
+  initSingleSelectTiles(document.getElementById('supDashCriminalDeclaration'));
   var stgpAllLondonChip = document.querySelector('#stgpLondonZones .simple-chip-action');
   if (stgpAllLondonChip) {
     stgpAllLondonChip.addEventListener('click', function () {
