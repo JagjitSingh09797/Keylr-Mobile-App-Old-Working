@@ -878,7 +878,7 @@
   .drawer-overlay.open { opacity: 1; visibility: visible; }
 
   .drawer {
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
@@ -894,9 +894,6 @@
     overflow: hidden;
   }
   .drawer.open { transform: translateX(0); }
-  @media (min-width: 480px) {
-    .drawer { left: calc(50% - 215px); }
-  }
   @media (prefers-reduced-motion: reduce) {
     .drawer { transition: none; }
     .drawer-overlay { transition: none; }
@@ -2198,8 +2195,8 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supcal-nav-btn { width: 34px; height: 34px; border-radius: 9px; border: 1.5px solid var(--border-subtle); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-heading); flex-shrink: 0; }
 .supcal-nav-btn:hover { border-color: #90a8c8; }
 .supcal-date-label { font-size: 14px; font-weight: 800; color: var(--text-heading); min-width: 140px; text-align: center; }
-.supcal-view-toggle { display: flex; background: var(--surface-soft); border-radius: 9px; padding: 3px; }
-.supcal-view-toggle button { padding: 7px 16px; border-radius: 7px; border: none; background: none; font-size: 12.5px; font-weight: 700; color: var(--text-body-muted); cursor: pointer; font-family: inherit; }
+.supcal-view-toggle { display: flex; background: var(--surface-soft); border-radius: 999px; padding: 3px; }
+.supcal-view-toggle button { padding: 7px 16px; border-radius: 999px; border: none; background: none; font-size: 12.5px; font-weight: 700; color: var(--text-body-muted); cursor: pointer; font-family: inherit; }
 .supcal-view-toggle button.active { background: #22447f; color: #fff; }
 
 /* Filter pills — segmented chips, always visible (replaces a dropdown so the current
@@ -2397,7 +2394,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supcal-day-card.selected { border-color: var(--accent-blue); box-shadow: 0 0 0 1px var(--accent-blue); }
 .supcal-day-card .dc-dow { font-size: 11px; font-weight: 700; color: var(--text-body-muted); text-transform: uppercase; }
 .supcal-day-card .dc-num { font-size: 17px; font-weight: 800; color: var(--text-heading); margin: 4px 0; }
-.supcal-avail-month-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.supcal-avail-month-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
 .supcal-avail-month-cell { min-height: 60px; padding: 8px; border-right: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-weight: 700; color: var(--text-heading); cursor: pointer; }
 .supcal-avail-month-cell:nth-child(7n) { border-right: none; }
 .supcal-avail-month-cell.selected { background: var(--icon-tint-bg); }
@@ -2447,6 +2444,14 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supcal-hours-toggle-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; }
 .supcal-hours-toggle-row .day-label { width: 90px; flex-shrink: 0; font-size: 13px; font-weight: 700; color: var(--text-heading); }
 .supcal-hours-toggle-row select.field-input { height: 36px; font-size: 12.5px; padding: 6px 10px; }
+/* Edit Working Hours: each day is two stacked rows — toggle+name on top, the time-range picker
+   below it — rather than all four controls squeezed onto one line. */
+.supcal-hours-day-block { padding: 12px 0; border-bottom: 1px solid var(--border-subtle); }
+.supcal-hours-day-block:last-of-type { border-bottom: none; }
+.supcal-hours-day-block .supcal-hours-toggle-row { padding: 0 0 10px; gap: 10px; }
+.supcal-hours-day-block .supcal-hours-toggle-row .day-label { width: auto; font-size: 14px; }
+.supcal-hours-time-row { display: flex; align-items: center; gap: 8px; }
+.supcal-hours-time-row > span { font-size: 12px; color: var(--text-body-muted); flex-shrink: 0; }
 .supcal-time-dd-btn.disabled { opacity: 0.5; cursor: default; background: var(--surface-soft); }
 .supcal-time-dd-menu { position: fixed; right: auto; max-height: 220px; overflow-y: auto; z-index: 600; }
 .supcal-time-dd-menu.open { min-width: 0 !important; width: max-content !important; max-width: 140px !important; }
@@ -2741,13 +2746,13 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   .ob-step.active { animation: none; }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 99999px) {
   .notice-grid { grid-template-columns: repeat(2, 1fr); }
   .svcp-add-var .btn { width: 100%; }
   .svcp-sticky-actions .btn { flex: 1; }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 99999px) {
   #supObApp .ob-actions .btn { font-size: 12.5px; padding: 9px 12px; }
   #supObApp .ob-step[data-stepkey="insurance"] .ob-field { max-width: none !important; }
   #obApp .ob-actions .btn { font-size: 12.5px; padding: 9px 12px; }
@@ -2779,7 +2784,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   #supcalGcalCard, #supcalMsCard { padding: 26px 20px; }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 99999px) {
   #pmPropertiesTopbarTitle h1, #pmPropertiesTopbarTitle .dash-content-sub,
     #pmPropFormTopbarTitle #pmpropFormTitle,
     #pmCompSettingsTopbarTitle h1, #pmCompSettingsTopbarTitle .dash-content-sub,
@@ -2791,22 +2796,22 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 99999px) {
   #supProfileSettingsView .dash-section { padding: 0; }
   .ain-thread-header .sinb-chat-header { margin-left: 0; padding-left: 0; }
   #ainChatScroll .sinb-msg-stack { max-width: none; }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 99999px) {
   .dash-content-sub { font-size: 11.5px; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 99999px) {
   #adminSupplierApplicantsView .supapp-filter-bar .pm-filter-field, #adminActiveSuppliersView .supapp-filter-bar .pm-filter-field { width: 100% !important; flex: 1 1 100% !important; }
   .admin-login-app.active { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 99999px) {
   #adminSupplierApplicantsView .pm-tab-pills, #adminActiveSuppliersView .pm-tab-pills,
     #adminPMListView .pm-tab-pills, #adminPMApplicantsView .pm-tab-pills { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .pmjr-chat-drawer { width: 100%; max-width: 100%; border-radius: 0; }
@@ -2833,16 +2838,16 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   .supcal-grid-wrap { overflow-x: visible; min-width: 0; }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 99999px) {
   .pmjr-layout { grid-template-columns: 1fr; }
   .pmjr-list-col { width: 100%; }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 99999px) {
   .pmprop-field-row.two-col { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 99999px) {
   .supcal-slot-row { flex-wrap: nowrap; }
   .supcal-slot-row .ob-field { flex: 1 1 0; min-width: 0; }
   .supcal-slot-del { height: 34px; }
@@ -2852,7 +2857,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   .svcp-modal-btns .btn { width: 100%; }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 99999px) {
   .supcal-month-cell .supcal-job-chip, .supcal-month-cell .supcal-more-link { display: none; }
   .supcal-week-hourrow .supcal-job-chip { display: none; }
   .supcal-month-cell .cell-date { font-size: 10px; margin-bottom: 2px; }
@@ -2864,19 +2869,43 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   .supcal-job-dots .jd.completed { background: #22c55e; }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 99999px) {
   #supcalPanelAvailability .supcal-body-row { flex-direction: column; }
   #supcalPanelAvailability .supcal-upcoming-side { flex: 1 1 auto; width: 100%; }
   #supcalPanelAvailability .supcal-hours-card { width: 100%; }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 99999px) {
   .supcal-avail-card { padding: 14px; }
   .supcal-avail-week-row { gap: 8px; }
   .supcal-day-card .dc-num { font-size: 15px; }
-  .supcal-avail-month-cell { min-height: 46px; padding: 6px; font-size: 12px; }
-  .supcal-avail-head-actions { width: 100%; flex-wrap: wrap; }
-  .supcal-avail-head-actions .btn { flex: 1; justify-content: center; }
+  .supcal-avail-month-cell { padding: 6px; font-size: 12px; }
+  /* Chip lives on the number itself, not the whole cell — no grid lines, generous whitespace,
+     matching the reference exactly. */
+  .supcal-avail-month-cell {
+    border: none; padding: 0; min-height: 48px; display: flex; align-items: center; justify-content: center;
+  }
+  .supcal-avail-month-cell:nth-child(7n) { border-right: none; }
+  .am-num {
+    min-width: 30px; height: 28px; padding: 0 5px; border-radius: 8px; border: 1.5px solid transparent;
+    display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+    font-size: 13px; font-weight: 700; color: var(--text-heading);
+  }
+  .am-num.is-today { font-weight: 800; }
+  /* Unavailable/partial styling now lives on the whole cell (below), not the number chip;
+     today's outline moved the same way, onto .supcal-avail-month-cell.is-today. */
+  .supcal-avail-month-cell.unavailable, .supcal-avail-month-cell.partial {
+    background: #fde3e3; color: #b91c1c; min-height: 48px; border-radius: 8px;
+  }
+  .supcal-avail-month-cell.is-today { border: 1.5px solid var(--accent-blue); border-radius: 8px; }
+  /* A light press effect on every tappable date cell across Schedule/Availability — month
+     grids, the week strip, and the week/day cards — so a tap always reads as registered. */
+  .supcal-month-cell, .supcal-avail-month-cell, .supcal-wstrip-cell, .supcal-day-card {
+    transition: transform 120ms ease-out, opacity 120ms ease-out;
+  }
+  .supcal-month-cell:active, .supcal-avail-month-cell:active, .supcal-wstrip-cell:active, .supcal-day-card:active {
+    transform: scale(0.94); opacity: 0.75;
+  }
   .supcal-upcoming-panel { padding: 14px; }
   .supcal-to-main { flex: 1; min-width: 0; }
   .supcal-to-actions { flex-shrink: 0; }
@@ -2897,7 +2926,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   .sup-soon-card { padding: 36px 20px; }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 99999px) {
   .supcal-wstrip-cell .ws-dow { font-size: 8.5px; }
   .supcal-wstrip-cell .ws-num { font-size: 11.5px; }
   .supcal-wstrip-cell.is-today .ws-num { width: 19px; height: 19px; }
@@ -2948,7 +2977,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .sinb-active-toggle { background: var(--icon-tint-bg); color: var(--accent-blue); }
 .sinb-composer-readonly-note { font-size: 11.5px; color: var(--text-body-muted); background: var(--surface-soft); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
 
-/* originally @media (max-width: 1024px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .sinb-details-col { width: 100%; max-width: 100%; }
 
 /* unconditional rules */
@@ -3003,7 +3032,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
      this is what actually wins the light-blue/Keylr-blue treatment in both the list and the header. */
   .ain-conv-avatar { color: var(--accent-blue) !important; background: var(--icon-tint-bg) !important; overflow: hidden; }
 
-/* originally @media (max-width: 860px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 /* The back button already has its own gap from .ain-thread-header's flex layout — its own
        margin-right on top of that pushed the avatar/name further right than intended once it's
        visible on narrower screens. */
@@ -3035,7 +3064,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
      which take precedence there. #pmOwnChatScroll (PM's own Settings > Chat) and #ainChatScroll
      (the admin Inbox) render the exact same sinb-* markup as the other two and get the identical
      treatment for the same reason. */
-  @media (max-width: 420px) { #sinbChatScroll, #supInboxChatScroll, #pmOwnChatScroll, #ainChatScroll {
+  @media (max-width: 99999px) { #sinbChatScroll, #supInboxChatScroll, #pmOwnChatScroll, #ainChatScroll {
       padding-left: 8px; padding-right: 8px;
       overflow-x: hidden;
       scrollbar-width: none; -ms-overflow-style: none;
@@ -3172,7 +3201,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supcal-month-cell:nth-child(7n) { border-right: none; }
 .supcal-month-cell.is-today { background: var(--icon-tint-bg); }
 
-/* originally @media (max-width: 500px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .supcal-month-cell .supcal-job-chip, .supcal-month-cell .supcal-more-link { display: none; }
 .supcal-month-cell { cursor: pointer; }
 
@@ -3180,12 +3209,37 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supcal-month-cell.is-unavailable { background: #fef2f2; }
 .supcal-unavail-chip { display: inline-block; font-size: 10px; font-weight: 700; color: #b91c1c; background: #fecaca; padding: 2px 7px; border-radius: 999px; margin-bottom: 4px; }
 
-/* originally @media (max-width: 640px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .supcal-month-cell { min-height: 60px; padding: 4px; }
 
-/* originally @media (max-width: 500px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .supcal-month-cell { min-height: 44px; padding: 3px; }
 .supcal-unavail-chip { font-size: 8px; padding: 1px 4px; }
+
+/* ===== Calendar month grid, restyled to match the reference: no grid lines between cells,
+   generous whitespace instead, a rounded-square chip (light blue fill + border) marks today, and a
+   single small count badge — not a row of coloured status dots — marks a day with matching jobs. */
+.supcal-month-cell {
+  border: none; min-height: 52px; padding: 8px 2px 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.supcal-month-cell .cell-date {
+  font-size: 13px; font-weight: 700; color: var(--text-heading); margin-bottom: 0;
+  min-width: 30px; height: 28px; padding: 0 5px; border-radius: 8px; border: 1.5px solid transparent;
+  display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+}
+/* is-today no longer carries its own styling — the containing .supcal-month-cell.mobile-selected
+   now carries the whole highlight (background + border), so the number underneath stays plain. */
+.supcal-month-count-badge {
+  width: 18px; height: 18px; border-radius: 50%; background: #22447f; color: #fff;
+  font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.supcal-month-cell.mobile-selected {
+  background: var(--icon-tint-bg); border-radius: 8px; box-sizing: border-box;
+}
+.supcal-month-cell.timeoff-all.mobile-selected, .supcal-month-cell.timeoff-partial.mobile-selected {
+  background: #fff1f1; border-color: #fecaca;
+}
 
 /* unconditional rules */
 /* Job popover */
@@ -3216,11 +3270,37 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 /* Day Detail modal (Availability tab \u2014 replaces the old instant tap-to-toggle) */
   .supcal-dd-status-row { display: flex; align-items: center; gap: 9px; padding: 12px 14px; border-radius: 9px; background: #eafaf0; font-size: 13px; font-weight: 700; color: #1a7a3e; margin-bottom: 10px; }
 
-/* originally @media (max-width: 620px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .supcal-day-card { padding: 11px 6px; flex-basis: 92px; min-width: 92px; }
 .supcal-avail-day-solo { overflow: visible; }
 .supcal-avail-day-solo .supcal-day-card { flex: 0 0 auto; width: 108px; }
 .supcal-day-card .dc-status { font-size: 10px; }
+
+/* ===== Week/Day cards, restyled to match the reference: the seven-day row is a real grid (no
+   sideways scroll — all seven always fit), cards carry no border or fill of their own, and only
+   the date number gets a circle treatment: outline for today, solid red-fill for a day off. The
+   lone Day-view card keeps a plain neutral border since it reads as its own small card there. */
+.supcal-avail-week-row {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+  overflow-x: visible; padding-bottom: 0;
+}
+.supcal-avail-day-solo { display: block; }
+.supcal-avail-day-solo .supcal-day-card { width: 112px; }
+.supcal-day-card {
+  border: none; background: transparent; box-shadow: none; padding: 8px 2px;
+  min-width: 0; flex-basis: auto; display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.supcal-day-card.bordered { border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 8px; }
+.supcal-day-card.selected, .supcal-day-card.unavailable, .supcal-day-card.partial { background: transparent; border-color: transparent; box-shadow: none; }
+.supcal-day-card.bordered.selected, .supcal-day-card.bordered.unavailable, .supcal-day-card.bordered.partial { border-color: var(--border-subtle); }
+.dc-num {
+  width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: var(--text-heading); margin: 2px 0;
+}
+.dc-num.is-today { border: 1.5px solid var(--accent-blue); }
+.dc-num.unavailable, .dc-num.partial { background: #e53935; color: #fff; }
+.dc-status { font-size: 11px; font-weight: 700; color: #1a7a3e; }
+.dc-status.closed { color: #e53935; }
 
 /* unconditional rules */
 .supcal-info-banner { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px); z-index: 900; display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 1px solid var(--border-subtle); border-left: 4px solid var(--accent-blue); border-radius: 12px; padding: 14px 18px; box-shadow: 0 16px 40px rgba(16,24,40,0.18); max-width: 420px; opacity: 0; transition: opacity 200ms ease-out, transform 200ms ease-out; }
@@ -3251,8 +3331,24 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
      shouldn't sit two sizes above it on the same screen. */
   .supcal-wstrip-cell { min-height: 66px; padding: 8px 2px; gap: 2px; }
 
-/* originally @media (max-width: 400px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .supcal-wstrip-cell { min-height: 60px; padding: 7px 1px; }
+
+/* ===== Week strip, restyled to match the reference: no grid-line borders between cells, no
+   status dots on the date itself (that detail lives in the panel below once a day is tapped) —
+   just a plain dash placeholder. The tapped/today day gets a rounded card border around the
+   whole cell plus a blue circle around its number; every other cell stays completely plain. */
+.supcal-week-strip { gap: 4px; }
+.supcal-wstrip-cell { border-right: none; background: transparent; gap: 4px; border-radius: 10px; border: 1.5px solid transparent; box-sizing: border-box; }
+.supcal-wstrip-cell.mobile-selected { box-shadow: none; background: var(--icon-tint-bg); border-color: var(--accent-blue); }
+.supcal-wstrip-cell.timeoff-all, .supcal-wstrip-cell.timeoff-partial { background: transparent; }
+.supcal-wstrip-cell.timeoff-all.mobile-selected, .supcal-wstrip-cell.timeoff-partial.mobile-selected { background: var(--icon-tint-bg); }
+.supcal-wstrip-cell .ws-dash { font-size: 13px; color: #94a3b8; line-height: 1; }
+.supcal-wstrip-cell.is-today .ws-num, .supcal-wstrip-cell.mobile-selected .ws-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%; background: transparent; color: var(--text-heading);
+  border: 1.5px solid var(--accent-blue);
+}
 
 /* unconditional rules */
 /* ---------- Year picker (Calendar tab toolbar) ----------
@@ -3274,7 +3370,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 /* Connected reads as a settled state rather than a call to action. */
   .supcal-sync-btn.connected { border-color: #bfe3cc; background: #f4fbf7; color: #15803d; }
 
-/* originally @media (max-width: 620px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 /* "Sync with:" moves above the buttons so each button keeps its icon + name on one line
        rather than the whole group squeezing down to the point of wrapping mid-label. */
     .supcal-sync-group { width: 100%; flex-wrap: wrap; row-gap: 8px; }
@@ -3303,7 +3399,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
      lives as a static sibling on the right; the row carries the divider the header used to. */
   .sinb-chat-header-row { display: flex; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-right: 16px; flex-shrink: 0; }
 
-/* originally @media (max-width: 640px) — flattened: this app is always narrower than every max-width breakpoint above */
+/* originally @media (max-width: 99999px) — flattened: this app is always narrower than every max-width breakpoint above */
 .sinb-cr-meta { gap: 3px 14px; padding: 7px 10px; }
 
 /* ===== Mobile-app-specific additions on top of the verbatim port above ===== */
@@ -3410,9 +3506,9 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 #supcalEditHoursOverlay .modal-card-foot .btn, #supcalTimeOffOverlay .modal-card-foot .btn { flex: 1; width: auto; }
 #supcalGcalCard .confirm-modal-btns, #supcalMsCard .confirm-modal-btns { display: flex; flex-direction: column-reverse; align-items: stretch; gap: 10px; }
 #supcalGcalCard .confirm-modal-btns button, #supcalMsCard .confirm-modal-btns button { flex: none; white-space: normal; line-height: 1.3; min-height: 44px; width: 100%; }
-#supcalEditHoursOverlay .supcal-hours-toggle-row .day-label { width: 66px; font-size: 12px; flex-shrink: 0; overflow: visible; white-space: nowrap; }
-#supcalEditHoursOverlay .supcal-hours-toggle-row { gap: 6px; }
-#supcalEditHoursOverlay .supcal-hours-toggle-row > span { font-size: 11px; flex-shrink: 0; }
+#supcalEditHoursOverlay .supcal-hours-day-block .day-label { width: auto; font-size: 14px; flex-shrink: 0; overflow: visible; white-space: nowrap; }
+#supcalEditHoursOverlay .supcal-hours-time-row { gap: 8px; }
+#supcalEditHoursOverlay .supcal-hours-time-row > span { font-size: 11px; flex-shrink: 0; }
 #supcalEditHoursOverlay .supcal-time-dd-btn { width: 100% !important; }
 
 /* ===== Centered-dialog treatment for Edit Working Hours / Add Time Off — overrides the
@@ -3471,7 +3567,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
   padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 10px;
 }
 .subpage-topbar .back-btn {
-  width: 42px; height: 42px; border-radius: 13px; background: #ffffff;
+  width: 42px; height: 42px; border-radius: 50%; background: #ffffff;
   display: flex; align-items: center; justify-content: center;
   color: var(--text-heading); flex-shrink: 0;
   box-shadow: 0 1px 2px rgba(16,24,40,0.05);
@@ -3483,9 +3579,13 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .subpage-topbar > div.subpage-title-wrap { flex: 1; min-width: 0; }
 .subpage-topbar .bell-btn { flex-shrink: 0; }
 .subpage-topbar .subpage-subtitle { font-size: 12px; font-weight: 500; color: var(--text-body-muted); margin-top: 2px; line-height: 1.3; }
+/* Schedule/Availability header reads as part of the page, not a separate white bar — no bell
+   here either, since Notifications is reachable from Home/the drawer already. */
+#screenCalendar .subpage-topbar { background: transparent; box-shadow: none; }
+#screenCalendar .subpage-bell { display: none; }
 .subpage-content { padding: 4px 16px calc(28px + env(safe-area-inset-bottom, 0px)); }
 #screenProfile .subpage-content, #screenServiceArea .subpage-content { padding-top: 24px; }
-.subpage-content.no-bottom-pad { padding-bottom: 4px; padding-top: 24px; }
+.subpage-content.no-bottom-pad { padding-bottom: 24px; padding-top: 24px; }
 /* Bottom-nav screens (Job Requests, Inbox) need extra bottom padding so content clears the bar. */
 .subpage-content.has-bottom-nav { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 #screenInbox .subpage-content.has-bottom-nav { padding: 0; }
@@ -3787,7 +3887,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
      mobile Edit button sits directly in the header row rather than needing a
      second dedicated progress-bar row the way Supplier's does.
      ========================================================================== */
-  @media (max-width: 420px) { #pmSettingsTabs {
+  @media (max-width: 99999px) { #pmSettingsTabs {
       overflow-x: auto; flex-wrap: nowrap;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; -ms-overflow-style: none;
@@ -4145,7 +4245,7 @@ rule already being here. */
     line-height: 1.7; }
 
 /* Onboarding wizard - mobile responsive (<=420px), ported verbatim from #supObApp's own rules */
-@media (max-width: 420px) {
+@media (max-width: 99999px) {
   #supObApp .ob-content { overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
   #supObApp .ob-content::-webkit-scrollbar { display: none; }
   #supObApp { scrollbar-width: none; -ms-overflow-style: none; }
@@ -5111,8 +5211,9 @@ rule already being here. */
                       </div>
                     </div>
 
-                    <!-- Booking preferences: mirrors the Portfolio step of onboarding -->
-                    <div class="supcal-hours-card" style="margin:16px 0 28px;">
+                    <!-- Booking preferences: not part of this tab's design — kept in the DOM (hidden)
+                         since the save/reset logic below still targets these exact elements. -->
+                    <div class="supcal-hours-card" style="margin:16px 0 28px;display:none;">
                       <div class="supcal-hours-head supcal-prefs-head" id="supcalPrefsHead" role="button" tabindex="0" aria-expanded="true" aria-controls="supcalPrefsBody">
                         <div>
                           <div class="supcal-hours-title">Booking Preferences</div>
@@ -7809,7 +7910,7 @@ rule already being here. */
 
 <!-- ============ EDIT WORKING HOURS MODAL ============ -->
           <div class="modal-overlay" id="supcalEditHoursOverlay">
-            <div class="modal-card" style="max-width:520px;">
+            <div class="modal-card">
               <div class="modal-card-head"><h3>Edit Working Hours</h3><button type="button" class="modal-close-btn" id="supcalEditHoursCloseBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
               <div class="modal-card-body" id="supcalEditHoursBody" style="max-height:60vh;overflow-y:auto;"></div>
               <div class="modal-card-foot">
@@ -11678,38 +11779,17 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
     var html = '<div class="supcal-month-grid">';
     ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].forEach(function (dow) { html += '<div class="supcal-month-dow">' + dow + '</div>'; });
     cells.forEach(function (c) {
-      var jobs = supcalJobsForDate(c.date);
+      var jobs = supcalJobsForDate(c.date).filter(function (j) { return supcalFilterValue === 'all' || j.status === supcalFilterValue; });
       var isToday = supcalSameDay(c.date, supcalToday);
-      var offState = supcalDayOffState(c.date);
-      html += '<div class="supcal-month-cell' + (c.other ? ' other-month' : '') + (isToday ? ' is-today' : '') +
-        (offState ? ' timeoff-' + offState : '') + '" data-cell-date="' + supcalDateKey(c.date) + '">' +
-        '<div class="cell-date">' + c.d + '</div>' +
-        (offState ? supcalMonthOffChips(c.date) : '');
-      jobs.slice(0, 3).forEach(function (j, idx) {
-        html += '<div class="supcal-job-chip ' + j.status + '" data-job-idx="' + supcalDemoJobs.indexOf(j) + '">' + j.time + ' ' + j.title + '</div>';
-      });
-      if (jobs.length > 3) html += '<div class="supcal-more-link">+' + (jobs.length - 3) + ' more</div>';
-      if (jobs.length || offState) {
-        html += '<div class="supcal-job-dots">' +
-          (offState ? '<span class="jd off"></span>' : '') +
-          jobs.slice(0, 5).map(function (j) { return '<span class="jd ' + j.status + '"></span>'; }).join('') +
-        '</div>';
-      }
-      html += '</div>';
+      html += '<div class="supcal-month-cell' + (c.other ? ' other-month' : '') + '" data-cell-date="' + supcalDateKey(c.date) + '">' +
+        '<span class="cell-date' + (isToday ? ' is-today' : '') + '">' + c.d + '</span>' +
+        (jobs.length ? '<span class="supcal-month-count-badge">' + jobs.length + '</span>' : '') +
+      '</div>';
     });
     html += '</div>';
     wrap.innerHTML = html;
-    wrap.querySelectorAll('.supcal-job-chip').forEach(function (chip) {
-      chip.addEventListener('click', function (e) {
-        e.stopPropagation();
-        if (supcalIsMobile()) return; // on narrow screens, the cell click below handles this instead
-        var job = supcalDemoJobs[parseInt(chip.getAttribute('data-job-idx'), 10)];
-        supcalOpenPopover(job, chip);
-      });
-    });
     wrap.querySelectorAll('.supcal-month-cell[data-cell-date]').forEach(function (cellEl) {
       cellEl.addEventListener('click', function () {
-        if (!supcalIsMobile()) return;
         wrap.querySelectorAll('.supcal-month-cell').forEach(function (c2) { c2.classList.remove('mobile-selected'); });
         cellEl.classList.add('mobile-selected');
         supcalShowMobileJobsForDateKey(cellEl.getAttribute('data-cell-date'));
@@ -11813,8 +11893,15 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
   /* Month and week both switch to the same compact, tap-driven layout, so they share one
      breakpoint rather than drifting apart at 500 vs 640. Matches the CSS media queries below. */
   var SUPCAL_OFF_SVG = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>';
+  /* This file is a dedicated mobile app screen, never a responsive desktop layout, so "mobile"
+     is not actually a function of the browser window's width — it's constant. Checking
+     window.innerWidth here was the ported-from-desktop assumption, and it silently breaks the
+     moment this file is opened in a normal (non-narrowed) browser tab: the app-shell is capped
+     at 430px by CSS, but window.innerWidth still reports the real, much wider window, so every
+     desktop-only code path below (hour-grid week view, gridlined month table, etc.) would fire
+     instead of the mobile ones. Hard-coded true so the mobile rendering always applies. */
   var SUPCAL_MOBILE_BP = 640;
-  function supcalIsMobile() { return window.innerWidth <= SUPCAL_MOBILE_BP; }
+  function supcalIsMobile() { return true; }
 
   function supcalGetWeekStart(d) {
     var day = (d.getDay() + 6) % 7;
@@ -11822,23 +11909,18 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
     s.setDate(d.getDate() - day);
     return s;
   }
-  /* Mobile week: the same seven columns as a month row — dow, date, dots — with the detail
-     moved into the panel below. No hour grid, so nothing has to scroll sideways. */
+  /* Mobile week: seven date cells — dow, date, and either a job-count badge (tap to see them in
+     the panel below, same pattern as month view) or a plain dash when the day has nothing. */
   function supcalRenderWeekStrip(days, wrap) {
     var html = '<div class="supcal-week-strip">';
     days.forEach(function (d) {
-      var jobs = supcalJobsForDate(d);
-      var offState = supcalDayOffState(d);
+      var count = supcalJobsForDate(d).filter(function (j) { return supcalFilterValue === 'all' || j.status === supcalFilterValue; }).length;
       html += '<button type="button" class="supcal-wstrip-cell' +
         (supcalSameDay(d, supcalToday) ? ' is-today' : '') +
-        (offState ? ' timeoff-' + offState : '') +
         '" data-cell-date="' + supcalDateKey(d) + '">' +
         '<span class="ws-dow">' + SUPCAL_DOW[d.getDay()] + '</span>' +
         '<span class="ws-num">' + d.getDate() + '</span>' +
-        '<span class="supcal-job-dots">' +
-          (offState ? '<span class="jd off"></span>' : '') +
-          jobs.slice(0, 4).map(function (j) { return '<span class="jd ' + j.status + '"></span>'; }).join('') +
-        '</span>' +
+        (count ? '<span class="supcal-month-count-badge">' + count + '</span>' : '<span class="ws-dash">&mdash;</span>') +
       '</button>';
     });
     html += '</div>';
@@ -12452,12 +12534,12 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
       var d = new Date(weekStart); d.setDate(weekStart.getDate() + i);
       var key = supcalDateKey(d);
       var unavailable = !!supcalUnavailableDays[key];
-      var selected = supcalSameDay(d, supcalAvailSelectedDate);
+      var isToday = supcalSameDay(d, supcalToday);
       var partial = supcalPartialDays[key];
-      html += '<div class="supcal-day-card' + (selected ? ' selected' : '') + (unavailable ? ' unavailable' : '') + (partial ? ' partial' : '') + supcalRangeEdgeClass(d) + '" data-supcal-day="' + key + '" role="button" tabindex="0" title="View this day">' +
+      html += '<div class="supcal-day-card" data-supcal-day="' + key + '" role="button" tabindex="0" title="View this day">' +
         '<div class="dc-dow">' + SUPCAL_DOW[d.getDay()] + '</div>' +
-        '<div class="dc-num">' + d.getDate() + '</div>' +
-        '<div class="dc-status' + (unavailable ? ' closed' : '') + '">' + (unavailable ? 'Time off' : partial ? supcalRangeHours(partial) : 'Open') + '</div>' +
+        '<div class="dc-num' + (isToday ? ' is-today' : '') + (unavailable ? ' unavailable' : '') + (partial ? ' partial' : '') + '">' + d.getDate() + '</div>' +
+        '<div class="dc-status' + (unavailable ? ' closed' : '') + '">' + (unavailable ? 'Off' : partial ? supcalRangeHours(partial) : 'Open') + '</div>' +
       '</div>';
     }
     html += '</div>';
@@ -12474,10 +12556,12 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
     for (var i = 0; i < firstDow; i++) html += '<div class="supcal-avail-month-cell" style="visibility:hidden;"></div>';
     for (var d = 1; d <= daysInMonth; d++) {
       var date = new Date(y, m, d);
-      var selected = supcalSameDay(date, supcalAvailSelectedDate);
+      var isToday = supcalSameDay(date, supcalToday);
       var isUnavailable = !!supcalUnavailableDays[supcalDateKey(date)];
       var isPartial = !!supcalPartialDays[supcalDateKey(date)];
-      html += '<div class="supcal-avail-month-cell' + (selected ? ' selected' : '') + (isUnavailable ? ' unavailable' : '') + (isPartial ? ' partial' : '') + supcalRangeEdgeClass(date) + '" data-supcal-monthday="' + d + '" role="button" tabindex="0" title="View this day">' + d + (isUnavailable || isPartial ? '<span class="supcal-avail-month-dot"></span>' : '') + '</div>';
+      html += '<div class="supcal-avail-month-cell' + (isToday ? ' is-today' : '') + (isUnavailable ? ' unavailable' : '') + (isPartial ? ' partial' : '') + '" data-supcal-monthday="' + d + '" role="button" tabindex="0" title="View this day">' +
+        '<span class="am-num">' + d + '</span>' +
+      '</div>';
     }
     html += '</div>';
     document.getElementById('supcalAvailBody').innerHTML = html;
@@ -12501,12 +12585,13 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
     var d = supcalAvailSelectedDate;
     var key = supcalDateKey(d);
     var unavailable = !!supcalUnavailableDays[key];
+    var isToday = supcalSameDay(d, supcalToday);
     var partial = supcalPartialDays[key];
     var html = '<div class="supcal-avail-week-row supcal-avail-day-solo">' +
-      '<div class="supcal-day-card selected' + (unavailable ? ' unavailable' : '') + (partial ? ' partial' : '') + supcalRangeEdgeClass(d) + '" data-supcal-day="' + key + '" role="button" tabindex="0" title="View this day">' +
+      '<div class="supcal-day-card bordered" data-supcal-day="' + key + '" role="button" tabindex="0" title="View this day">' +
         '<div class="dc-dow">' + SUPCAL_DOW[d.getDay()] + '</div>' +
-        '<div class="dc-num">' + d.getDate() + '</div>' +
-        '<div class="dc-status' + (unavailable ? ' closed' : '') + '">' + (unavailable ? 'Time off' : partial ? supcalRangeHours(partial) : 'Open') + '</div>' +
+        '<div class="dc-num' + (isToday ? ' is-today' : '') + (unavailable ? ' unavailable' : '') + (partial ? ' partial' : '') + '">' + d.getDate() + '</div>' +
+        '<div class="dc-status' + (unavailable ? ' closed' : '') + '">' + (unavailable ? 'Off' : partial ? supcalRangeHours(partial) : 'Open') + '</div>' +
       '</div>' +
     '</div>';
     document.getElementById('supcalAvailBody').innerHTML = html;
@@ -12563,20 +12648,24 @@ var SUPSA_REAL_BOUNDARIES = {"E1":[[51.51072,-0.05207],[51.51206,-0.04137],[51.5
     var body = document.getElementById('supcalEditHoursBody');
     body.innerHTML = keys.map(function (k, i) {
       var h = supcalWorkingHours[k];
-      return '<div class="supcal-hours-toggle-row" data-supcal-hours-row="' + k + '">' +
-        '<button type="button" class="toggle-switch' + (h.on ? ' on' : '') + '" data-supcal-hours-toggle="' + k + '" role="switch" aria-checked="' + (h.on ? 'true' : 'false') + '"><span class="thumb"></span></button>' +
-        '<span class="day-label">' + SUPCAL_DAY_NAMES[i] + '</span>' +
-        supcalTimeDropdownHtml(k, 'from', h.from, h.on) +
-        '<span style="font-size:12px;color:var(--text-body-muted);">to</span>' +
-        supcalTimeDropdownHtml(k, 'to', h.to, h.on) +
+      return '<div class="supcal-hours-day-block" data-supcal-hours-row="' + k + '">' +
+        '<div class="supcal-hours-toggle-row">' +
+          '<button type="button" class="toggle-switch' + (h.on ? ' on' : '') + '" data-supcal-hours-toggle="' + k + '" role="switch" aria-checked="' + (h.on ? 'true' : 'false') + '"><span class="thumb"></span></button>' +
+          '<span class="day-label">' + SUPCAL_DAY_NAMES[i] + '</span>' +
+        '</div>' +
+        '<div class="supcal-hours-time-row">' +
+          supcalTimeDropdownHtml(k, 'from', h.from, h.on) +
+          '<span style="font-size:12px;color:var(--text-body-muted);">to</span>' +
+          supcalTimeDropdownHtml(k, 'to', h.to, h.on) +
+        '</div>' +
       '</div>';
     }).join('');
     body.querySelectorAll('[data-supcal-hours-toggle]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var isOn = btn.classList.toggle('on');
         btn.setAttribute('aria-checked', isOn ? 'true' : 'false');
-        var row = btn.closest('.supcal-hours-toggle-row');
-        if (row) row.querySelectorAll('.supcal-time-dd-btn').forEach(function (b) { b.classList.toggle('disabled', !isOn); });
+        var block = btn.closest('.supcal-hours-day-block');
+        if (block) block.querySelectorAll('.supcal-time-dd-btn').forEach(function (b) { b.classList.toggle('disabled', !isOn); });
       });
     });
     function closeAllSupcalTimeDdMenus() {
