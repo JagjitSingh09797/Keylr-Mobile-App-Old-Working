@@ -3733,10 +3733,13 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
    Inbox (bottom-nav screens keep the bottom nav for navigation, but still get a consistent
    slim title bar rather than the desktop's h1/h2-in-content pattern). */
 .subpage-topbar {
-  position: sticky; top: 0; z-index: 20;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  max-width: 430px; margin: 0 auto;
   display: flex; align-items: center; gap: 12px;
-  background: #fff; border-bottom: 1px solid var(--border-subtle);
+  background: var(--page-bg); border-bottom: 1px solid var(--border-subtle);
   padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 10px;
+  padding-right: 70px;
+  text-align: center;
 }
 .subpage-topbar .back-btn {
   width: 42px; height: 42px; border-radius: 50%; background: #ffffff;
@@ -3757,8 +3760,8 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 #screenCalendar .subpage-topbar { background: transparent; box-shadow: none; }
 #screenCalendar .subpage-bell { display: none; }
 .subpage-content { padding: 4px 16px calc(28px + env(safe-area-inset-bottom, 0px)); }
-#screenProfile .subpage-content, #screenServiceArea .subpage-content { padding-top: 24px; }
-.subpage-content.no-bottom-pad { padding-bottom: 24px; padding-top: 24px; }
+.subpage-content { padding-top: 90px; }
+.subpage-content.no-bottom-pad { padding-bottom: 24px; }
 /* Bottom-nav screens (Job Requests, Inbox) need extra bottom padding so content clears the bar. */
 .subpage-content.has-bottom-nav { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 #screenInbox .subpage-content.has-bottom-nav { padding: 0; }
@@ -4240,12 +4243,51 @@ rule already being here. */
 .sup-comp-doc-row { display: flex; align-items: center; gap: 10px; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 10px 12px; }
 .sup-comp-doc-row .scdr-icon { color: #94a3b8; flex-shrink: 0; }
 .sup-comp-doc-row .scdr-name { font-size: 13px; color: var(--text-heading); font-weight: 600; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.sup-comp-doc-row .scdr-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; color: #1a7a3e; background: #eafaf0; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 999px; flex-shrink: 0; }
+.scdr-badge { display: inline-flex; align-items: center; font-size: 10px; font-weight: 700; color: #1a7a3e; background: #eafaf0; letter-spacing: 0.03em; padding: 3px 9px; border-radius: 999px; flex-shrink: 0; }
 .doc-pdf-icon { width: 34px; height: 34px; border-radius: 8px; background: #e0244d; color: #fff; font-size: 9.5px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: 0.02em; }
+
+/* ===== Trade certifications ===== */
+/* ===== Right to Work Yes/No tiles ===== */
+#supRightToWorkTiles .radio-tile { position: relative; border-color: var(--border-subtle); background: #fff; }
+#supRightToWorkTiles .radio-tile .rtw-icon {
+  width: 26px; height: 26px; border-radius: 50%; color: #fff; background: #cbd5e1;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 6px;
+}
+#supRightToWorkTiles .radio-tile[data-value="yes"].selected { border-color: #22c55e; background: #f0fdf4; }
+#supRightToWorkTiles .radio-tile[data-value="yes"].selected .rtw-icon { background: #22c55e; }
+#supRightToWorkTiles .radio-tile[data-value="no"].selected { border-color: #dc2626; background: #fef2f2; }
+#supRightToWorkTiles .radio-tile[data-value="no"].selected .rtw-icon { background: #dc2626; }
+#supRightToWorkTiles .radio-tile[data-value="no"].selected .rt-title ~ div { color: #dc2626; }
+#supRightToWorkTiles .rtw-dot { display: none; position: absolute; top: 10px; right: 10px; width: 9px; height: 9px; border-radius: 50%; background: #dc2626; }
+#supRightToWorkTiles .radio-tile[data-value="no"].selected .rtw-dot { display: block; }
+
+.cert-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cert-select-card {
+  position: relative; background: #fff; border: 1.5px solid var(--border-subtle); border-radius: 12px;
+  padding: 13px 14px; cursor: pointer; transition: border-color 150ms ease-out, background-color 150ms ease-out;
+}
+.cert-select-card.selected { border-color: var(--accent-blue); background: var(--icon-tint-bg); }
+.cert-select-card .csc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.cert-select-card .csc-box { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid #cbd5e1; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.cert-select-card.selected .csc-box { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }
+.cert-select-card .csc-title { font-size: 13.5px; font-weight: 700; color: var(--text-heading); }
+.cert-select-card .csc-auto { font-size: 9.5px; font-weight: 700; color: var(--accent-blue); background: var(--icon-tint-bg); padding: 2px 7px; border-radius: 999px; margin-left: 4px; letter-spacing: 0.03em; }
+.cert-select-card .csc-desc { font-size: 11.5px; color: var(--text-body-muted); line-height: 1.5; }
+.cert-detail-card { border: 1px solid var(--border-subtle); border-radius: 14px; padding: 18px; margin-top: 14px; background: #fff; }
+.cert-detail-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cert-detail-head h3 { font-size: 15px; font-weight: 800; color: var(--text-heading); }
+.cert-dropzone {
+  border: 1.5px dashed var(--border-subtle); border-radius: 10px; padding: 16px; text-align: center;
+  cursor: pointer; background: var(--surface-soft);
+}
+.cert-dropzone .cdz-link { color: var(--accent-blue); font-weight: 700; font-size: 13px; }
+.cert-dropzone .cdz-sub { font-size: 11.5px; color: var(--text-body-muted); margin-top: 2px; }
+
 .sup-comp-doc-row .scdr-name { font-size: 13px; font-weight: 700; color: var(--text-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.sup-comp-doc-row .scdr-actions { font-size: 12px; margin-top: 2px; }
+.sup-comp-doc-row .scdr-actions { font-size: 12px; margin-top: 2px; display: flex; align-items: center; gap: 8px; }
 .sup-comp-doc-row .scdr-actions a, .sup-comp-doc-row .scdr-actions span.scdr-act { color: var(--accent-blue); font-weight: 600; cursor: pointer; }
 .sup-comp-doc-row .scdr-x { cursor: pointer; color: var(--text-body-muted); flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--surface-soft); }
+.sup-comp-doc-row .scdr-x.aev-edit-only { display: flex; }
 .sup-comp-doc-row .scdr-view-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; background: linear-gradient(135deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%); color: #fff; font-size: 12.5px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
 .sup-comp-doc-row .scdr-upload-btn { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-body-muted); cursor: pointer; flex-shrink: 0; }
 #supqSuggestChips.supq-suggest-row .simple-chip { padding: 6px 12px; font-size: 11.5px; }
@@ -5547,11 +5589,17 @@ rule already being here. */
                   <div class="sup-acct-ring-col" id="supAcctRingCol">
                     <div style="position:relative;width:64px;height:64px;">
                       <svg width="64" height="64" viewBox="0 0 64 64">
+                        <defs>
+                          <linearGradient id="supProfileRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#22447f"/>
+                            <stop offset="100%" stop-color="#0d1b3d"/>
+                          </linearGradient>
+                        </defs>
                         <circle cx="32" cy="32" r="27" fill="none" stroke="var(--surface-soft)" stroke-width="5"/>
-                        <circle cx="32" cy="32" r="27" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="0" id="supProfileCompleteRing" transform="rotate(-90 32 32)"/>
+                        <circle cx="32" cy="32" r="27" fill="none" stroke="url(#supProfileRingGrad)" stroke-width="5" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="0" id="supProfileCompleteRing" transform="rotate(-90 32 32)"/>
                       </svg>
                       <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                        <span style="font-size:13px;font-weight:800;color:#b5891a;" id="supProfileCompletePct">100%</span>
+                        <span style="font-size:13px;font-weight:800;color:#22447f;" id="supProfileCompletePct">100%</span>
                         <span style="font-size:8px;font-weight:700;color:#94a3b8;">done</span>
                       </div>
                     </div>
@@ -5644,12 +5692,12 @@ rule already being here. */
               <div id="supSettingsPanelSectors" class="acct-settings-tab" style="display:none;">
                 <div style="margin-top:20px;">
                   <div class="tile-row-2" id="supDashSectorTiles">
-                    <div class="choice-tile selected" data-value="residential" tabindex="0" role="checkbox" aria-checked="true">
+                    <div class="choice-tile tile-vertical selected" data-value="residential" tabindex="0" role="checkbox" aria-checked="true">
                       <div class="tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
                       <div class="tile-body"><div class="tile-title">Residential</div></div>
                       <div class="tile-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
                     </div>
-                    <div class="choice-tile selected" data-value="commercial" tabindex="0" role="checkbox" aria-checked="true">
+                    <div class="choice-tile tile-vertical selected" data-value="commercial" tabindex="0" role="checkbox" aria-checked="true">
                       <div class="tile-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div>
                       <div class="tile-body"><div class="tile-title">Commercial</div></div>
                       <div class="tile-check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -6003,7 +6051,7 @@ rule already being here. */
                     <div class="field-collapsible open" id="supPiFields" style="max-height:1200px;opacity:1;">
                       <div class="otc-body">
                         <div class="ob-row-2">
-                          <div class="ob-field"><label>Indemnity provider</label><input class="field-input" type="text" value="Markel" id="supPiProviderInput"></div>
+                          <div class="ob-field" style="margin-bottom:0;"><label>Indemnity provider</label><input class="field-input" type="text" value="Markel" id="supPiProviderInput"></div>
                           <div class="ob-field"><label>Policy number</label><input class="field-input" type="text" value="PI-576019" id="supPiPolicyInput"></div>
                         </div>
                         <div class="ob-row-2">
@@ -6072,6 +6120,88 @@ rule already being here. */
                     </div>
                   </div>
                   <div class="acct-view-empty" id="supElInsuranceCardViewEmpty" style="display:none;">No Employers' Liability Insurance on file.</div>
+                  <div class="ob-section-heading" style="margin-top:26px;">Trade Certifications</div>
+                  <div class="callout callout-neutral" style="margin-bottom:16px;">
+                    <div><div class="callout-body">Verified certifications appear as trust badges on your profile. Select the ones you hold and add the registration number and expiry date.</div></div>
+                  </div>
+                  <div class="cert-select-grid" id="certSelectGrid">
+                    <div class="cert-select-card selected" data-cert="gassafe">
+                      <div class="csc-top"><span class="csc-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="csc-title">Gas Safe</span><span class="csc-auto">AUTO</span></div>
+                      <div class="csc-desc">Required for any gas work &mdash; boilers, cookers, pipework.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="niceic">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">NICEIC / NAPIT</span></div>
+                      <div class="csc-top" style="margin-top:-2px;"><span class="csc-auto">AUTO</span></div>
+                      <div class="csc-desc" style="margin-top:6px;">Electrical contractor accreditation for domestic and commercial.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="cscs">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">CSCS</span><span class="csc-auto">AUTO</span></div>
+                      <div class="csc-desc">Construction Skills Certification Scheme required on most construction sites.</div>
+                    </div>
+                    <div class="cert-select-card selected" data-cert="fgas">
+                      <div class="csc-top"><span class="csc-box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="csc-title">F-Gas</span></div>
+                      <div class="csc-desc">Required for refrigeration, air conditioning, and heat pump work.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="partp">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">Part P</span></div>
+                      <div class="csc-desc">Building regulations competent person scheme for electrical installations.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="oftec">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">OFTEC</span></div>
+                      <div class="csc-desc">Oil firing equipment installation and servicing registration.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="ciphe">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">CIPHE</span></div>
+                      <div class="csc-desc">Chartered Institute of Plumbing and Heating Engineering membership.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="mcs">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">MCS</span></div>
+                      <div class="csc-desc">Microgeneration Certification Scheme &mdash; solar, heat pumps, wind.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="napitfire">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">NAPIT Fire</span></div>
+                      <div class="csc-desc">Fire detection and alarm systems competent person.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="trustmark">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">TrustMark</span></div>
+                      <div class="csc-desc">Government endorsed quality scheme for home improvement.</div>
+                    </div>
+                    <div class="cert-select-card" data-cert="whichtrusted" style="grid-column:1 / -1;">
+                      <div class="csc-top"><span class="csc-box"></span><span class="csc-title">Which? Trusted Traders</span></div>
+                      <div class="csc-desc">Consumer endorsement for vetted tradespeople.</div>
+                    </div>
+                  </div>
+
+                  <div id="certDetailCards"></div>
+                  <div class="ob-section-heading" style="margin-top:26px;">Additional Certifications</div>
+                  <div class="ob-card-section" id="certAdditionalForm" style="display:none;">
+                    <div class="ob-field"><label>Certification name</label><div style="position:relative;"><input class="field-input" type="text" id="certAddNameInput" style="padding-right:38px;"><span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text-body-muted);" id="certAddRemoveBtn">&times;</span></div></div>
+                    <div class="simple-chip-row" style="margin-top:10px;">
+                      <div class="simple-chip" data-preset-cert="PASMA">PASMA</div>
+                      <div class="simple-chip" data-preset-cert="City &amp; Guilds 18th Edition">City &amp; Guilds 18th Edition</div>
+                      <div class="simple-chip" data-preset-cert="IPAF">IPAF</div>
+                      <div class="simple-chip" data-preset-cert="CSCS Gold">CSCS Gold</div>
+                      <div class="simple-chip" data-preset-cert="ECS">ECS</div>
+                      <div class="simple-chip" data-preset-cert="BPEC">BPEC</div>
+                    </div>
+                    <div class="ob-field" style="margin-top:14px;"><label>Certificate number</label><input class="field-input" type="text" placeholder="Optional" data-cert-add-number></div>
+                    <div class="ob-field" style="margin-top:14px;">
+                      <label>Expiry date</label>
+                      <button type="button" class="pm-custom-dd-btn keylr-date-trigger" data-cal="certAddExpiry" style="width:100%;">
+                        <span class="cdd-value cal-value placeholder" data-cal-text="certAddExpiry">dd/mm/yyyy</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                      </button>
+                    </div>
+                    <div class="cert-dropzone" style="margin-top:14px;">
+                      <div class="cdz-link">Click to upload</div>
+                      <div class="cdz-sub">Photo or PDF</div>
+                      <input type="file" style="display:none;">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="certAddConfirmBtn" style="width:100%;margin-top:16px;">Add certification</button>
+                  </div>
+                  <div id="certAdditionalSaved"></div>
+                  <button type="button" class="btn btn-secondary-light" id="certAddBtn" style="width:100%;margin-top:8px;">+ Add certification</button>
+
 
 
                   <div class="acct-save-row" style="justify-content:flex-end;gap:10px;margin-top:20px;">
@@ -6138,7 +6268,7 @@ rule already being here. */
                               </div>
                             </div>
                           </div>
-                          <div class="ob-field" style="max-width:calc(50% - 7px);margin-bottom:0;">
+                          <div class="ob-field" style="margin-bottom:0;">
                             <label>Issue date</label>
                             <div class="pm-filter-field" style="width:100%;">
                               <button type="button" class="pm-custom-dd-btn keylr-date-trigger ob-select-dd" data-cal="supDbsIssueDate" style="width:100%;">
@@ -6205,17 +6335,24 @@ rule already being here. */
                     <div class="aev-view-only"><span class="status-pill green" id="supRightToWorkView">Yes — I have the right to work in the UK</span></div>
 
                     <div class="radio-tile-row cols-2 aev-edit-only" id="supRightToWorkTiles" style="text-align:center;">
-                      <div class="radio-tile selected" data-value="yes" style="border-color:#22c55e;background:#f0fdf4;justify-content:center;">
+                      <div class="radio-tile selected" data-value="yes" style="justify-content:center;">
                         <div class="rt-body" style="text-align:center;width:100%;">
-                          <div class="rtw-icon" style="width:26px;height:26px;border-radius:50%;background:#22c55e;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+                          <div class="rtw-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
                           <div class="rt-title">Yes</div><div style="font-size:12px;color:var(--text-body-muted);margin-top:2px;">I have the right to work in the UK</div>
                         </div>
                       </div>
                       <div class="radio-tile" data-value="no" style="justify-content:center;">
+                        <span class="rtw-dot"></span>
                         <div class="rt-body" style="text-align:center;width:100%;">
-                          <div class="rtw-icon" style="width:26px;height:26px;border-radius:50%;background:#e8482c;color:#fff;display:none;align-items:center;justify-content:center;margin:0 auto 6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+                          <div class="rtw-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
                           <div class="rt-title">No</div><div style="font-size:12px;color:var(--text-body-muted);margin-top:2px;">I do not currently have right to work</div>
                         </div>
+                      </div>
+                    </div>
+                    <div class="callout callout-neutral" id="supRtwNoCallout" style="display:none;margin-top:14px;margin-bottom:0;border-color:#fde68a;background:#fffbeb;">
+                      <div style="display:flex;gap:10px;">
+                        <span style="color:#b45309;flex-shrink:0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+                        <span style="font-size:12.5px;color:#78350f;line-height:1.55;">You cannot list services on the marketplace without the legal right to work in the UK. Please contact our support team if you need guidance.</span>
                       </div>
                     </div>
                     <p class="helper aev-edit-only" style="margin-top:12px;margin-bottom:0;font-size:11px;">If a client requires document verification, you can provide your UKVI share code later — verified via the Home Office API.</p>
@@ -7890,6 +8027,16 @@ rule already being here. */
   </div>
 
   <!-- Payouts: payout detail -->
+  <div class="modal-overlay" id="certFileModal">
+    <div class="modal-card" style="max-width:340px;padding:24px;text-align:center;">
+      <div style="width:56px;height:56px;border-radius:14px;background:#e0244d;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin:0 auto 16px;">PDF</div>
+      <h3 id="certFileModalTitle" style="font-size:16px;margin-bottom:6px;">Certificate</h3>
+      <div id="certFileModalName" style="font-size:12.5px;color:var(--text-body-muted);word-break:break-all;margin-bottom:14px;"></div>
+      <div style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#1a7a3e;background:#eafaf0;padding:5px 12px;border-radius:999px;margin-bottom:20px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Uploaded and on file</div>
+      <button type="button" class="btn btn-primary" id="certFileModalCloseBtn" style="width:100%;">Close</button>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="payDetailOverlay">
     <div class="modal-card">
       <div class="pd-head">
@@ -9026,6 +9173,7 @@ rule already being here. */
     wireInsuranceToggle('supPliToggle', 'supPliFields');
     wireInsuranceToggle('supPiToggle', 'supPiFields');
     wireInsuranceToggle('supDbsToggle', 'supDbsFields');
+    wireInsuranceToggle('supHmrcToggle', 'supUtrField');
   })();
 
   /* ================= Change number / email reveal forms ================= */
@@ -9051,6 +9199,217 @@ rule already being here. */
     wireReveal('supChangeNumberBtn', 'supChangeNumberForm', 'supCancelChangeNumberBtn', 'supVerifyNewNumberBtn', null, 'supNewNumberInput', 'Verification code sent to your new number.');
     wireReveal('supIdChangeNumberLink', 'supIdChangeNumberForm', 'supIdCancelChangeNumberBtn', 'supIdVerifyNewNumberBtn', 'supIdPhoneView', 'supIdNewNumberInput', 'Verification code sent to your new number.');
     wireReveal('supAcctChangeEmailLink', 'supAcctChangeEmailForm', 'supAcctCancelChangeEmailBtn', 'supAcctSendEmailVerifyBtn', 'supIdEmailView', 'supAcctNewEmailInput', 'Confirmation email sent to your new address.');
+  })();
+
+  /* ================= Trade certifications ================= */
+  (function () {
+    var CHECK_SVG = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+    var CERT_META = {
+      gassafe: { label: 'Gas Safe', auto: true, regLabel: 'Gas Safe registration number', regValue: 'GS-558241', expiry: '31/03/2027', fileName: 'd87646687b324e9e984d0aa\u2026', uploaded: true },
+      niceic: { label: 'NICEIC / NAPIT', auto: true, regLabel: 'NICEIC / NAPIT registration number', regValue: '', expiry: '', fileName: '', uploaded: false },
+      cscs: { label: 'CSCS', auto: true, regLabel: 'CSCS registration number', regValue: '', expiry: '', fileName: '', uploaded: false },
+      fgas: { label: 'F-Gas', auto: false, expiry: '30/11/2026', fileName: '', uploaded: false },
+      partp: { label: 'Part P', auto: false, expiry: '', fileName: '', uploaded: false },
+      oftec: { label: 'OFTEC', auto: false, expiry: '', fileName: '', uploaded: false },
+      ciphe: { label: 'CIPHE', auto: false, expiry: '', fileName: '', uploaded: false },
+      mcs: { label: 'MCS', auto: false, expiry: '', fileName: '', uploaded: false },
+      napitfire: { label: 'NAPIT Fire', auto: false, expiry: '', fileName: '', uploaded: false },
+      trustmark: { label: 'TrustMark', auto: false, expiry: '', fileName: '', uploaded: false },
+      whichtrusted: { label: 'Which? Trusted Traders', auto: false, expiry: '', fileName: '', uploaded: false }
+    };
+
+    function certDocRowHtml(key, meta) {
+      if (meta.uploaded) {
+        return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">' +
+          '<span class="scf-label aev-edit-only" style="font-size:13px;font-weight:700;color:var(--text-heading);">Certificate</span>' +
+          '<span class="scdr-badge">UPLOADED</span></div>' +
+          '<div class="sup-comp-doc-row" style="margin-bottom:0;" data-cert-doc-row="' + key + '">' +
+          '<div class="doc-pdf-icon">PDF</div>' +
+          '<div style="flex:1;min-width:0;"><div class="scdr-name">' + meta.fileName + '</div>' +
+          '<div class="scdr-actions"><a href="javascript:void(0)" data-cert-view="' + key + '">View file</a> &middot; <span class="scdr-act aev-edit-only" data-cert-replace="' + key + '">Replace</span></div></div>' +
+          '<input type="file" data-cert-file-input="' + key + '" style="display:none;">' +
+          '<span class="scdr-x aev-edit-only" data-cert-remove="' + key + '"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span></div>';
+      }
+      return '<div class="scf-label aev-edit-only" style="font-size:13px;font-weight:700;color:var(--text-heading);margin-bottom:8px;">Certificate</div>' +
+        '<div class="cert-dropzone" data-cert-dropzone="' + key + '"><div class="cdz-link">Click to upload</div><div class="cdz-sub">Photo or PDF</div>' +
+        '<input type="file" data-cert-file-input="' + key + '" style="display:none;"></div>';
+    }
+    function renderCertDetailCards() {
+      var container = document.getElementById('certDetailCards');
+      var selectedKeys = Array.prototype.slice.call(document.querySelectorAll('#certSelectGrid .cert-select-card.selected')).map(function (c) { return c.getAttribute('data-cert'); });
+      container.innerHTML = selectedKeys.map(function (key) {
+        var meta = CERT_META[key];
+        if (!meta) return '';
+        var calKey = 'certExpiry_' + key;
+        return '<div class="cert-detail-card" data-cert-detail="' + key + '">' +
+          '<div class="cert-detail-head"><h3>' + meta.label + '</h3>' + (meta.auto ? '<span class="status-pill" style="background:var(--icon-tint-bg);color:var(--accent-blue);">Auto-verified</span>' : '') + '</div>' +
+          (meta.regLabel ? '<div class="ob-field"><label>' + meta.regLabel + '</label><input class="field-input" type="text" value="' + meta.regValue + '" data-cert-reg="' + key + '"></div>' : '') +
+          '<div class="ob-field" style="margin-top:' + (meta.regLabel ? '14px' : '0') + ';">' +
+          '<label>Expiry date</label>' +
+          '<button type="button" class="pm-custom-dd-btn keylr-date-trigger" data-cal="' + calKey + '" style="width:100%;">' +
+          '<span class="cdd-value cal-value' + (meta.expiry ? '' : ' placeholder') + '" data-cal-text="' + calKey + '">' + (meta.expiry || 'dd/mm/yyyy') + '</span>' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button></div>' +
+          (meta.expiry ? '<span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#1a7a3e;background:#eafaf0;padding:3px 10px;border-radius:999px;margin-top:8px;margin-bottom:16px;"><span style="width:5px;height:5px;border-radius:50%;background:#1a7a3e;"></span>Valid</span>' : '<div style="margin-top:14px;"></div>') +
+          certDocRowHtml(key, meta) +
+          '</div>';
+      }).join('');
+      wireCertDetailInteractions();
+    }
+    function wireCertDetailInteractions() {
+      document.querySelectorAll('#certDetailCards [data-cert-view]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var key = btn.getAttribute('data-cert-view');
+          openCertFileModal(CERT_META[key].label, CERT_META[key].fileName);
+        });
+      });
+      document.querySelectorAll('#certDetailCards [data-cert-replace]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.getAttribute('data-cert-replace');
+          var input = document.querySelector('#certDetailCards [data-cert-file-input="' + key + '"]');
+          if (input) input.click();
+        });
+      });
+      document.querySelectorAll('#certDetailCards [data-cert-remove]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.getAttribute('data-cert-remove');
+          CERT_META[key].uploaded = false;
+          CERT_META[key].fileName = '';
+          showToast('Certificate removed.');
+          renderCertDetailCards();
+        });
+      });
+      document.querySelectorAll('#certDetailCards [data-cert-dropzone]').forEach(function (zone) {
+        zone.addEventListener('click', function () {
+          var input = zone.querySelector('input[type=file]');
+          if (input) input.click();
+        });
+      });
+      document.querySelectorAll('#certDetailCards [data-cert-file-input]').forEach(function (input) {
+        input.addEventListener('change', function () {
+          if (!(input.files && input.files[0])) return;
+          var key = input.getAttribute('data-cert-file-input');
+          CERT_META[key].uploaded = true;
+          CERT_META[key].fileName = input.files[0].name;
+          showToast('Certificate uploaded.');
+          renderCertDetailCards();
+        });
+      });
+      document.querySelectorAll('#certDetailCards [data-cert-reg]').forEach(function (input) {
+        input.addEventListener('input', function () { CERT_META[input.getAttribute('data-cert-reg')].regValue = input.value; });
+      });
+    }
+    document.querySelectorAll('#certSelectGrid .cert-select-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var isSelected = card.classList.toggle('selected');
+        var box = card.querySelector('.csc-box');
+        box.innerHTML = isSelected ? CHECK_SVG : '';
+        renderCertDetailCards();
+      });
+    });
+    renderCertDetailCards();
+
+    // Additional certifications: supports adding several, each becoming its own saved card with
+    // the "+ Add certification" button remaining available below for adding more.
+    var addBtn = document.getElementById('certAddBtn');
+    var addForm = document.getElementById('certAdditionalForm');
+    var addNameInput = document.getElementById('certAddNameInput');
+    var addRemoveBtn = document.getElementById('certAddRemoveBtn');
+    var savedList = document.getElementById('certAdditionalSaved');
+    function resetAddForm() {
+      addNameInput.value = '';
+      document.querySelectorAll('[data-preset-cert]').forEach(function (c) { c.classList.remove('selected'); });
+      var numberInput = addForm.querySelector('[data-cert-add-number]');
+      if (numberInput) numberInput.value = '';
+      var expiryText = addForm.querySelector('[data-cal-text="certAddExpiry"]');
+      if (expiryText) { expiryText.textContent = 'dd/mm/yyyy'; expiryText.classList.add('placeholder'); }
+    }
+    if (addBtn && addForm) {
+      addBtn.addEventListener('click', function () {
+        addForm.style.display = '';
+        addBtn.style.display = 'none';
+      });
+    }
+    if (addRemoveBtn) addRemoveBtn.addEventListener('click', function () {
+      addForm.style.display = 'none';
+      addBtn.style.display = '';
+      resetAddForm();
+    });
+    var addConfirmBtn = document.getElementById('certAddConfirmBtn');
+    if (addConfirmBtn) addConfirmBtn.addEventListener('click', function () {
+      if (!addNameInput.value.trim()) { addNameInput.focus(); return; }
+      var card = document.createElement('div');
+      card.className = 'cert-detail-card';
+      card.innerHTML = '<div class="cert-detail-head"><h3>' + addNameInput.value.trim() + '</h3>' +
+        '<span class="scdr-x" style="position:static;" data-additional-remove="1"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></span></div>' +
+        '<div class="cert-dropzone" style="margin-top:0;"><div class="cdz-link">Click to upload</div><div class="cdz-sub">Photo or PDF</div><input type="file" style="display:none;"></div>';
+      var dz = card.querySelector('.cert-dropzone');
+      dz.addEventListener('click', function () { dz.querySelector('input').click(); });
+      card.querySelector('[data-additional-remove]').addEventListener('click', function () { card.remove(); });
+      savedList.appendChild(card);
+      showToast('Certification added.');
+      addForm.style.display = 'none';
+      addBtn.style.display = '';
+      resetAddForm();
+    });
+    document.querySelectorAll('[data-preset-cert]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        document.querySelectorAll('[data-preset-cert]').forEach(function (c) { c.classList.remove('selected'); });
+        chip.classList.add('selected');
+        if (addNameInput) addNameInput.value = chip.getAttribute('data-preset-cert');
+      });
+    });
+  })();
+
+  /* ================= Simple file preview modal (View file) ================= */
+  function openCertFileModal(title, fileName) {
+    var modal = document.getElementById('certFileModal');
+    document.getElementById('certFileModalTitle').textContent = title;
+    document.getElementById('certFileModalName').textContent = fileName;
+    modal.classList.add('open');
+  }
+  (function () {
+    var closeBtn = document.getElementById('certFileModalCloseBtn');
+    var modal = document.getElementById('certFileModal');
+    if (closeBtn) closeBtn.addEventListener('click', function () { modal.classList.remove('open'); });
+    if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) modal.classList.remove('open'); });
+    document.querySelectorAll('[data-doc-view]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openCertFileModal(btn.getAttribute('data-doc-view'), '9b93e539978243eaa47af304af4\u2026');
+      });
+    });
+  })();
+
+  /* ================= Document row buttons (view / replace / remove) ================= */
+  (function () {
+    document.querySelectorAll('[data-doc-replace]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var key = btn.getAttribute('data-doc-replace');
+        var input = document.querySelector('[data-doc-input="' + key + '"]');
+        if (input) input.click();
+      });
+    });
+    document.querySelectorAll('[data-doc-input]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        if (input.files && input.files[0]) showToast('Certificate replaced.');
+      });
+    });
+    document.querySelectorAll('.sup-comp-doc-row .scdr-x').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var row = btn.closest('.sup-comp-doc-row');
+        var label = row && row.parentElement && row.parentElement.querySelector('.scf-label, span[style*="font-weight:700"]');
+        if (row) {
+          var dz = document.createElement('div');
+          dz.className = 'cert-dropzone';
+          dz.innerHTML = '<div class="cdz-link">Click to upload</div><div class="cdz-sub">Photo or PDF</div><input type="file" style="display:none;">';
+          row.replaceWith(dz);
+          dz.addEventListener('click', function () { dz.querySelector('input').click(); });
+          dz.querySelector('input').addEventListener('change', function () { showToast('Certificate uploaded.'); });
+        }
+        showToast('Certificate removed.');
+      });
+    });
   })();
 
   /* ================= Profile photo upload ================= */
@@ -9892,6 +10251,17 @@ rule already being here. */
   initMultiSelectTiles(document.getElementById('supResSubChips'));
   initMultiSelectTiles(document.getElementById('supComSubChips'));
   initSingleSelectTiles(document.getElementById('supRightToWorkTiles'));
+  (function () {
+    var rtwTiles = document.getElementById('supRightToWorkTiles');
+    var rtwCallout = document.getElementById('supRtwNoCallout');
+    if (rtwTiles && rtwCallout) {
+      rtwTiles.querySelectorAll('.radio-tile').forEach(function (tile) {
+        tile.addEventListener('click', function () {
+          rtwCallout.style.display = tile.getAttribute('data-value') === 'no' ? '' : 'none';
+        });
+      });
+    }
+  })();
   initSingleSelectTiles(document.getElementById('supDashCriminalDeclaration'));
   var stgpAllLondonChip = document.querySelector('#stgpLondonZones .simple-chip-action');
   if (stgpAllLondonChip) {
