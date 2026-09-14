@@ -1730,7 +1730,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supjr-itemised-row .item-amount-wrap { width: 130px; flex-shrink: 0; }
 .supjr-itemised-remove-btn { width: 38px; height: 38px; flex-shrink: 0; border-radius: 9px; border: 1px solid var(--border-subtle); background: #fff; color: var(--text-body-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .supjr-itemised-remove-btn:hover { background: #fef3f2; color: #d92d20; border-color: #fda29b; }
-.supjr-summary-box { background: var(--surface-soft); border-radius: 12px; padding: 16px; margin-top: 4px; }
+.supjr-summary-box { background: var(--icon-tint-bg); border-radius: 12px; padding: 16px; margin-top: 4px; }
 .supjr-summary-row { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-heading); padding: 6px 0; }
 .supjr-summary-row.total { border-top: 1px solid var(--border-subtle); margin-top: 8px; padding-top: 12px; font-size: 15px; font-weight: 800; }
 .supjr-add-line-btn { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--accent-blue); background: none; border: none; cursor: pointer; font-family: inherit; }
@@ -3763,7 +3763,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .subpage-content { padding-top: 90px; }
 .subpage-content.no-bottom-pad { padding-bottom: 24px; }
 /* Bottom-nav screens (Job Requests, Inbox) need extra bottom padding so content clears the bar. */
-.subpage-content.has-bottom-nav { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+.subpage-content.has-bottom-nav { padding-top: 16px; padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 #screenInbox .subpage-content.has-bottom-nav { padding: 0; }
 #screenInbox .sinb-shell { border-radius: unset; border: none; }
 
@@ -3788,11 +3788,13 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 #screenJobRequests .subpage-topbar {
   position: static; max-width: none; background: var(--surface-white); border-bottom: none;
   padding: calc(20px + env(safe-area-inset-top, 0px)) 16px 16px; text-align: left; align-items: flex-start;
+  flex-wrap: wrap;
 }
 #screenJobRequests .subpage-title { font-size: 27px; font-weight: 800; color: #101828; text-align: left; letter-spacing: -0.01em; }
 #screenJobRequests .subpage-subtitle { font-size: 14px; margin-top: 4px; }
 #screenJobRequests .subpage-bell { display: none; }
-#screenJobRequests .subpage-content { padding-top: 4px; }
+#screenJobRequests .subpage-topbar #supjrTabs { width: 100%; margin-top: 16px; }
+#screenJobRequests .subpage-content { padding-top: 16px; }
 #supjrTabs.pmjr-tabs-row { border-bottom: none; margin-top: 2px; gap: 10px; }
 #supjrTabs .pmjr-tab { border-radius: 999px; padding: 10px 16px; background: var(--icon-tint-bg); font-weight: 700; }
 #supjrTabs .pmjr-tab .pmjr-tab-count { border-radius: 999px; }
@@ -3845,16 +3847,16 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supqd-header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .supqd-back-link { display: inline-flex; align-items: center; gap: 4px; color: rgba(255,255,255,0.75); font-size: 14.5px; font-weight: 700; background: none; border: none; cursor: pointer; font-family: inherit; padding: 4px 2px; flex-shrink: 0; }
 .supqd-back-link:hover { color: #fff; }
-.supqd-header-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+.supqd-header-badges { display: flex; align-items: flex-end; gap: 8px; flex-shrink: 0; }
 .supqd-badge { font-size: 12px; font-weight: 700; padding: 6px 13px; border-radius: 999px; background: rgba(255,255,255,0.16); color: #fff; white-space: nowrap; }
 .supqd-header-title { font-size: 23px; font-weight: 800; color: #fff; line-height: 1.28; margin-top: 16px; }
 .supqd-header-meta { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
 .supqd-header-meta-text { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); }
 .supqd-rating-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.14); color: #fff; font-size: 12.5px; font-weight: 700; padding: 4px 11px; border-radius: 999px; }
 .supqd-rating-pill svg { color: #f5a623; }
-.supqd-info-card { background: #fff; border-radius: 20px; margin: -28px 14px 0; padding: 18px; position: relative; box-shadow: 0 2px 10px rgba(16,24,40,0.06); }
+.supqd-info-card { background: #fff; border-radius: 20px; margin: 14px 14px 0; padding: 18px; position: relative; box-shadow: 0 2px 10px rgba(16,24,40,0.06); }
 .supqd-info-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.supqd-info-box { background: var(--surface-soft); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+.supqd-info-box { background: var(--surface-soft); border-radius: 12px; padding: 12px 14px; min-width: 0; text-align: center; }
 .supqd-info-box svg { color: var(--text-body-muted); margin-bottom: 6px; }
 .supqd-info-box .lbl { font-size: 11px; font-weight: 600; color: var(--text-body-muted); white-space: nowrap; }
 .supqd-info-box .val { font-size: 13.5px; font-weight: 700; color: var(--text-heading); margin-top: 3px; white-space: nowrap; }
@@ -3872,7 +3874,7 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supqd-tabs::-webkit-scrollbar { display: none; }
 .supqd-tab { flex-shrink: 0; padding: 10px 18px; border-radius: 999px; background: #fff; color: var(--text-heading); font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 1px 2px rgba(16,24,40,0.05); }
 .supqd-tab.active { background: var(--status-navy); color: #fff; }
-.supqd-tab-content-wrap { padding: 0 14px; }
+.supqd-tab-content-wrap { padding: 0 14px; margin-bottom: 32px; }
 .supqd-tab-panel { display: none; background: #fff; border-radius: 18px; padding: 20px; }
 .supqd-tab-panel.active { display: block; }
 .supqd-panel-heading { font-size: 17px; font-weight: 800; color: #101828; margin-bottom: 4px; }
@@ -3981,6 +3983,234 @@ input.field-input[type="date"]::-webkit-calendar-picker-indicator:hover { opacit
 .supqc-attach { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text-body-muted); background: none; border: none; cursor: pointer; }
 .supqc-input { flex: 1; min-width: 0; background: var(--surface-soft); border: none; border-radius: 999px; padding: 11px 16px; font-size: 14px; font-family: inherit; color: var(--text-heading); }
 .supqc-send { width: 38px; height: 38px; border-radius: 50%; background: var(--icon-tint-bg); color: var(--accent-blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: none; cursor: pointer; }
+
+/* ===== Supplier My Jobs module: list (12 status tabs), job detail (stepper, property,
+   description, checklist, activity, PM contact), and a shared job-chat screen reused by
+   both My Jobs and Inbox. ===== */
+
+/* -- My Jobs list -- */
+#screenMyJobs .subpage-topbar {
+  position: static; max-width: none; background: var(--surface-white); border-bottom: none;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 16px 0; text-align: left; align-items: flex-start;
+}
+#screenMyJobs .subpage-title { font-size: 27px; font-weight: 800; color: #101828; text-align: left; letter-spacing: -0.01em; }
+#screenMyJobs .subpage-content { padding: 0; }
+.myjob-tabs-row { display: flex; gap: 22px; border-bottom: 1px solid var(--border-subtle); padding: 18px 16px 0; background: var(--surface-white); overflow-x: auto; scrollbar-width: none; }
+.myjob-tabs-row::-webkit-scrollbar { display: none; }
+.myjob-tab { flex-shrink: 0; padding: 4px 0 13px; font-size: 15px; font-weight: 700; color: #94a3b8; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1px; display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.myjob-tab.active { color: var(--text-heading); border-bottom-color: var(--status-navy); }
+.myjob-tab-badge { background: var(--status-navy); color: #fff; font-size: 11.5px; font-weight: 800; border-radius: 999px; min-width: 20px; height: 20px; padding: 0 6px; display: inline-flex; align-items: center; justify-content: center; }
+.myjob-list { padding: 16px; }
+.myjob-card { background: #fff; border: 1px solid var(--border-subtle); border-left-width: 4px; border-radius: 14px; padding: 16px 16px 14px; margin-bottom: 14px; cursor: pointer; box-shadow: 0 1px 2px rgba(16,24,40,0.04); }
+.myjob-card:last-child { margin-bottom: 0; }
+.myjob-card.green { border-left-color: #1a7a3e; }
+.myjob-card.red { border-left-color: #c0392b; }
+.myjob-card.navy { border-left-color: var(--status-navy); }
+.myjob-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.myjob-card-title { font-size: 15.5px; font-weight: 800; color: #101828; line-height: 1.3; }
+.myjob-card-price { font-size: 17px; font-weight: 800; color: #101828; white-space: nowrap; flex-shrink: 0; }
+.myjob-badge { display: inline-flex; align-items: center; font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 999px; margin-top: 8px; white-space: nowrap; flex-shrink: 0; }
+.myjob-badge.green { background: #dcf5e6; color: #1a7a3e; display: unset; }
+.myjob-badge.red { background: #fde8e8; color: #c0392b; }
+.myjob-badge.grey { background: #eef1f5; color: #475569; }
+.myjob-badge.amber { background: #fdf3d8; color: #92650a; }
+.myjob-badge.blue { background: var(--icon-tint-bg); color: var(--accent-blue); }
+.myjob-badge.purple { background: #ece8fd; color: #602dc9; }
+.myjob-card-addr { font-size: 13px; color: #475569; margin-top: 8px; }
+.myjob-card-id { font-size: 12.5px; color: #94a3b8; margin-top: 2px; }
+.myjob-card-divider { border-top: 1px solid var(--border-subtle); margin: 12px 0 10px; }
+.myjob-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.myjob-card-sched { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-body-muted); min-width: 0; }
+.myjob-card-sched span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.myjob-card-open { display: flex; align-items: center; gap: 2px; font-size: 13.5px; font-weight: 700; color: var(--accent-blue); flex-shrink: 0; }
+.myjob-empty { padding: 70px 30px 40px; text-align: center; }
+.myjob-empty-title { font-size: 16px; font-weight: 800; color: var(--text-heading); }
+.myjob-empty-sub { font-size: 13.5px; color: var(--text-body-muted); margin-top: 6px; line-height: 1.5; }
+
+/* -- My Job detail -- */
+#screenMyJobDetail { background: var(--page-bg); }
+.myjd-header { background: #fff; padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 16px; border-bottom: 1px solid var(--border-subtle); }
+.myjd-back-link { display: inline-flex; align-items: center; gap: 4px; color: var(--text-body-muted); font-size: 14.5px; font-weight: 700; background: none; border: none; cursor: pointer; font-family: inherit; padding: 4px 2px 4px 0; }
+.myjd-header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 10px; }
+.myjd-title { font-size: 20px; font-weight: 800; color: #101828; line-height: 1.28; }
+.myjd-header-sub { font-size: 13px; color: var(--text-body-muted); margin-top: 6px; }
+.myjd-tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.myjd-tag { font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; }
+.myjd-tag.preferred { background: #fdf3d8; color: #92650a; }
+.myjd-tag.emergency { background: #fdeee0; color: #c2560c; }
+.myjd-content { padding: 18px 16px 130px; }
+.myjd-stepper { display: flex; background: #fff; border-radius: 16px; padding: 20px 10px; margin-bottom: 16px; }
+.myjd-step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; min-width: 0; }
+.myjd-step-line { position: absolute; top: 15px; left: -50%; width: 100%; height: 2px; background: var(--border-subtle); z-index: 0; }
+.myjd-step:first-child .myjd-step-line { display: none; }
+.myjd-step.done .myjd-step-line { background: var(--status-navy); }
+.myjd-step-circle { width: 30px; height: 30px; border-radius: 50%; background: #fff; border: 2px solid var(--border-subtle); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 800; color: #94a3b8; position: relative; z-index: 1; flex-shrink: 0; }
+.myjd-step.done .myjd-step-circle { background: var(--status-navy); border-color: var(--status-navy); color: #fff; }
+.myjd-step.current .myjd-step-circle { background: var(--status-navy); border-color: var(--status-navy); color: #fff; }
+.myjd-step-label { font-size: 10px; font-weight: 700; color: #94a3b8; margin-top: 6px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.myjd-step.current .myjd-step-label, .myjd-step.done .myjd-step-label { color: var(--text-heading); }
+.myjd-card { background: #fff; border-radius: 16px; padding: 18px; margin-bottom: 14px; }
+.myjd-card-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.03em; color: var(--text-body-muted); text-transform: uppercase; margin-bottom: 14px; }
+.myjd-card-head svg { color: var(--accent-blue); }
+.myjd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.myjd-field-lbl { font-size: 11.5px; font-weight: 600; color: var(--text-body-muted); }
+.myjd-field-val { font-size: 15px; font-weight: 700; color: #101828; margin-top: 4px; }
+.myjd-propgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.myjd-propbox { background: var(--icon-tint-bg); border-radius: 12px; padding: 13px 14px; }
+.myjd-propbox .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: var(--accent-blue); text-transform: uppercase; }
+.myjd-propbox .name { font-size: 14.5px; font-weight: 800; color: #101828; margin-top: 3px; }
+.myjd-propbox .sub { font-size: 12.5px; color: var(--text-body-muted); margin-top: 2px; }
+.myjd-keyaccess { background: #fdf3d8; border: 1px solid #f5deA0; border-radius: 12px; padding: 13px 14px; margin-bottom: 14px; }
+.myjd-keyaccess .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.03em; color: #92650a; text-transform: uppercase; }
+.myjd-keyaccess .val { font-size: 14.5px; font-weight: 800; color: #101828; margin-top: 3px; }
+.myjd-map { position: relative; height: 130px; border-radius: 12px; overflow: hidden; margin-bottom: 14px; background: #dfe4ea linear-gradient(135deg, #e2e6ec 0%, #cfd6df 100%); display: flex; align-items: flex-end; justify-content: flex-end; padding: 12px; }
+.myjd-map .google-tag { position: absolute; bottom: 10px; left: 12px; font-size: 15px; font-weight: 700; color: #5f6368; opacity: 0.8; }
+.myjd-directions-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--status-navy); color: #fff; border: none; border-radius: 999px; padding: 9px 15px; font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.myjd-factsgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.myjd-factbox.span-2 { grid-column: 1 / -1; }
+.myjd-factbox { background: var(--surface-soft); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+.myjd-factbox .myjd-field-val { white-space: normal; overflow-wrap: break-word; word-break: break-word; }
+.myjd-factbox .lbl { font-size: 11px; font-weight: 600; color: var(--text-body-muted); white-space: nowrap; }
+.myjd-factbox .val { font-size: 13.5px; font-weight: 700; color: #101828; margin-top: 3px; white-space: nowrap; }
+.myjd-collapsible-head { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.myjd-collapsible-head svg.chev { transition: transform 150ms ease-out; color: var(--text-body-muted); flex-shrink: 0; }
+.myjd-collapsible-head.open svg.chev { transform: rotate(180deg); }
+.myjd-guaranteed-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.myjd-guaranteed-pill { display: inline-flex; align-items: center; gap: 6px; background: #dcf5e6; color: #1a7a3e; font-size: 12.5px; font-weight: 700; padding: 6px 12px; border-radius: 999px; }
+.myjd-net-payout-box { background: var(--surface-soft); border-radius: 12px; padding: 13px 14px; }
+.myjd-net-payout-box .lbl { font-size: 11.5px; font-weight: 600; color: var(--text-body-muted); }
+.myjd-net-payout-box .val { font-size: 19px; font-weight: 800; color: #101828; margin-top: 3px; }
+.myjd-checklist-pct { font-size: 26px; font-weight: 800; color: #e8a53d; }
+.myjd-checklist-pct.full { color: #1a7a3e; }
+.myjd-progressbar { height: 8px; border-radius: 999px; background: var(--border-subtle); overflow: hidden; margin: 12px 0 6px; }
+.myjd-progressbar-fill { height: 100%; border-radius: 999px; background: #e8a53d; }
+.myjd-progressbar-fill.full { background: #1a7a3e; }
+.myjd-checklist-sub { font-size: 12.5px; color: var(--text-body-muted); margin-bottom: 6px; }
+.myjd-group-title { font-size: 14.5px; font-weight: 800; color: #101828; margin-top: 18px; margin-bottom: 2px; }
+.myjd-group-sub { font-size: 12px; color: var(--text-body-muted); margin-bottom: 10px; }
+.myjd-task { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border-subtle); }
+.myjd-task:first-of-type { border-top: none; }
+.myjd-task-check { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--border-subtle); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.myjd-task-check.done { background: #1a7a3e; border-color: #1a7a3e; color: #fff; }
+.myjd-task-body { flex: 1; min-width: 0; }
+.myjd-task-name { font-size: 14px; font-weight: 700; color: #101828; cursor: pointer; }
+.myjd-task-status { display: inline-flex; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 700; margin-top: 3px; }
+.myjd-task-status.done { color: #1a7a3e; }
+.myjd-task-status.fail { background: #fde8e8; color: #c0392b; padding: 2px 8px; border-radius: 999px; }
+.myjd-task-note { font-size: 13px; color: var(--text-body-muted); margin-top: 4px; }
+.myjd-task-media { display: flex; gap: 6px; margin-top: 8px; }
+.myjd-task-thumb { width: 44px; height: 44px; border-radius: 8px; background: var(--surface-soft) center/cover no-repeat; flex-shrink: 0; }
+.myjd-task-play { width: 44px; height: 44px; border-radius: 8px; background: var(--icon-tint-bg); display: flex; align-items: center; justify-content: center; color: var(--status-navy); flex-shrink: 0; cursor: pointer; }
+.myjd-activity-item { display: flex; gap: 12px; padding-bottom: 18px; position: relative; }
+.myjd-activity-item:last-child { padding-bottom: 0; }
+.myjd-activity-dotcol { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.myjd-activity-dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.myjd-activity-dot.green { background: #1a7a3e; }
+.myjd-activity-dot.grey { background: #94a3b8; }
+.myjd-activity-dot.blue { background: var(--accent-blue); }
+.myjd-activity-line { width: 2px; flex: 1; background: var(--border-subtle); margin-top: 4px; min-height: 14px; }
+.myjd-activity-text { font-size: 14px; font-weight: 700; color: #101828; }
+.myjd-activity-time { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+.myjd-pm-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.myjd-pm-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--icon-tint-bg) center/cover no-repeat; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accent-blue); font-size: 16px; flex-shrink: 0; overflow: hidden; }
+.myjd-pm-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.myjd-pm-name { font-size: 15.5px; font-weight: 800; color: #101828; }
+.myjd-pm-role { font-size: 12.5px; color: var(--text-body-muted); margin-top: 2px; }
+.myjd-pm-actions { display: flex; align-items: center; gap: 10px; }
+.myjd-pm-msg-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--status-navy); color: #fff; border: none; border-radius: 11px; padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.myjd-pm-call-btn { width: 46px; height: 46px; border-radius: 11px; background: var(--surface-soft); display: flex; align-items: center; justify-content: center; color: var(--text-heading); flex-shrink: 0; cursor: pointer; border: none; }
+.myjd-pm-email { font-size: 13px; color: var(--accent-blue); margin-top: 12px; word-break: break-all; }
+.myjd-video-overlay { padding: 24px; background: rgba(10,14,24,0.78); }
+.myjd-video-modal { position: relative; width: 100%; max-width: 380px; background: #000; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.myjd-video-modal video { width: 100%; max-height: 70vh; display: block; background: #000; }
+.myjd-video-close { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; background: rgba(16,24,40,0.55); border: none; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; }
+
+/* -- Shared job chat screen (used by My Jobs "Message" and Inbox conversations) -- */
+#screenJobChat { background: var(--page-bg); }
+.myjc-header { position: fixed; top: 0; left: 0; right: 0; max-width: 430px; margin: 0 auto; z-index: 16; display: flex; align-items: center; gap: 12px; padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 14px; background: #fff; border-bottom: 1px solid var(--border-subtle); }
+.myjc-back { width: 38px; height: 38px; border-radius: 50%; background: var(--surface-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text-heading); border: none; cursor: pointer; }
+.myjc-avatar { width: 38px; height: 38px; border-radius: 50%; background: #dbe0eb; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #3a4e82; flex-shrink: 0; font-size: 13.5px; overflow: hidden; }
+.myjc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.myjc-head-info { flex: 1; min-width: 0; }
+.myjc-name-row { display: flex; align-items: center; gap: 8px; }
+.myjc-name { font-size: 15px; font-weight: 800; color: var(--text-heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.myjc-tag-pill { flex-shrink: 0; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; color: #3a4e82; background: #e7eaf3; }
+.myjc-tag-pill.job { color: #3a4e82; background: #e7eaf3; }
+.myjc-tag-pill.support { color: #3a4e82; background: #e7eaf3; }
+.myjc-status { font-size: 12px; color: var(--text-body-muted); margin-top: 1px; }
+.myjc-body { padding: 18px 16px; padding-top: 96px; padding-bottom: 148px; min-height: calc(100vh - 80px); min-height: calc(100dvh - 80px); }
+.myjc-start { text-align: center; font-size: 12.5px; color: var(--text-body-muted); margin-bottom: 18px; }
+.myjc-date-divider { text-align: center; margin: 20px 0; }
+.myjc-date-divider span { display: inline-block; font-size: 11.5px; font-weight: 700; color: var(--text-body-muted); background: #fff; border: 1px solid var(--border-subtle); padding: 5px 14px; border-radius: 999px; }
+.myjc-msg-row { display: flex; margin-bottom: 18px; }
+.myjc-msg-row.out { justify-content: flex-end; }
+.myjc-bubble-wrap { max-width: 82%; }
+.myjc-msg-row.out .myjc-bubble-wrap { text-align: right; }
+.myjc-bubble-sys { background: var(--surface-soft); color: var(--text-heading); border-radius: 14px; padding: 13px 16px; font-size: 14px; line-height: 1.45; font-weight: 600; }
+.myjc-bubble-out { display: inline-block; background: linear-gradient(135deg, var(--btn-grad-start) 0%, var(--btn-grad-end) 100%); color: #fff; border-radius: 16px 16px 4px 16px; padding: 12px 17px; font-size: 14.5px; font-weight: 700; text-align: left; }
+.myjc-attach-img { margin: -12px -17px 8px; border-radius: 16px 16px 0 0; overflow: hidden; max-width: 220px; }
+.myjc-attach-img img { width: 100%; display: block; max-height: 220px; object-fit: cover; }
+.myjc-attach-file { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border-radius: 10px; padding: 8px 10px; margin-bottom: 6px; font-size: 13px; font-weight: 600; }
+.myjc-attach-file span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 160px; }
+.myjc-bubble-alert { border-radius: 14px; padding: 13px 16px; border: 1px solid; }
+.myjc-bubble-alert.negative { background: #fdeeee; border-color: #f8c9c9; }
+.myjc-bubble-alert.negative .t { color: #c0392b; }
+.myjc-bubble-alert.negative .d { color: #c0392b; }
+.myjc-bubble-alert.positive { background: #eafaf0; border-color: #bfe8cd; }
+.myjc-bubble-alert.positive .t { color: #1a7a3e; }
+.myjc-bubble-alert.positive .d { color: #1a7a3e; }
+.myjc-bubble-alert .t { font-size: 13.5px; font-weight: 800; margin-bottom: 3px; }
+.myjc-bubble-alert .d { font-size: 13px; line-height: 1.4; }
+.myjc-bubble-info { background: var(--icon-tint-bg); border: 1px solid #c9d6ec; border-radius: 14px; padding: 13px 16px; }
+.myjc-bubble-info .t { font-size: 14px; font-weight: 800; color: var(--accent-blue); margin-bottom: 3px; }
+.myjc-bubble-info .d { font-size: 13px; line-height: 1.4; color: var(--accent-blue); }
+.myjc-timestamp { font-size: 11px; color: var(--text-body-muted); margin-top: 6px; }
+.myjc-footer { position: fixed; bottom: 0; left: 0; right: 0; max-width: 430px; margin: 0 auto; background: #fff; border-top: 1px solid var(--border-subtle); padding: 12px 16px max(12px, env(safe-area-inset-bottom,0px)); z-index: 15; }
+.myjc-input-row { display: flex; align-items: center; gap: 10px; }
+.myjc-attach { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text-body-muted); background: none; border: none; cursor: pointer; }
+.myjc-input { flex: 1; min-width: 0; background: var(--surface-soft); border: none; border-radius: 999px; padding: 11px 16px; font-size: 14px; font-family: inherit; color: var(--text-heading); }
+.myjc-send { width: 38px; height: 38px; border-radius: 50%; background: var(--icon-tint-bg); color: var(--accent-blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: none; cursor: pointer; }
+.myjc-readonly-note { text-align: center; font-size: 13px; color: var(--text-body-muted); padding: 4px 0; }
+
+/* -- Inbox -- */
+#screenInbox .subpage-topbar {
+  position: static; max-width: none; background: var(--surface-white); border-bottom: none;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 16px 14px; text-align: left; align-items: flex-start;
+  flex-wrap: wrap;
+}
+#screenInbox .subpage-title { font-size: 27px; font-weight: 800; color: #101828; text-align: left; letter-spacing: -0.01em; }
+#screenInbox .subpage-topbar .inbox-search-wrap { width: 100%; padding: 16px 0 0; }
+#screenInbox .subpage-topbar .inbox-seg { width: 100%; margin: 14px 0 0; }
+.inbox-seg { display: flex; background: var(--surface-soft); border-radius: 12px; padding: 4px; margin: 14px 16px 0; gap: 4px; }
+.inbox-seg-btn { flex: 1; text-align: center; padding: 10px 8px; border-radius: 9px; font-size: 14px; font-weight: 700; color: var(--text-body-muted); cursor: pointer; background: none; border: none; font-family: inherit; }
+.inbox-seg-btn.active { background: #fff; color: var(--text-heading); box-shadow: 0 1px 2px rgba(16,24,40,0.08); }
+.inbox-list-meta { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 8px; }
+.inbox-count { font-size: 13px; color: var(--text-body-muted); }
+.inbox-sort-btn { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--border-subtle); border-radius: 999px; padding: 7px 14px; font-size: 12.5px; font-weight: 700; color: var(--text-heading); }
+.inbox-date-sep { display: flex; align-items: center; gap: 10px; padding: 10px 16px; font-size: 11.5px; font-weight: 700; color: var(--text-body-muted); text-transform: uppercase; letter-spacing: 0.03em; }
+.inbox-date-sep::before, .inbox-date-sep::after { content: ''; flex: 1; height: 1px; background: var(--border-subtle); }
+.inbox-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; position: relative; cursor: pointer; }
+.inbox-row.unread { border-left: 3px solid var(--accent-blue); background: #f7fafd; }
+.inbox-row-avatar { width: 44px; height: 44px; border-radius: 50%; background: #dbe0eb; display: flex; align-items: center; justify-content: center; font-weight: 800; color: #3a4e82; font-size: 14px; flex-shrink: 0; overflow: hidden; }
+.inbox-row-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.inbox-row-jobno-inline { font-size: 11px; color: #94a3b8; }
+.inbox-row-body { flex: 1; min-width: 0; }
+.inbox-row-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.inbox-row-name { font-size: 15px; font-weight: 800; color: #101828; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.inbox-row-date { font-size: 12px; color: #94a3b8; flex-shrink: 0; white-space: nowrap; }
+.inbox-row-date.unread { color: var(--accent-blue); font-weight: 700; }
+.inbox-row-tags { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.inbox-row-jobpill { font-size: 11px; font-weight: 700; color: #3a4e82; background: #e7eaf3; padding: 3px 10px; border-radius: 999px; }
+.inbox-row-status { font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+.inbox-row-status.closed { color: #1a7a3e; }
+.inbox-row-status.needsreply { color: #e8a53d; }
+.inbox-row-status .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.inbox-row-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+.inbox-row-jobid { font-size: 12.5px; color: #94a3b8; }
+.inbox-row-jobid.unread { color: var(--text-heading); font-weight: 600; }
+.inbox-row-unread-badge { background: var(--status-navy); color: #fff; font-size: 11.5px; font-weight: 800; border-radius: 999px; min-width: 21px; height: 21px; padding: 0 6px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.inbox-empty { margin: 4px 16px; padding: 60px 24px; text-align: center; border: 1.5px dashed var(--border-subtle); border-radius: 16px; }
+.inbox-empty-text { font-size: 14.5px; color: var(--text-body-muted); }
 
 /* ===== Account Settings / Profile module (ported from supplier.html) ===== */
 
@@ -5196,33 +5426,137 @@ rule already being here. */
     <div class="subpage-topbar">
       <div class="subpage-title-wrap">
         <div class="subpage-title">My Jobs</div>
-        <div class="subpage-subtitle">Everything you've accepted</div>
       </div>
-      <button class="bell-btn subpage-bell" type="button" aria-label="Notifications, 73 unread">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        <span class="bell-badge">73</span>
-      </button>
     </div>
-    <div class="subpage-content has-bottom-nav">
-                <div id="supMyJobsView">
-                  <div class="dash-section">
-                    <div class="sup-soon-card" style="margin-top:12px;">
-                      <div class="sup-soon-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-                      </div>
-                      <span class="sup-soon-chip">Coming soon</span>
-                      <div class="sup-soon-title">My Jobs is on the way</div>
-                      <div class="sup-soon-desc">
-                        You&rsquo;ll be able to track every job you&rsquo;ve accepted here &mdash; what&rsquo;s scheduled, what&rsquo;s in progress,
-                        and what&rsquo;s waiting on proof of completion.
-                      </div>
-                      <div class="sup-soon-meanwhile">
-                        In the meantime, new work still comes through <button type="button" class="sup-soon-link" data-goto-nav="job-requests">Job Requests</button>,
-                        and anything you&rsquo;ve accepted shows on your <button type="button" class="sup-soon-link" data-goto-nav="calendar">Calendar</button>.
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <div class="subpage-content has-bottom-nav" style="padding-top:0;">
+      <div class="myjob-tabs-row" id="myjobTabs">
+        <div class="myjob-tab active" data-mjtab="pending">Pending</div>
+        <div class="myjob-tab" data-mjtab="scheduled">Scheduled</div>
+        <div class="myjob-tab" data-mjtab="inprogress">In Progress</div>
+        <div class="myjob-tab" data-mjtab="paused">Paused</div>
+        <div class="myjob-tab" data-mjtab="inreview">In Review<span class="myjob-tab-badge" id="myjobBadgeInreview" style="display:none;">0</span></div>
+        <div class="myjob-tab" data-mjtab="completed">Completed<span class="myjob-tab-badge" id="myjobBadgeCompleted" style="display:none;">0</span></div>
+        <div class="myjob-tab" data-mjtab="awaitingpayment">Awaiting Payment</div>
+        <div class="myjob-tab" data-mjtab="paid">Paid<span class="myjob-tab-badge" id="myjobBadgePaid" style="display:none;">0</span></div>
+        <div class="myjob-tab" data-mjtab="disputed">Disputed<span class="myjob-tab-badge" id="myjobBadgeDisputed" style="display:none;">0</span></div>
+        <div class="myjob-tab" data-mjtab="cancelled">Cancelled<span class="myjob-tab-badge" id="myjobBadgeCancelled" style="display:none;">0</span></div>
+        <div class="myjob-tab" data-mjtab="missed">Missed<span class="myjob-tab-badge" id="myjobBadgeMissed" style="display:none;">0</span></div>
+        <div class="myjob-tab" data-mjtab="closed">Closed<span class="myjob-tab-badge" id="myjobBadgeClosed" style="display:none;">0</span></div>
+      </div>
+      <div class="myjob-list" id="myjobList"></div>
+    </div>
+  </div>
+
+  <!-- =========== SCREEN · MY JOB DETAIL =========== -->
+  <div class="screen" id="screenMyJobDetail">
+    <div class="myjd-header">
+      <button type="button" class="myjd-back-link" id="myjdBackBtn">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        My Jobs
+      </button>
+      <div class="myjd-header-top">
+        <div>
+          <div class="myjd-title" id="myjdTitle">—</div>
+          <div class="myjd-header-sub" id="myjdSub">—</div>
+        </div>
+        <span class="myjob-badge" id="myjdStatusBadge" style="margin-top:0;">—</span>
+      </div>
+      <div class="myjd-tags" id="myjdTags"></div>
+    </div>
+    <div class="myjd-content">
+      <div class="myjd-stepper" id="myjdStepper"></div>
+
+      <div class="myjd-card">
+        <div class="myjd-card-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Job Details</div>
+        <div class="myjd-grid-2" style="margin-bottom:14px;">
+          <div><div class="myjd-field-lbl">Date</div><div class="myjd-field-val" id="myjdDate">—</div></div>
+          <div><div class="myjd-field-lbl">Time</div><div class="myjd-field-val" id="myjdTime">—</div></div>
+        </div>
+        <div class="myjd-grid-2">
+          <div><div class="myjd-field-lbl">Payout</div><div class="myjd-field-val" id="myjdPayout">—</div></div>
+          <div><div class="myjd-field-lbl">Location</div><div class="myjd-field-val" id="myjdLocation">—</div></div>
+        </div>
+      </div>
+
+      <div class="myjd-card">
+        <div class="myjd-card-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Property &amp; Access</div>
+        <div class="myjd-propgrid">
+          <div class="myjd-propbox"><div class="lbl">Property</div><div class="name" id="myjdPropName">—</div><div class="sub" id="myjdPropType">—</div></div>
+          <div class="myjd-propbox"><div class="lbl">Address</div><div class="name" id="myjdPropAddr" style="font-size:13px;">—</div></div>
+        </div>
+        <div class="myjd-keyaccess"><div class="lbl">Key Access</div><div class="val" id="myjdKeyAccess">Access</div></div>
+        <div class="myjd-map"><span class="google-tag">Google</span><button type="button" class="myjd-directions-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>Get directions</button></div>
+        <div class="myjd-factsgrid" id="myjdFactsGrid"></div>
+      </div>
+
+      <div class="myjd-card">
+        <div class="myjd-collapsible-head open" id="myjdDescHead">
+          <div class="myjd-card-head" style="margin-bottom:0;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>Job Description</div>
+          <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div id="myjdDescBody" style="margin-top:14px;">
+          <div class="myjd-grid-2" style="margin-bottom:14px;">
+            <div class="myjd-factbox"><div class="myjd-field-lbl">Scheduled</div><div class="myjd-field-val" id="myjdDescScheduled">—</div></div>
+            <div class="myjd-factbox"><div class="myjd-field-lbl">Schedule Type</div><div class="myjd-field-val" id="myjdDescType">—</div></div>
+          </div>
+          <div class="myjd-grid-2" style="margin-bottom:14px;">
+            <div class="myjd-factbox"><div class="myjd-field-lbl">Booking Method</div><div class="myjd-field-val" id="myjdDescBooking">—</div></div>
+            <div class="myjd-factbox"><div class="myjd-field-lbl">Created</div><div class="myjd-field-val" id="myjdDescCreated">—</div></div>
+          </div>
+          <div class="myjd-grid-2">
+            <div class="myjd-factbox"><div class="myjd-field-lbl">Status</div><div class="myjd-field-val" id="myjdDescStatus">—</div></div>
+            <div class="myjd-factbox"><div class="myjd-field-lbl">Service</div><div class="myjd-field-val" id="myjdDescService">—</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="myjd-card">
+        <div class="myjd-card-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Price, Payment &amp; Claimable Extras</div>
+        <div class="myjd-guaranteed-row">
+          <span class="myjd-guaranteed-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.3l2.5 2.5 5-5.6"/></svg>Payment guaranteed</span>
+          <span style="color:var(--text-body-muted);font-weight:700;">—</span>
+        </div>
+        <div class="myjd-net-payout-box"><div class="lbl">Net Payout</div><div class="val" id="myjdNetPayout">—</div></div>
+      </div>
+
+      <div class="myjd-card">
+        <div class="myjd-card-head" style="margin-bottom:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>PM Checklist</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+          <div class="myjd-checklist-sub" id="myjdChecklistSub" style="margin-top:6px;">— of — tasks complete</div>
+          <div class="myjd-checklist-pct" id="myjdChecklistPct">0%</div>
+        </div>
+        <div class="myjd-progressbar"><div class="myjd-progressbar-fill" id="myjdProgressFill" style="width:0%;"></div></div>
+        <div id="myjdChecklistGroups"></div>
+      </div>
+
+      <div class="myjd-card">
+        <div class="myjd-card-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Activity</div>
+        <div id="myjdActivity"></div>
+      </div>
+
+      <div class="myjd-card">
+        <div class="myjd-card-head"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Property Manager</div>
+        <div class="myjd-pm-row">
+          <div class="myjd-pm-avatar" id="myjdPmAvatar">T</div>
+          <div>
+            <div class="myjd-pm-name" id="myjdPmName">—</div>
+            <div class="myjd-pm-role" id="myjdPmRole">—</div>
+          </div>
+        </div>
+        <div class="myjd-pm-actions">
+          <button type="button" class="myjd-pm-msg-btn" id="myjdMessageBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Message</button>
+          <button type="button" class="myjd-pm-call-btn" aria-label="Call"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></button>
+        </div>
+        <div class="myjd-pm-email" id="myjdPmEmail">—</div>
+      </div>
+    </div>
+
+    <!-- Checklist video preview -->
+    <div class="modal-overlay myjd-video-overlay" id="myjdVideoOverlay">
+      <div class="myjd-video-modal">
+        <button type="button" class="myjd-video-close" id="myjdVideoCloseBtn" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        <video id="myjdVideoPlayer" playsinline controls></video>
+      </div>
     </div>
   </div>
   <!-- =========== SCREEN · JOB REQUESTS =========== -->
@@ -5236,6 +5570,11 @@ rule already being here. */
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
         <span class="bell-badge">73</span>
       </button>
+      <div class="pmjr-tabs-row" id="supjrTabs">
+        <div class="pmjr-tab active" data-tab="all">All <span class="pmjr-tab-count" id="supjrCountAll">0</span></div>
+        <div class="pmjr-tab" data-tab="setprice">Set price <span class="pmjr-tab-count" id="supjrCountSetprice">0</span></div>
+        <div class="pmjr-tab" data-tab="quote">Quote <span class="pmjr-tab-count" id="supjrCountQuote">0</span></div>
+      </div>
     </div>
     <div class="subpage-content has-bottom-nav">
                 <div id="supJobRequestsView">
@@ -5245,12 +5584,6 @@ rule already being here. */
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
                         <input type="text" id="supjrSearchInput" placeholder="Search property, job ID, service, PM..." autocomplete="off">
                       </div>
-                    </div>
-
-                    <div class="pmjr-tabs-row" id="supjrTabs">
-                      <div class="pmjr-tab active" data-tab="all">All requests <span class="pmjr-tab-count" id="supjrCountAll">0</span></div>
-                      <div class="pmjr-tab" data-tab="setprice">Set price <span class="pmjr-tab-count" id="supjrCountSetprice">0</span></div>
-                      <div class="pmjr-tab" data-tab="quote">Quote <span class="pmjr-tab-count" id="supjrCountQuote">0</span></div>
                     </div>
 
                     <div class="pmjr-layout">
@@ -5272,156 +5605,168 @@ rule already being here. */
                         </div>
                         <div class="pmjr-list" id="supjrList"></div>
                       </div>
-                      <div class="pmjr-detail-wrap" id="supjrDetailWrap">
-                        <div id="supjrDetail"></div>
-
-                        <div class="pmjr-chat-overlay" id="supjrChatOverlay"></div>
-                        <div class="pmjr-chat-drawer" id="supjrChatDrawer">
-                          <div class="pmjr-chat-head">
-                            <div class="pmjr-chat-avatar" id="supjrChatAvatar"><div class="pmjr-chat-online-dot"></div></div>
-                            <div style="min-width:0;flex:1;">
-                              <div class="pmjr-chat-name" id="supjrChatName">&nbsp;</div>
-                              <div class="pmjr-chat-status"><span class="dot"></span><span id="supjrChatStatusText">Online now</span></div>
-                            </div>
-                            <button type="button" class="pmjr-chat-close" id="supjrChatCloseBtn" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-                          </div>
-                          <div class="pmjr-chat-messages" id="supjrChatMessages"></div>
-                          <div class="pmjr-chat-footer">
-                            <button type="button" class="pmjr-chat-price-update-btn" id="supjrChatPriceUpdateBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-right:4px;vertical-align:-2px;"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Update price</button>
-                            <div class="pmjr-chat-input-row">
-                              <input type="text" class="pmjr-chat-input" id="supjrChatInput" placeholder="Message...">
-                              <button type="button" class="pmjr-chat-send" id="supjrChatSendBtn" aria-label="Send"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
 
-                  <!-- Price Breakdown modal (centered) -->
-                  <div class="modal-overlay" id="supjrPbkOverlay">
-                    <div class="supjr-pbk-card">
-                      <div class="supjr-pbk-head">
-                        <div>
-                          <div class="supjr-pbk-title">Price breakdown</div>
-                          <div class="supjr-pbk-sub">What you'll receive for this job and what you can claim on top.</div>
-                        </div>
-                        <button type="button" class="supjr-pbk-close" id="supjrPbkCloseBtn" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-                      </div>
-                      <div class="supjr-pbk-rows" id="supjrPbkRows"></div>
-                    </div>
-                  </div>
-
-                  <!-- Counter the Set Price — right side-drawer -->
-                  <div class="supjr-side-overlay" id="supjrCounterOverlay">
-                    <div class="supjr-side-modal narrow">
-                      <div class="supjr-side-head">
-                        <div class="supjr-side-head-title">Counter the set price</div>
-                        <div class="supjr-side-head-sub" id="supjrCounterSub">—</div>
-                        <button type="button" class="supjr-side-close" id="supjrCounterCloseBtn" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-                      </div>
-                      <div class="supjr-side-body">
-                        <div class="supjr-price-callout" style="margin-bottom:20px;">
-                          <div>
-                            <div style="font-weight:700;color:var(--text-heading);margin-bottom:10px;">The current set price for you</div>
-                            <div class="supjr-summary-row"><span>Job price (net)</span><span id="supjrCounterNet">£0.00</span></div>
-                            <div class="supjr-summary-row"><span>VAT (20%)</span><span id="supjrCounterVat">£0.00</span></div>
-                            <div class="supjr-summary-row total" style="border-top:1px solid rgba(0,0,0,0.08);"><span>Total</span><span id="supjrCounterTotal">£0.00</span></div>
-                            <div style="font-size:12px;color:#92650a;margin-top:8px;">A counter requires their approval before scheduling.</div>
-                          </div>
-                        </div>
-                        <div class="supjr-field-label">Your price (incl. VAT)</div>
-                        <div class="supjr-money-input-wrap" style="margin-bottom:6px;">
-                          <span class="supjr-money-prefix">£</span>
-                          <input type="text" inputmode="decimal" class="supjr-money-input" id="supjrCounterPriceInput" placeholder="0">
-                        </div>
-                        <div style="font-size:12px;color:var(--text-body-muted);margin-bottom:20px;">Enter the total price including VAT.</div>
-                        <div class="supjr-field-label">Notes for the client</div>
-                        <textarea class="field-input" id="supjrCounterNotes" rows="4" placeholder="Scope, exclusions, materials provided, lead time..." style="resize:vertical;"></textarea>
-                        <div class="supjr-validity-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Quote is valid for 7 days. Client confirms before you're scheduled.</div>
-                      </div>
-                      <div class="supjr-side-footer">
-                        <button type="button" class="btn btn-sm" style="border:1px solid var(--border-subtle);background:#fff;" id="supjrCounterCancelBtn">Cancel</button>
-                        <button type="button" class="btn btn-primary supjr-send-btn" id="supjrCounterSendBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send counter offer</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Send Your Quote — right side-drawer -->
-                  <div class="supjr-side-overlay popup-mode" id="supjrQuoteOverlay">
-                    <div class="supjr-side-modal popup-center">
-                      <div class="supjr-side-head light">
-                        <div class="supjr-side-head-title">Send Your Quote</div>
-                        <div class="supjr-side-head-sub" id="supjrQuoteSub">—</div>
-                        <button type="button" class="supjr-side-close" id="supjrQuoteCloseBtn" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-                      </div>
-                      <div class="supjr-side-body">
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-                          <div class="supjr-field-label" style="margin-bottom:0;">Quick call-out</div>
-                          <div style="font-size:11.5px;color:var(--text-body-muted);">Always included in your quote</div>
-                        </div>
-                        <div class="supjr-quick-callout-grid" style="margin-bottom:20px;">
-                          <div class="supjr-quick-callout-card fee">
-                            <div class="supjr-qc-label fee-lbl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Call-out fee</div>
-                            <div class="supjr-qc-sub">Diagnose + first hour</div>
-                            <div class="supjr-money-input-wrap"><span class="supjr-money-prefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrQuoteCalloutInput" value="150"></div>
-                          </div>
-                          <div class="supjr-quick-callout-card emergency">
-                            <div class="supjr-qc-label emg-lbl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Emergency charges</div>
-                            <div class="supjr-qc-sub">Out-of-hours rate</div>
-                            <div class="supjr-money-input-wrap"><span class="supjr-money-prefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrQuoteEmergencyInput" value="200"></div>
-                          </div>
-                        </div>
-
-                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-                          <div class="supjr-field-label" style="margin-bottom:0;">Itemised breakdown</div>
-                          <button type="button" class="supjr-add-line-btn" id="supjrAddLineBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add Line</button>
-                        </div>
-                        <div id="supjrItemisedRows" style="margin-bottom:16px;"></div>
-
-                        <div class="supjr-summary-box" style="margin-bottom:20px;">
-                          <div id="supjrSummaryRows"></div>
-                        </div>
-
-                        <div class="supjr-material-row" style="margin-bottom:6px;">
-                          <div class="supjr-field-label">Material cost (optional)</div>
-                          <div class="supjr-money-input-wrap">
-                            <span class="supjr-money-prefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrMaterialCostInput" value="0">
-                          </div>
-                        </div>
-                        <div style="font-size:12px;color:var(--text-body-muted);margin-bottom:20px;">Material cost is NOT included in the priced total — no VAT or Keylr fee applies. You'll upload the receipt later.</div>
-
-                        <div class="supjr-field-label">Upfront payment (optional)</div>
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
-                          <div class="supjr-upfront-toggle">
-                            <button type="button" class="active" data-upfront-mode="£" id="supjrUpfrontModeCurrency">£</button>
-                            <button type="button" data-upfront-mode="%" id="supjrUpfrontModePercent">%</button>
-                          </div>
-                          <div class="supjr-money-input-wrap" style="flex:1;">
-                            <span class="supjr-money-prefix" id="supjrUpfrontPrefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrUpfrontInput" value="0">
-                          </div>
-                        </div>
-
-                        <div class="supjr-field-label">Notes for the client</div>
-                        <textarea class="field-input" id="supjrQuoteNotes" rows="4" maxlength="4000" placeholder="Scope, exclusions, materials provided, lead time..." style="resize:vertical;"></textarea>
-                        <div class="supjr-char-count"><span id="supjrQuoteNotesCount">0</span> / 4000</div>
-
-                        <div class="supjr-validity-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Quote is valid for 7 days. The client confirms before you're scheduled.</div>
-                      </div>
-                      <div class="supjr-side-footer">
-                        <button type="button" class="btn btn-sm" style="border:1px solid var(--border-subtle);background:#fff;" id="supjrQuoteCancelBtn">Cancel</button>
-                        <button type="button" class="btn btn-primary supjr-send-btn" id="supjrQuoteSendBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send Quote</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Success snackbar — Accept Job (solid banner) / Quote submitted / Counter offer sent (light pill) -->
-                  <div class="supjr-success-toast banner" id="supjrSuccessToast">
-                    <span class="toast-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.3l2.5 2.5 5-5.6"/></svg></span>
-                    <span id="supjrSuccessToastMsg"></span>
-                    <button type="button" class="toast-close" id="supjrSuccessToastClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-                  </div>
                 </div>
+    </div>
+  </div>
+
+  <!-- Global overlays for the Job Requests detail/chat flow — kept outside any single
+       .screen so they stay reachable whether the user is on the Job Requests list or
+       the Job Request Detail screen (both can trigger them). -->
+  <div class="pmjr-chat-overlay" id="supjrChatOverlay"></div>
+  <div class="pmjr-chat-drawer" id="supjrChatDrawer">
+    <div class="pmjr-chat-head">
+      <div class="pmjr-chat-avatar" id="supjrChatAvatar"><div class="pmjr-chat-online-dot"></div></div>
+      <div style="min-width:0;flex:1;">
+        <div class="pmjr-chat-name" id="supjrChatName">&nbsp;</div>
+        <div class="pmjr-chat-status"><span class="dot"></span><span id="supjrChatStatusText">Online now</span></div>
+      </div>
+      <button type="button" class="pmjr-chat-close" id="supjrChatCloseBtn" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="pmjr-chat-messages" id="supjrChatMessages"></div>
+    <div class="pmjr-chat-footer">
+      <button type="button" class="pmjr-chat-price-update-btn" id="supjrChatPriceUpdateBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-right:4px;vertical-align:-2px;"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Update price</button>
+      <div class="pmjr-chat-input-row">
+        <input type="text" class="pmjr-chat-input" id="supjrChatInput" placeholder="Message...">
+        <button type="button" class="pmjr-chat-send" id="supjrChatSendBtn" aria-label="Send"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price Breakdown modal (centered) -->
+  <div class="modal-overlay" id="supjrPbkOverlay">
+    <div class="supjr-pbk-card">
+      <div class="supjr-pbk-head">
+        <div>
+          <div class="supjr-pbk-title">Price breakdown</div>
+          <div class="supjr-pbk-sub">What you'll receive for this job and what you can claim on top.</div>
+        </div>
+        <button type="button" class="supjr-pbk-close" id="supjrPbkCloseBtn" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="supjr-pbk-rows" id="supjrPbkRows"></div>
+    </div>
+  </div>
+
+  <!-- Counter the Set Price — right side-drawer -->
+  <div class="supjr-side-overlay" id="supjrCounterOverlay">
+    <div class="supjr-side-modal narrow">
+      <div class="supjr-side-head">
+        <div class="supjr-side-head-title">Counter the set price</div>
+        <div class="supjr-side-head-sub" id="supjrCounterSub">—</div>
+        <button type="button" class="supjr-side-close" id="supjrCounterCloseBtn" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="supjr-side-body">
+        <div class="supjr-price-callout" style="margin-bottom:20px;">
+          <div>
+            <div style="font-weight:700;color:var(--text-heading);margin-bottom:10px;">The current set price for you</div>
+            <div class="supjr-summary-row"><span>Job price (net)</span><span id="supjrCounterNet">£0.00</span></div>
+            <div class="supjr-summary-row"><span>VAT (20%)</span><span id="supjrCounterVat">£0.00</span></div>
+            <div class="supjr-summary-row total" style="border-top:1px solid rgba(0,0,0,0.08);"><span>Total</span><span id="supjrCounterTotal">£0.00</span></div>
+            <div style="font-size:12px;color:#92650a;margin-top:8px;">A counter requires their approval before scheduling.</div>
+          </div>
+        </div>
+        <div class="supjr-field-label">Your price (incl. VAT)</div>
+        <div class="supjr-money-input-wrap" style="margin-bottom:6px;">
+          <span class="supjr-money-prefix">£</span>
+          <input type="text" inputmode="decimal" class="supjr-money-input" id="supjrCounterPriceInput" placeholder="0">
+        </div>
+        <div style="font-size:12px;color:var(--text-body-muted);margin-bottom:20px;">Enter the total price including VAT.</div>
+        <div class="supjr-field-label">Notes for the client</div>
+        <textarea class="field-input" id="supjrCounterNotes" rows="4" placeholder="Scope, exclusions, materials provided, lead time..." style="resize:vertical;"></textarea>
+        <div class="supjr-validity-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Quote is valid for 7 days. Client confirms before you're scheduled.</div>
+      </div>
+      <div class="supjr-side-footer">
+        <button type="button" class="btn btn-sm" style="border:1px solid var(--border-subtle);background:#fff;" id="supjrCounterCancelBtn">Cancel</button>
+        <button type="button" class="btn btn-primary supjr-send-btn" id="supjrCounterSendBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send counter offer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Send Your Quote — right side-drawer -->
+  <div class="supjr-side-overlay popup-mode" id="supjrQuoteOverlay">
+    <div class="supjr-side-modal popup-center">
+      <div class="supjr-side-head light">
+        <div class="supjr-side-head-title">Send Your Quote</div>
+        <div class="supjr-side-head-sub" id="supjrQuoteSub">—</div>
+        <button type="button" class="supjr-side-close" id="supjrQuoteCloseBtn" aria-label="Close"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="supjr-side-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="supjr-field-label" style="margin-bottom:0;">Quick call-out</div>
+          <div style="font-size:11.5px;color:var(--text-body-muted);">Always included in your quote</div>
+        </div>
+        <div class="supjr-quick-callout-grid" style="margin-bottom:20px;">
+          <div class="supjr-quick-callout-card fee">
+            <div class="supjr-qc-label fee-lbl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Call-out fee</div>
+            <div class="supjr-qc-sub">Diagnose + first hour</div>
+            <div class="supjr-money-input-wrap"><span class="supjr-money-prefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrQuoteCalloutInput" value="150"></div>
+          </div>
+          <div class="supjr-quick-callout-card emergency">
+            <div class="supjr-qc-label emg-lbl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 001.7 3h17a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>Emergency charges</div>
+            <div class="supjr-qc-sub">Out-of-hours rate</div>
+            <div class="supjr-money-input-wrap"><span class="supjr-money-prefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrQuoteEmergencyInput" value="200"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="supjr-field-label" style="margin-bottom:0;">Itemised breakdown</div>
+          <button type="button" class="supjr-add-line-btn" id="supjrAddLineBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add Line</button>
+        </div>
+        <div id="supjrItemisedRows" style="margin-bottom:16px;"></div>
+
+        <div class="supjr-summary-box" style="margin-bottom:20px;">
+          <div id="supjrSummaryRows"></div>
+        </div>
+
+        <div class="supjr-material-row" style="margin-bottom:6px;">
+          <div class="supjr-field-label">Material cost (optional)</div>
+          <div class="supjr-money-input-wrap">
+            <span class="supjr-money-prefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrMaterialCostInput" value="0">
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--text-body-muted);margin-bottom:20px;">Material cost is NOT included in the priced total — no VAT or Keylr fee applies. You'll upload the receipt later.</div>
+
+        <div class="supjr-field-label">Upfront payment (optional)</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+          <div class="supjr-upfront-toggle">
+            <button type="button" class="active" data-upfront-mode="£" id="supjrUpfrontModeCurrency">£</button>
+            <button type="button" data-upfront-mode="%" id="supjrUpfrontModePercent">%</button>
+          </div>
+          <div class="supjr-money-input-wrap" style="flex:1;">
+            <span class="supjr-money-prefix" id="supjrUpfrontPrefix">£</span><input type="text" inputmode="decimal" class="supjr-money-input" id="supjrUpfrontInput" value="0">
+          </div>
+        </div>
+
+        <div class="supjr-field-label">Notes for the client</div>
+        <textarea class="field-input" id="supjrQuoteNotes" rows="4" maxlength="4000" placeholder="Scope, exclusions, materials provided, lead time..." style="resize:vertical;"></textarea>
+        <div class="supjr-char-count"><span id="supjrQuoteNotesCount">0</span> / 4000</div>
+
+        <div class="supjr-validity-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Quote is valid for 7 days. The client confirms before you're scheduled.</div>
+      </div>
+      <div class="supjr-side-footer">
+        <button type="button" class="btn btn-sm" style="border:1px solid var(--border-subtle);background:#fff;" id="supjrQuoteCancelBtn">Cancel</button>
+        <button type="button" class="btn btn-primary supjr-send-btn" id="supjrQuoteSendBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>Send Quote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success snackbar — Accept Job (solid banner) / Quote submitted / Counter offer sent (light pill) -->
+  <div class="supjr-success-toast banner" id="supjrSuccessToast">
+    <span class="toast-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.3l2.5 2.5 5-5.6"/></svg></span>
+    <span id="supjrSuccessToastMsg"></span>
+    <button type="button" class="toast-close" id="supjrSuccessToastClose" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+
+  <!-- =========== SCREEN · JOB REQUEST DETAIL =========== -->
+  <div class="screen" id="screenJobRequestDetail">
+    <div class="subpage-topbar">
+      <button type="button" class="back-btn" id="supjrDetailBackBtn" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="subpage-title-wrap"><div class="subpage-title">Job Request</div></div>
+    </div>
+    <div class="subpage-content">
+      <div id="supjrDetail"></div>
     </div>
   </div>
   <!-- =========== SCREEN · QUOTES =========== -->
@@ -5959,58 +6304,50 @@ rule already being here. */
     <div class="subpage-topbar">
       <div class="subpage-title-wrap">
         <div class="subpage-title">Inbox</div>
-        <div class="subpage-subtitle">Chat with Keylr Support</div>
       </div>
-      <button class="bell-btn subpage-bell" type="button" aria-label="Notifications, 73 unread">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        <span class="bell-badge">73</span>
-      </button>
+      <div class="inbox-search-wrap">
+        <div class="dash-search-bar" style="max-width:none;width:100%;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="inboxSearchInput" placeholder="Search name, job or message..." autocomplete="off">
+        </div>
+      </div>
+      <div class="inbox-seg" id="inboxSeg">
+        <button type="button" class="inbox-seg-btn active" data-inbox-seg="active">Active</button>
+        <button type="button" class="inbox-seg-btn" data-inbox-seg="archived">Archived</button>
+        <button type="button" class="inbox-seg-btn" data-inbox-seg="completed">Completed</button>
+      </div>
     </div>
-    <div class="subpage-content has-bottom-nav" style="display:flex;flex-direction:column;">
-                <div id="supInboxView">
-                  <div class="sinb-shell">
-                    <div class="sinb-body sinb-body-solo">
-                      <div class="sinb-chat-col sinb-chat-col-full" id="supInboxChatCol">
-                        <div class="sinb-chat-header" id="supInboxChatHeader"></div>
-                        <div class="pm-tab-pills sinb-filter-pills" id="supInboxFilterPills" style="padding:10px 16px;border-bottom:1px solid var(--border-subtle);">
-                          <div class="pm-tab-pill active" data-sinb-filter="all">All Chat</div>
-                          <div class="pm-tab-pill" data-sinb-filter="support">Support</div>
-                          <div class="pm-tab-pill" data-sinb-filter="edit-requests">Profile Updates</div>
-                        </div>
-                        <div class="sinb-chat-thread-wrap">
-                          <div class="sinb-chat-scroll" id="supInboxChatScroll">
-                            <div id="supInboxMessagesInner"></div>
-                            <div class="sinb-scroll-anchor"><button type="button" class="sinb-scroll-bottom-btn" id="supInboxScrollBottomBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg><span>Go to bottom</span></button></div>
-                          </div>
-                        </div>
-                        <div class="sinb-composer" id="supInboxComposer">
-                          <div class="sinb-reply-preview" id="supInboxReplyPreview" style="display:none;">
-                            <div class="sinb-reply-preview-bar"></div>
-                            <div class="sinb-reply-preview-body"><span class="sinb-reply-preview-label">Replying to</span><span class="sinb-reply-preview-field" id="supInboxReplyPreviewField"></span></div>
-                            <button type="button" class="sinb-reply-preview-close" id="supInboxReplyPreviewClose"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
-                          </div>
-                          <div class="sinb-composer-icons">
-                            <div style="position:relative;">
-                              <button type="button" class="sinb-icon-btn" id="supInboxEmojiBtn" data-tooltip="Add emoji"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></button>
-                              <div class="sinb-emoji-popover" id="supInboxEmojiPopover">
-                                <span data-emoji="👍">👍</span><span data-emoji="👌">👌</span><span data-emoji="🙂">🙂</span><span data-emoji="😀">😀</span><span data-emoji="🙌">🙌</span><span data-emoji="👋">👋</span>
-                                <span data-emoji="✅">✅</span><span data-emoji="🔧">🔧</span><span data-emoji="🚐">🚐</span><span data-emoji="⏰">⏰</span><span data-emoji="📷">📷</span><span data-emoji="👊">👊</span>
-                              </div>
-                            </div>
-                            <button type="button" class="sinb-icon-btn" id="supInboxAttachBtn" data-tooltip="Attach image or PDF"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></button>
-                            <input type="file" id="supInboxAttachInput" accept="image/*,video/*,.pdf" style="display:none;">
-                            <div class="sinb-na-chip" id="supInboxNaChip" role="button" tabindex="0" aria-pressed="false" style="display:none;">Needs action (<span id="supInboxNaChipCount">0</span>)</div>
-                          </div>
-                          <div class="sinb-input-row">
-                            <input type="text" id="supInboxMessageInput" placeholder="Message...">
-                            <button type="button" class="sinb-send-btn" id="supInboxSendBtn" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></button>
-                          </div>
-                          <div class="sinb-composer-hint">Enter to send · Shift + Enter for new line · Images, videos + PDFs up to 10 MB.</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <div class="subpage-content has-bottom-nav" style="padding-top:0;">
+      <div class="inbox-list-meta">
+        <div class="inbox-count" id="inboxCountLabel">0 conversations</div>
+        <button type="button" class="inbox-sort-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M6 12h12M10 17h4"/></svg>Most recent</button>
+      </div>
+      <div id="inboxList"></div>
+    </div>
+  </div>
+
+  <!-- =========== SCREEN · JOB CHAT (shared by My Jobs "Message" and Inbox rows) =========== -->
+  <div class="screen" id="screenJobChat">
+    <div class="myjc-header">
+      <button type="button" class="myjc-back" id="myjcBackBtn" aria-label="Back"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="myjc-avatar" id="myjcAvatar">T</div>
+      <div class="myjc-head-info">
+        <div class="myjc-name-row">
+          <div class="myjc-name" id="myjcName">—</div>
+          <span class="myjc-tag-pill job" id="myjcTagPill">Job</span>
+        </div>
+        <div class="myjc-status" id="myjcStatus">Online now</div>
+      </div>
+    </div>
+    <div class="myjc-body" id="myjcBody"></div>
+    <div class="myjc-footer" id="myjcFooter">
+      <div class="myjc-input-row">
+        <button type="button" class="myjc-attach" id="myjcAttachBtn" aria-label="Attach"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></button>
+        <input type="file" id="myjcAttachInput" accept="image/*,application/pdf" style="display:none;">
+        <input type="text" class="myjc-input" id="myjcInput" placeholder="Message...">
+        <button type="button" class="myjc-send" id="myjcSendBtn" aria-label="Send"><svg width="15" height="15" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 7h10M8 4l4 3-4 3"/></svg></button>
+      </div>
+      <div class="myjc-readonly-note" id="myjcReadonlyNote" style="display:none;">This conversation is archived and read-only.</div>
     </div>
   </div>
 
@@ -8939,10 +9276,13 @@ rule already being here. */
   var screenAuth = document.getElementById('screenAuth');
   var screenHome = document.getElementById('screenHome');
   var screenJobRequests = document.getElementById('screenJobRequests');
+  var screenJobRequestDetail = document.getElementById('screenJobRequestDetail');
   var screenQuotes = document.getElementById('screenQuotes');
   var screenQuoteDetail = document.getElementById('screenQuoteDetail');
   var screenQuoteChat = document.getElementById('screenQuoteChat');
   var screenMyJobs = document.getElementById('screenMyJobs');
+  var screenMyJobDetail = document.getElementById('screenMyJobDetail');
+  var screenJobChat = document.getElementById('screenJobChat');
   var screenServiceArea = document.getElementById('screenServiceArea');
   var screenCalendar = document.getElementById('screenCalendar');
   var screenInbox = document.getElementById('screenInbox');
@@ -8953,7 +9293,7 @@ rule already being here. */
   var screenNotifications = document.getElementById('screenNotifications');
   var screenProfile = document.getElementById('screenProfile');
   var screenEditWizard = document.getElementById('screenEditWizard');
-  var allScreens = [screenSplash, screenAuth, screenHome, screenJobRequests, screenQuotes, screenQuoteDetail, screenQuoteChat, screenMyJobs, screenServiceArea, screenCalendar, screenInbox, screenPayouts, screenDisputes, screenNotifications, screenProfile, screenEditWizard, screenChangePassword, screenSettings];
+  var allScreens = [screenSplash, screenAuth, screenHome, screenJobRequests, screenJobRequestDetail, screenQuotes, screenQuoteDetail, screenQuoteChat, screenMyJobs, screenMyJobDetail, screenJobChat, screenServiceArea, screenCalendar, screenInbox, screenPayouts, screenDisputes, screenNotifications, screenProfile, screenEditWizard, screenChangePassword, screenSettings];
   var bottomNav = document.getElementById('bottomNav');
   var splashSignInBtn = document.getElementById('splashSignInBtn');
   var ccWrap = document.getElementById('ccWrap');
@@ -11210,7 +11550,8 @@ rule already being here. */
       if (!target) return;
       if (target === screenJobRequests && typeof initSupjrOnce === 'function') initSupjrOnce();
       if (target === screenQuotes && typeof initSupQuotesOnce === 'function') initSupQuotesOnce();
-      if (target === screenInbox && typeof initSupInboxOnce === 'function') initSupInboxOnce();
+      if (target === screenMyJobs && typeof initMyJobsOnce === 'function') initMyJobsOnce();
+      if (target === screenInbox && typeof initMyInboxOnce === 'function') initMyInboxOnce();
       showScreen(target);
     });
   });
@@ -11263,13 +11604,24 @@ rule already being here. */
   function supjrEscapeHtml(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+  function supjrPersonInitials(name) {
+    if (!name) return '?';
+    var parts = String(name).trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+    return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+  }
   function supjrHashCode(str) {
     var hash = 0;
     for (var i = 0; i < str.length; i++) { hash = ((hash << 5) - hash + str.charCodeAt(i)) | 0; }
     return Math.abs(hash);
   }
-  function supjrFmtMoney(n) { return '\u00a3' + (Math.round(n * 100) / 100).toFixed(2); }
-  function supjrFmtWhole(n) { var r = Math.round(n * 100) / 100; return '\u00a3' + (r % 1 === 0 ? r.toFixed(0) : r.toFixed(2)); }
+  function supjrAddCommas(numStr) {
+    var parts = numStr.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+  }
+  function supjrFmtMoney(n) { return '\u00a3' + supjrAddCommas((Math.round(n * 100) / 100).toFixed(2)); }
+  function supjrFmtWhole(n) { var r = Math.round(n * 100) / 100; return '\u00a3' + supjrAddCommas(r % 1 === 0 ? r.toFixed(0) : r.toFixed(2)); }
   function supjrFmtDate(iso) {
     var d = new Date(iso + 'T00:00:00');
     var dd = ('0' + d.getDate()).slice(-2);
@@ -11479,6 +11831,7 @@ rule already being here. */
         supjrSelectedJobId = jobId;
         supjrRenderList();
         supjrRenderDetail();
+        showScreen(screenJobRequestDetail);
       });
     });
   }
@@ -12119,14 +12472,13 @@ rule already being here. */
 
   var SINB_MOUNTS = [
     { header: 'sinbChatHeader', scroll: 'sinbChatScroll', inner: 'sinbMessagesInner', scrollBtn: 'sinbScrollBottomBtn', replyPreview: 'sinbReplyPreview', replyPreviewField: 'sinbReplyPreviewField', replyPreviewClose: 'sinbReplyPreviewClose', messageInput: 'sinbMessageInput', sendBtn: 'sinbSendBtn', emojiBtn: 'sinbEmojiBtn', emojiPopover: 'sinbEmojiPopover', attachBtn: 'sinbAttachBtn', attachInput: 'sinbAttachInput', getConv: sinbGetActiveConv },
-    { header: 'supInboxChatHeader', scroll: 'supInboxChatScroll', inner: 'supInboxMessagesInner', scrollBtn: 'supInboxScrollBottomBtn', replyPreview: 'supInboxReplyPreview', replyPreviewField: 'supInboxReplyPreviewField', replyPreviewClose: 'supInboxReplyPreviewClose', messageInput: 'supInboxMessageInput', sendBtn: 'supInboxSendBtn', emojiBtn: 'supInboxEmojiBtn', emojiPopover: 'supInboxEmojiPopover', attachBtn: 'supInboxAttachBtn', attachInput: 'supInboxAttachInput', getConv: sinbGetActiveConv },
     { header: 'obChatHeader', scroll: 'obChatScroll', inner: 'obChatMessagesInner', scrollBtn: 'obChatScrollBottomBtn', replyPreview: 'obChatReplyPreview', replyPreviewField: 'obChatReplyPreviewField', replyPreviewClose: 'obChatReplyPreviewClose', messageInput: 'obChatMessageInput', sendBtn: 'obChatSendBtn', emojiBtn: 'obChatEmojiBtn', emojiPopover: 'obChatEmojiPopover', attachBtn: 'obChatAttachBtn', attachInput: 'obChatAttachInput', getConv: obChatGetConv, standalone: true },
     { header: 'pmObChatHeader', scroll: 'pmObChatScroll', inner: 'pmObChatMessagesInner', scrollBtn: 'pmObChatScrollBottomBtn', replyPreview: 'pmObChatReplyPreview', replyPreviewField: 'pmObChatReplyPreviewField', replyPreviewClose: 'pmObChatReplyPreviewClose', messageInput: 'pmObChatMessageInput', sendBtn: 'pmObChatSendBtn', emojiBtn: 'pmObChatEmojiBtn', emojiPopover: 'pmObChatEmojiPopover', attachBtn: 'pmObChatAttachBtn', attachInput: 'pmObChatAttachInput', getConv: pmObChatGetConv, standalone: true }
-  ]; // Account Settings > Chat and the Dashboard > Inbox page both show the exact same live "Keylr
-     // Support" conversation and stay in sync via getConv (both point at sinbGetActiveConv). The
-     // two onboarding floating widgets (Supplier and PM) are each their own separate, standalone
-     // conversation instead (getConv points at obChatGetConv / pmObChatGetConv) — see OB_CHAT_CONV
-     // and PM_OB_CHAT_CONV above.
+  ]; // Account Settings > Chat keeps showing the live "Keylr Support" conversation via sinbGetActiveConv.
+     // The Dashboard > Inbox page was rebuilt as its own multi-conversation module (see "SUPPLIER:
+     // MY INBOX (rebuild)" below) and no longer mounts here. The two onboarding floating widgets
+     // (Supplier and PM) remain their own separate, standalone conversations (getConv points at
+     // obChatGetConv / pmObChatGetConv) — see OB_CHAT_CONV and PM_OB_CHAT_CONV above.
 
   function sinbBuildHeaderHtml(c) {
     return '<div class="sinb-conv-avatar" style="background:' + sinbAvatarColor(c.initials) + ';color:#1e40af;">' + c.initials + (c.presence ? '<span class="presence-dot"></span>' : '') + '</div>' +
@@ -12522,6 +12874,8 @@ rule already being here. */
     supjrRenderList();
     supjrRenderDetail();
 
+    document.getElementById('supjrDetailBackBtn').addEventListener('click', function () { showScreen(screenJobRequests); });
+
     document.querySelectorAll('#supjrTabs .pmjr-tab').forEach(function (tab) {
       tab.addEventListener('click', function () { supjrSwitchTab(tab.getAttribute('data-tab')); });
     });
@@ -12882,7 +13236,7 @@ rule already being here. */
     if (!q) return;
     supqEnsureDetail(q);
     supqActiveQuoteId = quoteId;
-    document.getElementById('supqcAvatar').textContent = (q.pmName || '?').charAt(0);
+    document.getElementById('supqcAvatar').textContent = supjrPersonInitials(q.pmName);
     document.getElementById('supqcName').textContent = q.pmName + ' \u2014 ' + q.title;
     document.getElementById('supqcStatus').textContent = 'Online now';
     document.getElementById('supqcUpdatePriceBtn').style.display = (q.forceLiveFooter || q.status === 'pending' || q.status === 'accepted') ? '' : 'none';
@@ -13108,6 +13462,592 @@ rule already being here. */
       supqRenderList();
       showScreen(screenQuotes);
       showToast('Response withdrawn.');
+    });
+  }
+
+  /* =========================================================
+     SUPPLIER: MY JOBS (rebuild) — 12 status tabs, rich job detail
+     (stepper, property/access, description, price, PM checklist,
+     activity log, PM contact), sharing the job-chat screen with Inbox.
+  ========================================================== */
+  var MYJOB_STATUS_META = {
+    pending: { label: 'Pending', badge: 'grey' },
+    scheduled: { label: 'Scheduled', badge: 'grey' },
+    inprogress: { label: 'In Progress', badge: 'blue' },
+    paused: { label: 'Paused', badge: 'grey' },
+    inreview: { label: 'In Review', badge: 'amber', border: 'navy', detailBadge: 'purple' },
+    completed: { label: 'Completed', badge: 'green', border: 'green' },
+    awaitingpayment: { label: 'Awaiting Payment', badge: 'amber', border: 'navy' },
+    paid: { label: 'Paid', badge: 'green', border: 'green' },
+    disputed: { label: 'Disputed', badge: 'red', border: 'red' },
+    cancelled: { label: 'Cancelled', badge: 'grey', border: 'red' },
+    missed: { label: 'Missed', badge: 'red', border: 'red' },
+    resolved: { label: 'Resolved', badge: 'blue', border: 'navy' }
+  };
+  var MYJOB_EMPTY_COPY = {
+    pending: 'Quotes and accepted invites awaiting the PM\u2019s decision will appear here.',
+    scheduled: 'Jobs with a locked date and time will show here.',
+    inprogress: 'Once you start a scheduled job, it\u2019ll move here.',
+    paused: 'Jobs you have paused mid-shift will show here.',
+    inreview: 'Jobs you\u2019ve completed and submitted will appear here while the PM reviews them.',
+    completed: 'Jobs the PM has signed off will show here.',
+    awaitingpayment: 'Completed jobs you\u2019re still owed money for will show here.',
+    paid: 'Jobs you\u2019ve been paid for will show here.',
+    disputed: 'Jobs under dispute will show here.',
+    cancelled: 'Cancelled jobs will show here.',
+    missed: 'Jobs you missed will show here.',
+    closed: 'Jobs that have reached a final outcome will show here.'
+  };
+  var MYJOB_GENERIC_SCOPE = ['Confirm work area is safe to access', 'Complete the service as specified', 'Photograph completed work'];
+  var MYJOB_DEFAULT_VIDEO = 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4';
+
+  var SUP_MY_JOBS = [
+    { id: 'mj2658', jobNo: 'JOB-2658', title: 'End of Tenancy / Deep / Regular / Communal', status: 'missed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 90,
+      preferred: true, emergency: true,
+      date: '29/06/2026', time: 'Within 4\u20135 hrs', payout: 90, location: 'Carrington, PO Box 81490, London, SW18 9WR',
+      property: { name: 'Homeland Heights', type: 'Residential', addr: 'Carrington, PO Box 81490, London, SW18 9WR', beds: 3, baths: 1, occupancy: 'Occupied' },
+      created: 'Monday, 29 Jun 2026', bookingMethod: 'Quote Based', scheduleType: 'Emergency',
+      stepReached: 3,
+      checklistGroups: [
+        { title: 'Bedroom 1', tasks: [ { name: 'Clean bedroom', done: true, note: 'cleaned...', photos: ['https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=200&h=200&fit=crop&auto=format&q=70'], play: true }, { name: 'Clean the floor', done: true, photos: ['https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=200&h=200&fit=crop&auto=format&q=70'], play: true } ] },
+        { title: 'Bedroom 2', tasks: [ { name: 'Clean bedroom', done: false }, { name: 'Clean the floor', done: false } ] },
+        { title: 'Bedroom 3', tasks: [ { name: 'Clean bedroom', done: false }, { name: 'Clean the floor', done: false } ] },
+        { title: 'Kitchen 1', tasks: [ { name: 'Clean kitchen', done: false }, { name: 'Clean utilities', done: false } ] }
+      ],
+      activity: [
+        { text: 'Schedule confirmed for 29 Jun', time: '16d ago', dot: 'green' },
+        { text: 'Assigned to you', time: '16d ago', dot: 'green' },
+        { text: 'You accepted', time: '16d ago', dot: 'green' },
+        { text: 'Job created', time: '16d ago', dot: 'grey' },
+        { text: 'Invited to this job', time: '16d ago', dot: 'blue' }
+      ],
+      pmName: 'Thomas Davies', pmCompany: 'KEY RIDERS LTD', pmEmail: 'pm.thomas.davies.6@keylr-seed.co.uk',
+      chat: [
+        { kind: 'date', text: '29 JUN 2026' },
+        { kind: 'system', text: 'Conversation started for End of Tenancy / Deep / Regular / Communal.', time: '5:37 PM' },
+        { kind: 'out', text: 'Submitted a quote: \u00a390', time: '5:37 PM' },
+        { kind: 'positive', title: 'End of Tenancy / Deep / Regular / Communal', text: 'The property manager has selected you for End of Tenancy / Deep / Regular / Communal.', time: '5:38 PM' },
+        { kind: 'system', text: 'Your quote of \u00a390.00 has been accepted \u2014 you\u2019ve been awarded this job.', time: '5:38 PM' },
+        { kind: 'positive', title: 'End of Tenancy / Deep / Regular / Communal', text: 'The supplier has started work on your job.', time: '5:53 PM' },
+        { kind: 'date', text: '30 JUN 2026' },
+        { kind: 'negative', title: 'Supplier did not show up', text: 'Your job was not completed as scheduled. We\u2019ve marked it as a no-show. Please review and take action.', time: '5:30 AM' }
+      ] },
+    { id: 'mj2766', jobNo: 'JOB-2766', title: 'Boiler Repair / No Hot Water / Gas Leak Emergency', status: 'inreview', addrLine: 'Homeland 2 \u00b7 Barnsley \u00b7 S75 2DH', schedLine: 'Emergency \u2013 as soon as possible', price: 40,
+      preferred: true, emergency: true,
+      date: '03/07/2026', time: 'Within 4\u20135 hrs', payout: 40, location: 'Q & Q Recovery, West Road, Barnsley, S75 2DH',
+      property: { name: 'Homeland 2', type: 'Residential', addr: 'Q & Q Recovery, West Road, Barnsley, S75 2DH', beds: 3, baths: 2, occupancy: 'Occupied' },
+      created: 'Friday, 03 Jul 2026', bookingMethod: 'Quote Based', scheduleType: 'Emergency',
+      stepReached: 5,
+      checklistGroups: [
+        { title: null, tasks: [
+          { name: 'Check the boiler', done: true, note: 'Checked, it is fine.', photos: ['https://images.unsplash.com/photo-1620653713380-7a34b773fef8?w=200&h=200&fit=crop&auto=format&q=70', 'https://images.unsplash.com/photo-1650551182956-47efa0f90b64?w=200&h=200&fit=crop&auto=format&q=70'], play: true },
+          { name: 'Check the gas leakage', done: true, fail: true, note: 'Checked, it is leaking.', photos: ['https://images.unsplash.com/photo-1650551182991-b07558247564?w=200&h=200&fit=crop&auto=format&q=70'] }
+        ] }
+      ],
+      activity: [
+        { text: 'Job completed', time: '12d ago', dot: 'green' },
+        { text: 'Schedule confirmed for 03 Jul', time: '12d ago', dot: 'green' },
+        { text: 'Assigned to you', time: '12d ago', dot: 'green' },
+        { text: 'You accepted', time: '12d ago', dot: 'green' },
+        { text: 'Job created', time: '12d ago', dot: 'grey' },
+        { text: 'Invited to this job', time: '12d ago', dot: 'blue' }
+      ],
+      pmName: 'Thomas Davies', pmCompany: 'KEY RIDERS LTD', pmEmail: 'pm.thomas.davies.6@keylr-seed.co.uk' },
+
+    { id: 'mj2734', jobNo: 'JOB-2734', title: 'Carpet / Stair Carpet Steam Clean', status: 'inreview', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 180 },
+    { id: 'mj2726', jobNo: 'JOB-2726', title: 'Boiler Service (Annual)', status: 'inreview', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 2400 },
+    { id: 'mj2681', jobNo: 'JOB-2681', title: 'Oven / Cooker / Microwave / Extractor Repair', status: 'inreview', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 160 },
+    { id: 'mj2652', jobNo: 'JOB-2652', title: 'Airbnb Turnover Clean', status: 'inreview', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: 147.6 },
+
+    { id: 'mj2753', jobNo: 'JOB-2753', title: 'End of Tenancy / Deep / Regular / Communal', status: 'completed', addrLine: 'Northen heights \u00b7 London \u00b7 SW2 5XU', schedLine: 'Emergency \u2013 as soon as possible', price: 240, pmName: 'Alex Turner' },
+    { id: 'mj2745', jobNo: 'JOB-2745', title: 'End of Tenancy / Deep / Regular / Communal', status: 'completed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 54 },
+    { id: 'mj2720', jobNo: 'JOB-2720', title: 'Smoke Alarm Installation', status: 'completed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 405 },
+    { id: 'mj2718', jobNo: 'JOB-2718', title: 'Carpet / Stair Carpet Steam Clean', status: 'completed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 460 },
+    { id: 'mj2693', jobNo: 'JOB-2693', title: 'Boiler Service (Annual)', status: 'completed', addrLine: 'Northen heights \u00b7 London \u00b7 SW2 5XU', schedLine: 'Emergency \u2013 as soon as possible', price: 228 },
+    { id: 'mj2684', jobNo: 'JOB-2684', title: 'Airbnb Turnover Clean', status: 'completed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 140 },
+    { id: 'mj2656', jobNo: 'JOB-2656', title: 'End of Tenancy / Deep / Regular / Communal', status: 'completed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+    { id: 'mj2655', jobNo: 'JOB-2655', title: 'Appliance Installation (all white goods)', status: 'completed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 400 },
+    { id: 'mj2631', jobNo: 'JOB-2631', title: 'End of Tenancy / Deep / Regular / Communal', status: 'completed', addrLine: 'Flat 38, 79 Victoria Road \u00b7 Manchester \u00b7 M1 1AE', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+
+    { id: 'mj2629', jobNo: 'JOB-2629', title: 'Airbnb Turnover Clean', status: 'disputed', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: 147.6 },
+
+    { id: 'mj2690', jobNo: 'JOB-2690', title: 'End of Tenancy / Deep / Regular / Communal', status: 'paid', addrLine: 'Northen heights \u00b7 London \u00b7 SW2 5XU', schedLine: 'Emergency \u2013 as soon as possible', price: 336 },
+    { id: 'mj2676', jobNo: 'JOB-2676', title: 'Oven / Cooker / Microwave / Extractor Repair', status: 'paid', addrLine: 'HOMELAND \u00b7 London \u00b7 SW1P 3LT', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2673', jobNo: 'JOB-2673', title: 'Carpet / Stair Carpet Steam Clean', status: 'paid', addrLine: 'HOMELAND \u00b7 London \u00b7 SW1P 3LT', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+
+    { id: 'mj2721', jobNo: 'JOB-2721', title: 'Smoke Alarm Installation', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 450 },
+    { id: 'mj2714', jobNo: 'JOB-2714', title: 'Door Entry / Intercom / Smart Doorbell', status: 'cancelled', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Flexible \u2013 any day', price: null },
+    { id: 'mj2711', jobNo: 'JOB-2711', title: 'Door Entry / Intercom / Smart Doorbell', status: 'cancelled', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2710', jobNo: 'JOB-2710', title: 'Door Entry / Intercom / Smart Doorbell', status: 'cancelled', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2699', jobNo: 'JOB-2699', title: 'Door Entry / Intercom / Smart Doorbell', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2696', jobNo: 'JOB-2696', title: 'Door Entry / Intercom / Smart Doorbell', status: 'cancelled', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2695', jobNo: 'JOB-2695', title: 'Door Entry / Intercom / Smart Doorbell', status: 'cancelled', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2667', jobNo: 'JOB-2667', title: 'Airbnb Turnover Clean', status: 'cancelled', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: '02/07/2026', price: 1428 },
+    { id: 'mj2665', jobNo: 'JOB-2665', title: 'End of Tenancy / Deep / Regular / Communal', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+    { id: 'mj2663', jobNo: 'JOB-2663', title: 'End of Tenancy / Deep / Regular / Communal', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+    { id: 'mj2662', jobNo: 'JOB-2662', title: 'End of Tenancy / Deep / Regular / Communal', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+    { id: 'mj2660', jobNo: 'JOB-2660', title: 'Airbnb Turnover Clean', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 160 },
+    { id: 'mj2659', jobNo: 'JOB-2659', title: 'End of Tenancy / Deep / Regular / Communal', status: 'cancelled', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 5 },
+
+    { id: 'mj2765', jobNo: 'JOB-2765', title: 'Boiler Repair / No Hot Water / Gas Leak Emergency', status: 'missed', addrLine: 'Homeland 2 \u00b7 Barnsley \u00b7 S75 2DH', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+    { id: 'mj2719', jobNo: 'JOB-2719', title: 'Carpet / Stair Carpet Steam Clean', status: 'missed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 310 },
+    { id: 'mj2717', jobNo: 'JOB-2717', title: 'End of Tenancy / Deep / Regular / Communal', status: 'missed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 600 },
+    { id: 'mj2700', jobNo: 'JOB-2700', title: 'Carpet / Stair Carpet Steam Clean', status: 'missed', addrLine: 'HOMELAND \u00b7 London \u00b7 SW1P 3LT', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2694', jobNo: 'JOB-2694', title: 'Door Entry / Intercom / Smart Doorbell', status: 'missed', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2686', jobNo: 'JOB-2686', title: 'Boiler Service (Annual)', status: 'missed', addrLine: 'Shivalik city \u00b7 London \u00b7 SW3 2JH', schedLine: 'Emergency \u2013 as soon as possible', price: 228 },
+    { id: 'mj2680', jobNo: 'JOB-2680', title: 'Appliance Installation (all white goods)', status: 'missed', addrLine: 'HOMELAND \u00b7 London \u00b7 SW1P 3LT', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2679', jobNo: 'JOB-2679', title: 'Appliance Installation (all white goods)', status: 'missed', addrLine: 'HOMELAND \u00b7 London \u00b7 SW1P 3LT', schedLine: 'Emergency \u2013 as soon as possible', price: null },
+    { id: 'mj2675', jobNo: 'JOB-2675', title: 'Door Entry / Intercom / Smart Doorbell', status: 'missed', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: '02/07/2026', price: null },
+    { id: 'mj2661', jobNo: 'JOB-2661', title: 'Airbnb Turnover Clean', status: 'missed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 160 },
+    { id: 'mj2657', jobNo: 'JOB-2657', title: 'End of Tenancy / Deep / Regular / Communal', status: 'missed', addrLine: 'Homeland Heights \u00b7 London \u00b7 SW18 9WR', schedLine: 'Emergency \u2013 as soon as possible', price: 60 },
+
+    { id: 'mj2649', jobNo: 'JOB-2649', title: 'End of Tenancy / Deep / Regular / Communal', status: 'resolved', addrLine: 'Flat 62, 135 Kings Road \u00b7 London \u00b7 SW1A 2BX', schedLine: 'Emergency \u2013 as soon as possible', price: 84 }
+  ];
+
+  function myjobDefaultStepReached(status) {
+    if (status === 'paid' || status === 'resolved') return 6;
+    if (status === 'inreview' || status === 'completed' || status === 'disputed' || status === 'awaitingpayment') return 5;
+    if (status === 'missed') return 3;
+    if (status === 'cancelled') return 2;
+    if (status === 'inprogress') return 4;
+    if (status === 'scheduled') return 3;
+    return 1;
+  }
+
+  function myjobEnsureDetail(job) {
+    if (job._detailReady) return job;
+    job._detailReady = true;
+    var parts = job.addrLine.split('\u00b7');
+    if (!job.property) job.property = { name: (parts[0] || job.addrLine).trim(), type: 'Residential', addr: job.addrLine, beds: 3, baths: 1, occupancy: 'Occupied' };
+    if (!job.date) job.date = /\d\d\/\d\d\/\d{4}/.test(job.schedLine) ? job.schedLine : '\u2014';
+    if (!job.time) job.time = 'Flexible';
+    if (job.payout == null) job.payout = job.price || 0;
+    if (!job.location) job.location = job.property.addr;
+    if (!job.created) job.created = '\u2014';
+    if (!job.bookingMethod) job.bookingMethod = 'Quote Based';
+    if (!job.scheduleType) job.scheduleType = /emergency/i.test(job.schedLine) ? 'Emergency' : 'Standard';
+    if (job.stepReached == null) job.stepReached = myjobDefaultStepReached(job.status);
+    if (!job.checklistGroups) job.checklistGroups = [{ title: null, tasks: MYJOB_GENERIC_SCOPE.map(function (s) { return { name: s, done: job.status === 'completed' || job.status === 'paid' || job.status === 'inreview' || job.status === 'resolved' }; }) }];
+    if (!job.activity) {
+      job.activity = [
+        { text: 'Assigned to you', time: '9d ago', dot: 'green' },
+        { text: 'You accepted', time: '9d ago', dot: 'green' },
+        { text: 'Job created', time: '9d ago', dot: 'grey' },
+        { text: 'Invited to this job', time: '9d ago', dot: 'blue' }
+      ];
+    }
+    if (!job.pmName) job.pmName = job.addrLine.indexOf('Shivalik') > -1 ? 'Alex Turner' : 'Thomas Davies';
+    if (!job.pmCompany) job.pmCompany = 'KEY RIDERS LTD';
+    if (!job.pmEmail) job.pmEmail = 'pm.thomas.davies.6@keylr-seed.co.uk';
+    if (job.preferred == null) job.preferred = true;
+    if (job.emergency == null) job.emergency = /emergency/i.test(job.schedLine);
+    return job;
+  }
+
+  function myjobEnsureChat(job) {
+    if (job.chat) return job.chat;
+    var chat = [{ kind: 'system', text: 'Conversation started for ' + job.title + '.' }];
+    if (job.price) chat.push({ kind: 'out', text: 'Submitted a quote: ' + supjrFmtWhole(job.price) });
+    chat.push({ kind: 'positive', title: job.title, text: 'The property manager has selected you for ' + job.title + '.' });
+    if (job.status === 'missed') chat.push({ kind: 'negative', title: 'Supplier did not show up', text: 'Your job was not completed as scheduled. We\u2019ve marked it as a no-show.' });
+    else if (job.status === 'cancelled') chat.push({ kind: 'negative', title: job.title, text: 'This job has been cancelled.' });
+    else if (job.status === 'disputed') chat.push({ kind: 'negative', title: job.title, text: 'The property manager has raised a dispute on this job.' });
+    else chat.push({ kind: 'system', text: 'The supplier has started work on your job.' });
+    job.chat = chat;
+    return chat;
+  }
+
+  var myjobActiveTab = 'pending';
+  var myjobActiveJobId = null;
+  var myjobInitialized = false;
+
+  var MYJOB_CLOSED_TAB_IDS = ['mj2753', 'mj2711', 'mj2700', 'mj2694', 'mj2693', 'mj2690', 'mj2686', 'mj2680', 'mj2679', 'mj2676', 'mj2675', 'mj2673', 'mj2652', 'mj2649', 'mj2629'];
+  function myjobStatusesForTab(tab) {
+    if (tab === 'closed') return null;
+    return [tab];
+  }
+  function myjobJobsForTab(tab) {
+    if (tab === 'closed') {
+      return SUP_MY_JOBS.filter(function (j) { return MYJOB_CLOSED_TAB_IDS.indexOf(j.id) > -1; })
+        .slice().sort(function (a, b) { return MYJOB_CLOSED_TAB_IDS.indexOf(a.id) - MYJOB_CLOSED_TAB_IDS.indexOf(b.id); });
+    }
+    var statuses = myjobStatusesForTab(tab);
+    return SUP_MY_JOBS.filter(function (j) { return statuses.indexOf(j.status) > -1; });
+  }
+  function myjobUpdateTabCounts() {
+    ['inreview', 'completed', 'paid', 'disputed', 'cancelled', 'missed', 'closed'].forEach(function (key) {
+      var n = myjobJobsForTab(key).length;
+      var idKey = key.charAt(0).toUpperCase() + key.slice(1);
+      var badge = document.getElementById('myjobBadge' + idKey);
+      if (badge) { badge.textContent = n; badge.style.display = n > 0 ? 'inline-flex' : 'none'; }
+    });
+  }
+  function myjobCardHtml(job) {
+    var meta = MYJOB_STATUS_META[job.status] || { label: job.status, badge: 'grey' };
+    var borderClass = meta.border || (meta.badge === 'green' ? 'green' : meta.badge === 'red' ? 'red' : 'navy');
+    var price = job.price ? supjrFmtWhole(job.price) : '\u2014';
+    return '<div class="myjob-card ' + borderClass + '" data-job-id="' + job.id + '">' +
+      '<div class="myjob-card-top">' +
+        '<div><div class="myjob-card-title">' + supjrEscapeHtml(job.title) + '</div>' +
+        '<span class="myjob-badge ' + meta.badge + '">' + meta.label + '</span></div>' +
+        '<div class="myjob-card-price">' + price + '</div>' +
+      '</div>' +
+      '<div class="myjob-card-addr">' + supjrEscapeHtml(job.addrLine) + '</div>' +
+      '<div class="myjob-card-id">' + supjrEscapeHtml(job.jobNo) + '</div>' +
+      '<div class="myjob-card-divider"></div>' +
+      '<div class="myjob-card-bottom">' +
+        '<div class="myjob-card-sched"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>' + supjrEscapeHtml(job.schedLine) + '</span></div>' +
+        '<div class="myjob-card-open">Open<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></div>' +
+      '</div>' +
+    '</div>';
+  }
+  function myjobRenderList() {
+    var list = document.getElementById('myjobList');
+    var jobs = myjobJobsForTab(myjobActiveTab);
+    if (!jobs.length) {
+      list.innerHTML = '<div class="myjob-empty"><div class="myjob-empty-title">Nothing here yet</div><div class="myjob-empty-sub">' + (MYJOB_EMPTY_COPY[myjobActiveTab] || '') + '</div></div>';
+      return;
+    }
+    list.innerHTML = jobs.map(myjobCardHtml).join('');
+    list.querySelectorAll('.myjob-card').forEach(function (card) {
+      card.addEventListener('click', function () { myjobOpenDetail(card.getAttribute('data-job-id')); });
+    });
+  }
+  function myjobSwitchTab(tab) {
+    myjobActiveTab = tab;
+    document.querySelectorAll('#myjobTabs .myjob-tab').forEach(function (t) { t.classList.toggle('active', t.getAttribute('data-mjtab') === tab); });
+    myjobRenderList();
+  }
+
+  function myjobStepperHtml(job) {
+    var labels = ['Requested', 'Awarded', 'Scheduled', 'On site', 'Complet\u2026', 'Paid'];
+    return labels.map(function (label, i) {
+      var stepNum = i + 1;
+      var cls = stepNum < job.stepReached ? 'done' : (stepNum === job.stepReached ? 'current' : '');
+      var inner = stepNum < job.stepReached ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' : stepNum;
+      return '<div class="myjd-step ' + cls + '"><div class="myjd-step-line"></div><div class="myjd-step-circle">' + inner + '</div><div class="myjd-step-label">' + label + '</div></div>';
+    }).join('');
+  }
+
+  function myjobChecklistHtml(job) {
+    var totalTasks = 0, doneTasks = 0;
+    job.checklistGroups.forEach(function (g) { g.tasks.forEach(function (t) { totalTasks++; if (t.done) doneTasks++; }); });
+    var pct = totalTasks ? Math.round((doneTasks / totalTasks) * 100) : 0;
+    document.getElementById('myjdChecklistSub').textContent = doneTasks + ' of ' + totalTasks + ' tasks complete';
+    var pctEl = document.getElementById('myjdChecklistPct');
+    pctEl.textContent = pct + '%';
+    pctEl.classList.toggle('full', pct === 100);
+    var fillEl = document.getElementById('myjdProgressFill');
+    fillEl.style.width = pct + '%';
+    fillEl.classList.toggle('full', pct === 100);
+    document.getElementById('myjdChecklistGroups').innerHTML = job.checklistGroups.map(function (g, gi) {
+      var groupDone = g.tasks.filter(function (t) { return t.done; }).length;
+      var headHtml = g.title ? '<div class="myjd-group-title">' + supjrEscapeHtml(g.title) + '</div><div class="myjd-group-sub">' + groupDone + ' of ' + g.tasks.length + ' tasks completed</div>' : '';
+      var tasksHtml = g.tasks.map(function (t, ti) {
+        var mediaHtml = '';
+        if (t.photos && t.photos.length) {
+          mediaHtml = '<div class="myjd-task-media">';
+          t.photos.forEach(function (url) { mediaHtml += '<div class="myjd-task-thumb" style="background-image:url(\'' + url + '\');"></div>'; });
+          if (t.play) mediaHtml += '<div class="myjd-task-play" data-video="' + supjrEscapeHtml(t.videoUrl || MYJOB_DEFAULT_VIDEO) + '"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>';
+          mediaHtml += '</div>';
+        }
+        var statusHtml = t.fail
+          ? '<span class="myjd-task-status fail">Fail</span>'
+          : (t.done ? '<span class="myjd-task-status done"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Done</span>' : '');
+        return '<div class="myjd-task">' +
+          '<div class="myjd-task-check' + (t.done ? ' done' : '') + '" data-gi="' + gi + '" data-ti="' + ti + '" role="checkbox" aria-checked="' + (t.done ? 'true' : 'false') + '" tabindex="0">' + (t.done ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>' : '') + '</div>' +
+          '<div class="myjd-task-body"><div class="myjd-task-name" data-gi="' + gi + '" data-ti="' + ti + '">' + supjrEscapeHtml(t.name) + '</div>' + statusHtml +
+          (t.note ? '<div class="myjd-task-note">' + supjrEscapeHtml(t.note) + '</div>' : '') + mediaHtml + '</div>' +
+        '</div>';
+      }).join('');
+      return headHtml + tasksHtml;
+    }).join('');
+    var groupsEl = document.getElementById('myjdChecklistGroups');
+    groupsEl.querySelectorAll('.myjd-task-check, .myjd-task-name').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var gi = parseInt(this.getAttribute('data-gi'), 10);
+        var ti = parseInt(this.getAttribute('data-ti'), 10);
+        var task = job.checklistGroups[gi].tasks[ti];
+        if (task.fail) return;
+        task.done = !task.done;
+        myjobChecklistHtml(job);
+      });
+    });
+    groupsEl.querySelectorAll('.myjd-task-play').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.stopPropagation();
+        myjobOpenVideo(el.getAttribute('data-video') || MYJOB_DEFAULT_VIDEO);
+      });
+    });
+  }
+
+  function myjobOpenVideo(url) {
+    var overlay = document.getElementById('myjdVideoOverlay');
+    var player = document.getElementById('myjdVideoPlayer');
+    player.src = url;
+    overlay.classList.add('open');
+    player.play().catch(function () {});
+  }
+  function myjobCloseVideo() {
+    var overlay = document.getElementById('myjdVideoOverlay');
+    var player = document.getElementById('myjdVideoPlayer');
+    player.pause();
+    player.removeAttribute('src');
+    player.load();
+    overlay.classList.remove('open');
+  }
+
+  function myjobActivityHtml(job) {
+    return job.activity.map(function (a, i) {
+      return '<div class="myjd-activity-item">' +
+        '<div class="myjd-activity-dotcol"><div class="myjd-activity-dot ' + a.dot + '"></div>' + (i < job.activity.length - 1 ? '<div class="myjd-activity-line"></div>' : '') + '</div>' +
+        '<div><div class="myjd-activity-text">' + supjrEscapeHtml(a.text) + '</div><div class="myjd-activity-time">' + supjrEscapeHtml(a.time) + '</div></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function myjobOpenDetail(jobId) {
+    var job = SUP_MY_JOBS.find(function (j) { return j.id === jobId; });
+    if (!job) return;
+    myjobEnsureDetail(job);
+    myjobActiveJobId = jobId;
+    var meta = MYJOB_STATUS_META[job.status] || { label: job.status, badge: 'grey' };
+    document.getElementById('myjdTitle').textContent = job.title;
+    document.getElementById('myjdSub').textContent = job.property.addr.split(',').slice(0, 2).join(',') + ' \u00b7 ' + job.jobNo;
+    var statusBadge = document.getElementById('myjdStatusBadge');
+    statusBadge.textContent = meta.label;
+    statusBadge.className = 'myjob-badge ' + (meta.detailBadge || meta.badge);
+    statusBadge.style.marginTop = '0';
+    document.getElementById('myjdTags').innerHTML =
+      (job.preferred ? '<span class="myjd-tag preferred">\u2605 Preferred</span>' : '') +
+      (job.emergency ? '<span class="myjd-tag emergency">\u26a0 Emergency</span>' : '');
+    document.getElementById('myjdStepper').innerHTML = myjobStepperHtml(job);
+    document.getElementById('myjdDate').textContent = job.date;
+    document.getElementById('myjdTime').textContent = job.time;
+    document.getElementById('myjdPayout').textContent = supjrFmtWhole(job.payout);
+    document.getElementById('myjdLocation').textContent = job.location;
+    document.getElementById('myjdPropName').textContent = job.property.name;
+    document.getElementById('myjdPropType').textContent = job.property.type;
+    document.getElementById('myjdPropAddr').textContent = job.location;
+    document.getElementById('myjdFactsGrid').innerHTML =
+      '<div class="myjd-factbox"><div class="lbl">Beds</div><div class="val">' + job.property.beds + '</div></div>' +
+      '<div class="myjd-factbox"><div class="lbl">Baths</div><div class="val">' + job.property.baths + '</div></div>' +
+      (job.property.occupancy ? '<div class="myjd-factbox span-2"><div class="lbl">Occupancy</div><div class="val">' + supjrEscapeHtml(job.property.occupancy) + '</div></div>' : '');
+    document.getElementById('myjdDescScheduled').textContent = job.date;
+    document.getElementById('myjdDescType').textContent = job.scheduleType;
+    document.getElementById('myjdDescBooking').textContent = job.bookingMethod;
+    document.getElementById('myjdDescCreated').textContent = job.created;
+    document.getElementById('myjdDescStatus').textContent = meta.label;
+    document.getElementById('myjdDescService').textContent = job.title;
+    document.getElementById('myjdNetPayout').textContent = supjrFmtWhole(job.payout);
+    myjobChecklistHtml(job);
+    document.getElementById('myjdActivity').innerHTML = myjobActivityHtml(job);
+    document.getElementById('myjdPmAvatar').innerHTML = '<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces&auto=format&q=80" alt="" onerror="this.parentElement.textContent=\'' + supjrEscapeHtml(job.pmName.charAt(0)) + '\';">';
+    document.getElementById('myjdPmName').textContent = job.pmName;
+    document.getElementById('myjdPmRole').textContent = 'Property manager \u00b7 ' + job.pmCompany;
+    document.getElementById('myjdPmEmail').textContent = job.pmEmail;
+    document.querySelectorAll('#screenMyJobDetail .myjd-collapsible-head').forEach(function (h) { h.classList.add('open'); document.getElementById(h.id.replace('Head', 'Body')).style.display = ''; });
+    showScreen(screenMyJobDetail);
+  }
+
+  function initMyJobsOnce() {
+    if (myjobInitialized) return;
+    myjobInitialized = true;
+    myjobUpdateTabCounts();
+    myjobRenderList();
+    if (typeof initJobChatOnce === 'function') initJobChatOnce();
+    document.querySelectorAll('#myjobTabs .myjob-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () { myjobSwitchTab(tab.getAttribute('data-mjtab')); });
+    });
+    document.getElementById('myjdBackBtn').addEventListener('click', function () { showScreen(screenMyJobs); });
+    document.getElementById('myjdDescHead').addEventListener('click', function () {
+      this.classList.toggle('open');
+      document.getElementById('myjdDescBody').style.display = this.classList.contains('open') ? '' : 'none';
+    });
+    document.getElementById('myjdMessageBtn').addEventListener('click', function () {
+      var job = SUP_MY_JOBS.find(function (j) { return j.id === myjobActiveJobId; });
+      if (job) openJobChat({ id: job.id, name: job.pmName, title: job.title, avatarInitial: supjrPersonInitials(job.pmName), chat: myjobEnsureChat(job), readOnly: false, tagLabel: 'Job', returnScreen: screenMyJobDetail });
+    });
+    document.getElementById('myjdVideoCloseBtn').addEventListener('click', myjobCloseVideo);
+    document.getElementById('myjdVideoOverlay').addEventListener('click', function (e) { if (e.target === this) myjobCloseVideo(); });
+  }
+
+  /* =========================================================
+     SHARED JOB CHAT — used by My Jobs "Message" and Inbox rows
+  ========================================================== */
+  var jobChatReturnScreen = null;
+  var jobChatActiveConv = null;
+
+  function jobChatBubbleHtml(m) {
+    if (m.kind === 'date') return '<div class="myjc-date-divider"><span>' + supjrEscapeHtml(m.text) + '</span></div>';
+    if (m.kind === 'system') return '<div class="myjc-msg-row"><div class="myjc-bubble-wrap"><div class="myjc-bubble-sys">' + supjrEscapeHtml(m.text) + '</div>' + (m.time ? '<div class="myjc-timestamp">' + supjrEscapeHtml(m.time) + '</div>' : '') + '</div></div>';
+    if (m.kind === 'out') {
+      var attachHtml = '';
+      if (m.imageUrl) attachHtml = '<div class="myjc-attach-img"><img src="' + m.imageUrl + '" alt="Attachment"></div>';
+      else if (m.fileName) attachHtml = '<div class="myjc-attach-file"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg><span>' + supjrEscapeHtml(m.fileName) + '</span></div>';
+      var textHtml = m.text ? supjrEscapeHtml(m.text) : '';
+      return '<div class="myjc-msg-row out"><div class="myjc-bubble-wrap"><div class="myjc-bubble-out">' + attachHtml + textHtml + '</div><div class="myjc-timestamp">You' + (m.time ? ' \u00b7 ' + supjrEscapeHtml(m.time) : '') + '</div></div></div>';
+    }
+    if (m.kind === 'positive' || m.kind === 'negative') return '<div class="myjc-msg-row"><div class="myjc-bubble-wrap"><div class="myjc-bubble-alert ' + m.kind + '"><div class="t">' + supjrEscapeHtml(m.title) + '</div><div class="d">' + supjrEscapeHtml(m.text) + '</div></div>' + (m.time ? '<div class="myjc-timestamp">' + supjrEscapeHtml(m.time) + '</div>' : '') + '</div></div>';
+    if (m.kind === 'info') return '<div class="myjc-msg-row"><div class="myjc-bubble-wrap"><div class="myjc-bubble-info"><div class="t">' + supjrEscapeHtml(m.title) + '</div><div class="d">' + supjrEscapeHtml(m.text) + '</div></div>' + (m.time ? '<div class="myjc-timestamp">' + supjrEscapeHtml(m.time) + '</div>' : '') + '</div></div>';
+    return '';
+  }
+  function jobChatRenderBody() {
+    var body = document.getElementById('myjcBody');
+    body.innerHTML = '<div class="myjc-start">Start of conversation</div>' + jobChatActiveConv.chat.map(jobChatBubbleHtml).join('');
+  }
+  function openJobChat(conv) {
+    if (typeof initJobChatOnce === 'function') initJobChatOnce();
+    jobChatActiveConv = conv;
+    jobChatReturnScreen = conv.returnScreen || screenInbox;
+    document.getElementById('myjcAvatar').textContent = conv.avatarInitial || supjrPersonInitials(conv.name);
+    document.getElementById('myjcName').textContent = conv.title ? (conv.name + ' \u2014 ' + conv.title) : conv.name;
+    var pill = document.getElementById('myjcTagPill');
+    pill.textContent = conv.tagLabel || 'Job';
+    pill.className = 'myjc-tag-pill ' + (conv.tagLabel === 'Support' ? 'support' : 'job');
+    document.getElementById('myjcStatus').textContent = conv.readOnly ? 'Archived' : 'Online now';
+    document.getElementById('myjcInput').style.display = conv.readOnly ? 'none' : '';
+    document.getElementById('myjcSendBtn').style.display = conv.readOnly ? 'none' : '';
+    document.querySelector('#myjcFooter .myjc-input-row').style.display = conv.readOnly ? 'none' : 'flex';
+    document.getElementById('myjcReadonlyNote').style.display = conv.readOnly ? '' : 'none';
+    jobChatRenderBody();
+    showScreen(screenJobChat);
+  }
+  function jobChatSendMessage() {
+    var input = document.getElementById('myjcInput');
+    var text = input.value.trim();
+    if (!text || !jobChatActiveConv) return;
+    var msg = { kind: 'out', text: text, time: 'Just now' };
+    jobChatActiveConv.chat.push(msg);
+    document.getElementById('myjcBody').insertAdjacentHTML('beforeend', jobChatBubbleHtml(msg));
+    input.value = '';
+  }
+
+  /* =========================================================
+     SUPPLIER: MY INBOX (rebuild) — conversation list derived from
+     My Jobs' chats plus the Keylr Support thread, with Active /
+     Archived / Completed segments.
+  ========================================================== */
+  var SUP_KEYLR_SUPPORT_CONV = {
+    id: 'sup-support', name: 'Keylr Support', tagLabel: 'Support', segment: 'active', dateLabel: '08 Jul', dateSection: 'Previous 30 Days', sortKey: 0, pinned: true,
+    chat: [
+      { kind: 'info', title: '\u00a3150.00 has been deposited', text: 'Your deposit payout of \u00a3150.00 for JB-2688 has been successfully credited to your bank account.', time: '9:35 AM' },
+      { kind: 'info', title: '\u00a3275.02 has been deposited', text: 'Your deposit payout of \u00a3275.02 for JB-2689 has been successfully credited to your bank account.', time: '10:37 AM' },
+      { kind: 'info', title: '\u00a3200.00 has been deposited', text: 'Your deposit payout of \u00a3200.00 for JB-2690 has been successfully credited to your bank account.', time: '10:54 AM' },
+      { kind: 'info', title: '\u00a34.00 has been deposited', text: 'Your deposit payout of \u00a34.00 for JB-2692 has been successfully credited to your bank account.', time: '12:25 PM' },
+      { kind: 'date', text: '7 JUL 2026' },
+      { kind: 'info', title: '\u00a380.02 has been deposited', text: 'Your deposit payout of \u00a380.02 for JB-2695 has been successfully credited to your bank account.', time: '1:19 PM' },
+      { kind: 'date', text: '8 JUL 2026' },
+      { kind: 'info', title: 'Payout of \u00a3849.98 scheduled', text: 'A deposit of \u00a3849.98 from your customer has been charged. Keylr Connect is holding the funds until they clear; your payout will be released on 13 July 2026 and arrive in your bank within a working day after that. We\u2019ll notify you when it lands.', time: '12:14 PM' }
+    ],
+    lastMsg: 'We\u2019re here when you need us.'
+  };
+
+  var MYJOB_UNREAD_COUNTS = { mj2719: 6, mj2734: 6, mj2720: 4, mj2718: 8, mj2661: 6 };
+  function inboxDateInfo(daysAgo) {
+    var anchor = new Date(2026, 6, 10);
+    var d = new Date(anchor.getTime() - daysAgo * 86400000);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    if (daysAgo <= 6) return { label: days[d.getDay()], section: 'Previous 7 Days', sortKey: daysAgo };
+    return { label: (d.getDate() < 10 ? '0' : '') + d.getDate() + ' ' + months[d.getMonth()], section: 'Previous 30 Days', sortKey: daysAgo };
+  }
+  function inboxConversations() {
+    var convs = SUP_MY_JOBS.filter(function (j) { return !j.hidden; }).map(function (j, idx) {
+      myjobEnsureDetail(j);
+      var segment = (j.status === 'inreview' || j.status === 'pending' || j.status === 'inprogress' || j.status === 'scheduled') ? 'active' : 'archived';
+      var daysAgo = idx === 0 ? 2 : Math.min(idx + 1, 27);
+      var dateInfo = inboxDateInfo(daysAgo);
+      return { id: 'jobconv-' + j.id, jobId: j.id, name: j.pmName, title: j.title, tagLabel: 'Job', jobNo: j.jobNo,
+        segment: segment, closed: segment === 'archived', unread: MYJOB_UNREAD_COUNTS[j.id] || 0,
+        dateLabel: dateInfo.label, dateSection: dateInfo.section, sortKey: dateInfo.sortKey, chat: myjobEnsureChat(j) };
+    });
+    convs.unshift(SUP_KEYLR_SUPPORT_CONV);
+    return convs;
+  }
+  var inboxActiveSeg = 'active';
+  var inboxInitialized = false;
+  function inboxRowHtml(c) {
+    var statusHtml = c.closed
+      ? '<span class="inbox-row-status closed"><span class="dot"></span>Closed</span>'
+      : (c.unread ? '<span class="inbox-row-status needsreply"><span class="dot"></span>Needs reply</span>' : '');
+    return '<div class="inbox-row' + (c.unread ? ' unread' : '') + '" data-conv-id="' + c.id + '">' +
+      '<div class="inbox-row-avatar">' + supjrEscapeHtml(supjrPersonInitials(c.name)) + '</div>' +
+      '<div class="inbox-row-body">' +
+        '<div class="inbox-row-top"><div class="inbox-row-name">' + supjrEscapeHtml(c.name) + (c.title ? ' \u2014 ' + supjrEscapeHtml(c.title) : '') + '</div><div class="inbox-row-date' + (c.unread ? ' unread' : '') + '">' + supjrEscapeHtml(c.dateLabel || '') + '</div></div>' +
+        '<div class="inbox-row-tags">' + (c.title ? '<span class="inbox-row-jobpill">' + supjrEscapeHtml(c.tagLabel) + '</span><span class="inbox-row-jobno-inline">' + supjrEscapeHtml(c.jobNo || '') + '</span>' : '') + statusHtml + '</div>' +
+        '<div class="inbox-row-bottom"><span class="inbox-row-jobid' + (c.unread ? ' unread' : '') + '">' + supjrEscapeHtml(c.jobNo || c.lastMsg || '') + '</span>' + (c.unread ? '<span class="inbox-row-unread-badge">' + c.unread + '</span>' : '') + '</div>' +
+      '</div>' +
+    '</div>';
+  }
+  function inboxRenderList() {
+    var all = inboxConversations().filter(function (c) { return c.segment === inboxActiveSeg; });
+    document.getElementById('inboxCountLabel').textContent = all.length + ' conversation' + (all.length === 1 ? '' : 's');
+    var list = document.getElementById('inboxList');
+    if (!all.length) {
+      list.innerHTML = '<div class="inbox-empty"><div class="inbox-empty-text">No conversations here yet. \ud83d\udcac</div></div>';
+      return;
+    }
+    all.sort(function (a, b) { return a.sortKey - b.sortKey; });
+    var html = '';
+    var lastSection = null;
+    all.forEach(function (c) {
+      if (c.dateSection !== lastSection) { html += '<div class="inbox-date-sep">' + c.dateSection + '</div>'; lastSection = c.dateSection; }
+      html += inboxRowHtml(c);
+    });
+    list.innerHTML = html;
+    list.querySelectorAll('.inbox-row').forEach(function (row) {
+      row.addEventListener('click', function () {
+        var conv = inboxConversations().find(function (c) { return c.id === row.getAttribute('data-conv-id'); });
+        if (!conv) return;
+        openJobChat({ id: conv.id, name: conv.name, title: conv.title, avatarInitial: supjrPersonInitials(conv.name), chat: conv.chat, readOnly: !!conv.closed, tagLabel: conv.tagLabel, returnScreen: screenInbox });
+      });
+    });
+  }
+  function initMyInboxOnce() {
+    if (inboxInitialized) return;
+    inboxInitialized = true;
+    inboxRenderList();
+    if (typeof initJobChatOnce === 'function') initJobChatOnce();
+    document.querySelectorAll('#inboxSeg .inbox-seg-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('#inboxSeg .inbox-seg-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        inboxActiveSeg = btn.getAttribute('data-inbox-seg');
+        inboxRenderList();
+      });
+    });
+  }
+
+  var jobChatWired = false;
+  function initJobChatOnce() {
+    if (jobChatWired) return;
+    jobChatWired = true;
+    document.getElementById('myjcBackBtn').addEventListener('click', function () { showScreen(jobChatReturnScreen || screenInbox); });
+    document.getElementById('myjcSendBtn').addEventListener('click', jobChatSendMessage);
+    document.getElementById('myjcInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); jobChatSendMessage(); } });
+    document.getElementById('myjcAttachBtn').addEventListener('click', function () {
+      if (!jobChatActiveConv || jobChatActiveConv.readOnly) return;
+      document.getElementById('myjcAttachInput').click();
+    });
+    document.getElementById('myjcAttachInput').addEventListener('change', function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file || !jobChatActiveConv) return;
+      var msg = { kind: 'out', time: 'Just now' };
+      if (file.type && file.type.indexOf('image/') === 0) {
+        var reader = new FileReader();
+        reader.onload = function () {
+          msg.imageUrl = reader.result;
+          jobChatActiveConv.chat.push(msg);
+          document.getElementById('myjcBody').insertAdjacentHTML('beforeend', jobChatBubbleHtml(msg));
+        };
+        reader.readAsDataURL(file);
+      } else {
+        msg.fileName = file.name;
+        jobChatActiveConv.chat.push(msg);
+        document.getElementById('myjcBody').insertAdjacentHTML('beforeend', jobChatBubbleHtml(msg));
+      }
+      e.target.value = '';
     });
   }
 
